@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "73334355613",
+    "firebase_url": "https://shop-f7501.firebaseio.com",
+    "project_id": "shop-f7501",
+    "storage_bucket": "shop-f7501.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73334355613:android:2ede74dc490ef7e4474674",
+        "android_client_info": {
+          "package_name": "com.codingburg.eshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73334355613-qmhkdv8qm84mkoga6ljo554ubkft0kgf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVMeNbNUTEF_6G4_RAc4O4-c3wrPEmSWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73334355613-qmhkdv8qm84mkoga6ljo554ubkft0kgf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

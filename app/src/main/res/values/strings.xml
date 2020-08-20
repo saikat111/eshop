@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">eShop</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="name">eshop</string>
+    <string name="pattran">-------------------</string>
+    <string name="sendmoney">আমাদের বিকাশ নম্বরটি</string>
+    <string name="bikash">01755111413(personal)</string>
+    <string name="sendtext">বিকাশের মাধ্যমে এই নম্বরটিতে আপনার অর্থ প্রেরণ করুন</string>
+    <string name="details">টাকা পাঠানোর পরে নীচের লিখিত নিয়মগুলি অনুসরণ করুন:</string>
+    <string name="order">আপনার বিকাশ নম্বরটি লিখুন যা থেকে আপনি আমাদের টাকা পাঠিয়েছেন :</string>
+    <string name="finalorder">যদি প্রতিটি জিনিস ঠিক থাকে তবে অর্ডার বোতামটি টিপুন</string>
+    <string name="finalword">আমরা আপনাকে এসএমএসের মাধ্যমে সমস্ত বিবরণ পাঠাব</string>
+    <string name="call">যদি আপনি কিছু জানতে চান 01737256480 এই নম্বরে কল করুন</string>
+    <string name="address">আপনার ঠিকানা লিখুন:</string>
+
+
+</resources>

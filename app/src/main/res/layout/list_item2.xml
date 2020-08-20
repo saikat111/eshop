@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardview"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    card_view:cardElevation="100dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+
+
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:layout_marginTop="7dp"
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            >
+        </ImageView>
+        <TextView
+            android:layout_gravity="center"
+            android:id="@+id/model"
+            android:textStyle="italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="#000"
+
+            >
+        </TextView>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="৳"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="20dp">
+
+            </TextView>
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center"
+                android:id="@+id/price"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                >
+            </TextView>
+
+
+
+        </LinearLayout>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="available for"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/location"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            >
+        </TextView>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="Delivery with in "
+            android:textSize="18dp"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/time"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="dfvd"
+            android:textSize="18dp"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+        </TextView>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

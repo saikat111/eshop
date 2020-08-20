@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.Profile">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_marginBottom="100dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp"
+            >
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="35dp"
+                android:fontFamily="@font/andika"
+                android:text="eShop"
+                android:textColor="#000"
+
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/name"
+                android:textColor="#000"
+                android:layout_marginTop="5dp"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:fontFamily="@font/andika"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
+            android:id="@+id/number"
+             android:textColor="#000"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/andika"
+                android:textSize="20dp"
+            android:layout_height="wrap_content">
+        </TextView>
+
+            <Button
+                android:layout_marginTop="5dp"
+                android:id="@+id/logout"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/send_otp"
+                android:textColor="#000"
+                android:text="LOGOUT"
+
+                >
+
+            </Button>
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:text="All Orders:"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:fontFamily="@font/andika"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <RelativeLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    android:id="@+id/recyclerView3"
+                    >
+                </androidx.recyclerview.widget.RecyclerView>
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <com.luseen.spacenavigation.SpaceNavigationView
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+
+        />
+
+</RelativeLayout>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <!--Card View widget-->
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="15dp"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        card_view:contentPadding="8dp"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="9dp"
+      card_view:cardBackgroundColor="#E6DD8C"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                >
+            </ImageView>
+            <LinearLayout
+                android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_gravity="center"
+                    android:id="@+id/model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:textColor="#000"
+
+                    >
+                </TextView>
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="৳"
+                        android:textColor="#000"
+                        android:textSize="20dp">
+
+                    </TextView>
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center"
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        >
+                    </TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/quantity"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        >
+                    </TextView>
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:text="x"
+                        android:textSize="20dp"
+                        >
+                    </TextView>
+
+
+                </LinearLayout>
+
+          <LinearLayout
+              android:layout_marginTop="10dp"
+              android:layout_gravity="center"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+
+              <ImageView
+                  android:id="@+id/add"
+                  android:layout_marginLeft="10dp"
+                  android:layout_width="50dp"
+                  android:layout_height="50dp"
+                  android:src="@drawable/ic_baseline_add_24">
+              </ImageView>
+              <ImageView
+                  android:id="@+id/remove"
+                  android:layout_marginLeft="10dp"
+                  android:layout_width="50dp"
+                  android:layout_height="50dp"
+                  android:src="@drawable/ic_baseline_remove_24">
+              </ImageView>
+
+
+
+          </LinearLayout>
+                <ImageView
+                    android:id="@+id/removecart"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_baseline_delete_forever_24">
+                </ImageView>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/key"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                >
+            </TextView>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>

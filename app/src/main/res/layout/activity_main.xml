@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home.MainActivity"
+    >
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp"
+                    >
+                        <com.google.android.material.appbar.AppBarLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                                <com.google.android.material.appbar.MaterialToolbar
+                                    android:id="@+id/topAppBar"
+                                    android:background="#FFF"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="?attr/actionBarSize"
+                                    app:title="@string/name"
+                                    app:menu="@menu/top_bar"
+                                    />
+
+                        </com.google.android.material.appbar.AppBarLayout>
+
+
+                        <com.synnapps.carouselview.CarouselView
+                            android:id="@+id/carouselView"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            app:fillColor="#FFFFFFFF"
+                            app:pageColor="#00000000"
+                            app:radius="6dp"
+                            app:slideInterval="2500"
+                            app:strokeColor="#FF777777"
+                            app:strokeWidth="1dp"/>
+
+                        <TextView
+                            android:id="@+id/seeallaerro"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/andika"
+                            android:text="Categories"
+                            android:textColor="#614A05"
+                            android:textSize="20dp"
+                            >
+
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/seeall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:fontFamily="@font/andika"
+                            android:text="see all"
+                            android:textColor="#000"
+                            android:textSize="15dp">
+
+                        </TextView>
+
+                        <RelativeLayout
+                            android:layout_marginTop="2dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            >
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/recyclerview4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:scrollbars="horizontal"
+                                    android:layout_centerVertical="true"
+                                    android:layout_centerHorizontal="true"
+                                    >
+                                </androidx.recyclerview.widget.RecyclerView>
+                        </RelativeLayout>
+                        <TextView
+                            android:id="@+id/seeallshop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/andika"
+                            android:text="Shops"
+                            android:textColor="#614A05"
+                            android:textSize="20dp"
+                            >
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/seehop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:fontFamily="@font/andika"
+                            android:text="see all"
+                            android:textColor="#000"
+                            android:textSize="15dp">
+                        </TextView>
+
+                        <RelativeLayout
+                            android:layout_marginTop="2dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            >
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/recyclerviewshop"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:scrollbars="horizontal"
+                                    android:layout_centerVertical="true"
+                                    android:layout_centerHorizontal="true"
+                                    >
+                                </androidx.recyclerview.widget.RecyclerView>
+                        </RelativeLayout>
+                        <androidx.cardview.widget.CardView
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+
+                            android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/andika"
+                                            android:text="Featured"
+                                            android:textColor="#614A05"
+                                            android:textSize="20dp">
+                                        </TextView>
+                                        <RelativeLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="200dp"
+                                            android:orientation="vertical"
+                                            >
+                                                <androidx.recyclerview.widget.RecyclerView
+                                                    android:id="@+id/recyclerview"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:scrollbars="horizontal"
+                                                    android:layout_centerVertical="true"
+                                                    android:layout_centerHorizontal="true"
+                                                    >
+                                                </androidx.recyclerview.widget.RecyclerView>
+                                        </RelativeLayout>
+                                </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/andika"
+                                            android:text="Best Sell"
+                                            android:textColor="#614A05"
+                                            android:textSize="20dp"
+                                            >
+                                        </TextView>
+                                        <RelativeLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="200dp"
+                                            android:orientation="vertical"
+                                            >
+                                                <androidx.recyclerview.widget.RecyclerView
+                                                    android:id="@+id/recyclerview2"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:scrollbars="horizontal"
+                                                    android:layout_centerVertical="true"
+                                                    android:layout_centerHorizontal="true"
+                                                    >
+                                                </androidx.recyclerview.widget.RecyclerView>
+                                        </RelativeLayout>
+                                </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                        <com.synnapps.carouselview.CarouselView
+                                            android:id="@+id/carouselView2"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="200dp"
+                                            app:fillColor="#FFFFFFFF"
+                                            app:pageColor="#00000000"
+                                            app:radius="6dp"
+                                            app:slideInterval="3000"
+                                            app:strokeColor="#FF777777"
+                                            app:strokeWidth="1dp"/>
+
+                                </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+
+
+                                <RelativeLayout
+
+                                    android:layout_marginTop="25dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="15dp"
+                                    >
+                                        <androidx.recyclerview.widget.RecyclerView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:scrollbars="vertical"
+                                            android:id="@+id/recyclerView3"
+                                            >
+                                        </androidx.recyclerview.widget.RecyclerView>
+                                </RelativeLayout>
+
+
+
+                </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+        <com.luseen.spacenavigation.SpaceNavigationView
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+
+            />
+
+
+</RelativeLayout>
