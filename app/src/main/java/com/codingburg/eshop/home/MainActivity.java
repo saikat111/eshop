@@ -34,6 +34,7 @@ import com.codingburg.eshop.model.ModelData;
 import com.codingburg.eshop.model.ModelDataList;
 
 import com.codingburg.eshop.search.Seach;
+import com.codingburg.eshop.subcetegory.SubCetegory;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -77,12 +78,16 @@ public class MainActivity extends AppCompatActivity {
     private  TextView seeallaerro;
     private  FirebaseFirestore db;
     private DocumentReference offerTop, discount;
+    private ImageView men, women, kids;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        men = findViewById(R.id.men);
+        women = findViewById(R.id.women);
+        kids = findViewById(R.id.kids);
         seeall = findViewById(R.id.seeall);
         seeallaerro = findViewById(R.id.seeallaerro);
         mAuth =FirebaseAuth.getInstance();
@@ -94,6 +99,30 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        men.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SubCetegory.class);
+                intent.putExtra("id", "men");
+                startActivity(intent);
+            }
+        });
+        women.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SubCetegory.class);
+                intent.putExtra("id", "women");
+                startActivity(intent);
+            }
+        });
+        kids.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SubCetegory.class);
+                intent.putExtra("id", "baby");
+                startActivity(intent);
+            }
+        });
 
         //buttom navigation
         SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
