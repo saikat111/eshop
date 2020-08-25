@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E1F2E4"
 
     >
     <androidx.core.widget.NestedScrollView
@@ -33,12 +34,13 @@
             </RelativeLayout>
 
         </LinearLayout>
-
-
-
-
-
     </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+
 
 
     <com.luseen.spacenavigation.SpaceNavigationView

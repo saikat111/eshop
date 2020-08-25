@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".productdetails.ProductDetails"
-    android:background="#FFF"
+
     >
     <TextView
         android:id="@+id/getname"
@@ -32,15 +32,29 @@
             android:padding="15dp"
             >
 
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/topAppBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="#FFF"
+                    app:menu="@menu/top_bar"
+                    app:title="@string/name" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
             <com.synnapps.carouselview.CarouselView
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="13dp"
                 android:id="@+id/carouselView"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 app:fillColor="#FFFFFFFF"
                 app:pageColor="#00000000"
                 app:radius="6dp"
-                app:slideInterval="4000"
+                app:slideInterval="3000"
                 app:strokeColor="#FF777777"
                 app:strokeWidth="1dp"/>
 
@@ -60,6 +74,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+               app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
 
                 >
                 <LinearLayout
@@ -78,16 +94,17 @@
 
                     </TextView>
                     <TextView
-                        android:layout_marginLeft="5dp"
-                        android:id="@+id/price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/andika"
-                        android:textSize="20dp"
-                        android:textColor="#000"
-                        >
-                    </TextView>
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/andika"
+                    android:textSize="20dp"
+                    android:textColor="#000"
+                    >
+                </TextView>
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -100,14 +117,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="20dp"
-                android:textColor="#000"
+                android:textSize="23dp"
+                android:textColor="#CC821F"
                 >
             </TextView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                >
 
                 <TextView
                     android:id="@+id/details"
@@ -115,7 +135,6 @@
                     android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:textSize="20dp"
                     android:textColor="#000"
                     >
@@ -125,7 +144,10 @@
 
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true"
+    >
 
     <LinearLayout
         android:layout_marginTop="15dp"
@@ -223,7 +245,10 @@
             <androidx.cardview.widget.CardView
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                >
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -247,7 +272,10 @@
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -260,7 +288,7 @@
                         android:textColor="#000"
                         android:textSize="25dp"
                         android:fontFamily="@font/andika"
-                        android:text="Home delivery with in"
+                        android:text="Delivery with in"
                         >
                     </TextView>
                     <TextView
@@ -293,6 +321,8 @@
     android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true"
 
   >
     <LinearLayout
@@ -306,16 +336,15 @@
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000"
+                android:textColor="#614A05"
                 android:fontFamily="@font/andika"
                 android:text="Related Products"
-                android:textSize="25dp"
-                android:textStyle="italic"
+                android:textSize="20dp"
+
                 >
 
             </TextView>
             <RelativeLayout
-                android:layout_marginTop="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
                 android:orientation="vertical"
@@ -329,23 +358,33 @@
                     android:layout_centerHorizontal="true"
                     >
                 </androidx.recyclerview.widget.RecyclerView>
-
-
             </RelativeLayout>
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:layout_marginTop="15dp"
+                android:id="@+id/image_slider"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:iss_auto_cycle="true"
+                app:iss_period="3000"
+                app:iss_delay="0"
+                app:iss_title_background="@drawable/gradient"
+                />
+
+
             <TextView
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/andika"
-                 android:textColor="#000"
+                android:textColor="#614A05"
                 android:text="You may like"
-                android:textSize="25dp"
-               android:textStyle="italic"
+                android:textSize="20dp"
+
                 >
 
             </TextView>
             <RelativeLayout
-                android:layout_marginTop="25dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <androidx.recyclerview.widget.RecyclerView

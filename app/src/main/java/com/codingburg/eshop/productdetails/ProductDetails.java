@@ -2,17 +2,13 @@ package com.codingburg.eshop.productdetails;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,28 +19,24 @@ import android.widget.Toast;
 
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.authentication.PleaseLogin;
-import com.codingburg.eshop.cart.Cart;
 
-import com.codingburg.eshop.home.MainActivity;
 import com.codingburg.eshop.model.ModelAdapter;
 import com.codingburg.eshop.model.ModelAdapterList;
 import com.codingburg.eshop.model.ModelData;
 import com.codingburg.eshop.model.ModelDataList;
 
-import com.codingburg.eshop.notification.Notification;
-import com.codingburg.eshop.profile.Profile;
-
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.codingburg.eshop.search.Seach;
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.interfaces.ItemClickListener;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -52,23 +44,27 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.luseen.spacenavigation.SpaceItem;
-import com.luseen.spacenavigation.SpaceNavigationView;
-import com.luseen.spacenavigation.SpaceOnClickListener;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProductDetails extends AppCompatActivity {
+    MaterialToolbar toolbar;
+    private ImageSlider imageSlider, imageSlider2;
     private MaterialToolbar topAppBar;
     private Button  addcart, add, remove;
     private TextView price, name, quantity ,total, time, location, details, getname, getnuber;
     private int quantityValue =1;
-    private String id ,category;
+    private String id , categoryfrom;
     private DocumentReference productDb;
     private CollectionReference showCatagoryProducts;
     private CarouselView carouselView;
@@ -89,8 +85,9 @@ public class ProductDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
+        FirebaseDatabase.getInstance().goOffline();
         id = getIntent().getExtras().getString("id");
-        category = getIntent().getExtras().getString("category");
+        categoryfrom = getIntent().getExtras().getString("category");
         getname = findViewById(R.id.getname);
         getnuber = findViewById(R.id.getnumber);
         addcart = findViewById(R.id.addcard);
@@ -109,13 +106,55 @@ public class ProductDetails extends AppCompatActivity {
         final String[] getKey = new String[1];
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Adding to your cart..");
-        FirebaseDatabase.getInstance().goOffline();
+
+
+
         try {
             userId = firebaseAuth.getCurrentUser().getUid();
         }
         catch (Exception e){
             e.printStackTrace();
         }
+
+
+        imageSlider = findViewById(R.id.image_slider);
+        final ArrayList<String> idP = new ArrayList<>();
+        final ArrayList<String> category = new ArrayList<>();
+        final List<SlideModel> remoteImages = new ArrayList<>();
+        FirebaseFirestore.getInstance().collection("promote").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for(QueryDocumentSnapshot documentSnapshot : value){
+                    remoteImages.add(new SlideModel(documentSnapshot.get("image").toString(), ScaleTypes.FIT));
+                    idP.add(documentSnapshot.get("id").toString());
+                    category.add(documentSnapshot.get("category").toString());
+                }
+                imageSlider.setImageList(remoteImages, ScaleTypes.FIT);
+                imageSlider.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onItemSelected(int i) {
+                        Intent intent = new Intent(getApplicationContext(), ProductDetails.class);
+                        intent.putExtra("id", idP.get(i));
+                        intent.putExtra("category", category.get(i));
+                        startActivity(intent);
+                    }
+                });
+            }
+        });
+        toolbar =  findViewById(R.id.topAppBar);
+        toolbar.setOnMenuItemClickListener(new androidx.appcompat.widget.Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(item.getItemId() == R.id.search){
+                    Intent intent = new Intent(getApplicationContext(), Seach.class);
+                    startActivity(intent);
+                }
+                return false;
+            }
+        });
+
+
+
         productDb = FirebaseFirestore.getInstance().collection("product").document(id);
         getProductDetails();
         getDiscoutItems();
@@ -228,7 +267,7 @@ public class ProductDetails extends AppCompatActivity {
         });
         //recyclerView show products
         showCatagoryProducts = FirebaseFirestore.getInstance().collection("product");
-        Query query = showCatagoryProducts.whereEqualTo("category", category);
+        Query query = showCatagoryProducts.whereEqualTo("category", categoryfrom);
         recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
         RecyclerViewLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(RecyclerViewLayoutManager);
@@ -310,7 +349,7 @@ public class ProductDetails extends AppCompatActivity {
                         sampleImages[1] = offertwo;
                     }
                     if(map.get("imagethree")!=null){
-                        String offerthree = (String) map.get("imagetwo");
+                        String offerthree = (String) map.get("imagethree");
                         sampleImages[2] = offerthree;
                     }
                 }

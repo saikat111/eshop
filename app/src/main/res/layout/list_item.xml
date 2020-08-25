@@ -8,8 +8,10 @@
     android:layout_height="200dp"
     card_view:cardElevation="100dp"
     android:layout_marginTop="10dp"
+    card_view:cardCornerRadius="10dp"
     android:layout_marginLeft="10dp"
-
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
 
     >
     <LinearLayout
@@ -18,6 +20,7 @@
             android:orientation="vertical"
         >
         <ImageView
+            android:layout_marginTop="8dp"
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="110dp"
@@ -29,8 +32,8 @@
            android:fontFamily="@font/andika"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#000"
+            android:textSize="13dp"
+            android:textColor="#D6112F"
 
             >
         </TextView>
@@ -45,7 +48,7 @@
                    android:text="৳"
                    android:textStyle="bold"
                    android:textColor="#000"
-                   android:textSize="20dp">
+                   android:textSize="15dp">
 
                </TextView>
                <TextView
@@ -56,7 +59,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:textColor="#000000"
-                   android:textSize="20dp"
+                   android:textSize="15dp"
                    >
                </TextView>
 
