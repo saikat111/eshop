@@ -19,6 +19,14 @@ import com.codingburg.eshop.productviewmodel.ProductViewModelAdapter;
 import com.codingburg.eshop.profile.Profile;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.formats.UnifiedNativeAd;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
@@ -34,6 +42,8 @@ public class Seach extends AppCompatActivity {
     private  String category;
     private CollectionReference databaseReferenced, search;
     private FirebaseFirestore db;
+    private AdView mAdView;
+
 
 
     @Override
@@ -41,6 +51,43 @@ public class Seach extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.products);
         FirebaseDatabase.getInstance().goOffline();
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+
+//ads
+        AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.native_ID_1))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+
+        adLoader.loadAd(new AdRequest.Builder().build());
+
+        AdLoader adLoader2 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template2);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+
+        adLoader2.loadAd(new AdRequest.Builder().build());
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        //ads
+
         //buttom navigation
         SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);

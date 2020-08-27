@@ -15,4 +15,5 @@
         <item name="android:activityCloseExitAnimation">@anim/side_out_right</item>
     </style>
 
+
 </resources>

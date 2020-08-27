@@ -8,9 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +46,20 @@ import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.ads.nativetemplates.NativeTemplateStyle;
+import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.VideoController;
+import com.google.android.gms.ads.formats.MediaView;
+import com.google.android.gms.ads.formats.UnifiedNativeAd;
+import com.google.android.gms.ads.formats.UnifiedNativeAdView;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -84,19 +102,26 @@ public class MainActivity extends AppCompatActivity {
     LinearLayoutManager HorizontalLayout;
     private FirebaseAuth mAuth;
     private  String userId;
-    MaterialToolbar toolbar;
     private  TextView seeallaerro;
     private  FirebaseFirestore db;
     private DocumentReference offerTop, discount;
     private ImageView men, women, kids;
     int[] sampleImages1 = {R.drawable.image_6,R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
     int[] sampleImages3 = {R.drawable.c1,R.drawable.c2, R.drawable.c3, R.drawable.c4, R.drawable.c5, R.drawable.c6};
+    private AdView mAdView, mAdView2, mAdView3, mAdView4;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseDatabase.getInstance().goOffline();
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
         men = findViewById(R.id.men);
         women = findViewById(R.id.women);
         kids = findViewById(R.id.kids);
@@ -104,6 +129,83 @@ public class MainActivity extends AppCompatActivity {
         seeallaerro = findViewById(R.id.seeallaerro);
         mAuth =FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+//ads
+
+        AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.native_ID_1))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+
+        adLoader.loadAd(new AdRequest.Builder().build());
+
+        AdLoader adLoader2 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template2);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+
+        adLoader2.loadAd(new AdRequest.Builder().build());
+
+        AdLoader adLoader5 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template5);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+
+        adLoader5.loadAd(new AdRequest.Builder().build());
+
+        AdLoader adLoader3 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template3);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+
+        adLoader3.loadAd(new AdRequest.Builder().build());
+
+        AdLoader adLoader4 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template4);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+
+        adLoader4.loadAd(new AdRequest.Builder().build());
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        mAdView2 = findViewById(R.id.adView2);
+        AdRequest adRequest2 = new AdRequest.Builder().build();
+        mAdView2.loadAd(adRequest);
+        mAdView3 = findViewById(R.id.adView3);
+        AdRequest adRequest3 = new AdRequest.Builder().build();
+        mAdView3.loadAd(adRequest);
+        mAdView4 = findViewById(R.id.adView4);
+        AdRequest adRequest4 = new AdRequest.Builder().build();
+        mAdView4.loadAd(adRequest);
+//ads
         //image silde one and two
         imageSlider = findViewById(R.id.image_slider);
         final ArrayList<String> id = new ArrayList<>();
@@ -180,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SubCetegory.class);
-                intent.putExtra("id", "baby");
+                intent.putExtra("id", "child");
                 startActivity(intent);
             }
         });
@@ -268,17 +370,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //buttom navigation
-         toolbar =  findViewById(R.id.topAppBar);
-        toolbar.setOnMenuItemClickListener(new androidx.appcompat.widget.Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if(item.getItemId() == R.id.search){
-                    Intent intent = new Intent(getApplicationContext(), Seach.class);
-                    startActivity(intent);
-                }
-                return false;
-            }
-        });
 
         //offer
 
@@ -397,7 +488,19 @@ public class MainActivity extends AppCompatActivity {
 //        shopAdapter.stopListening();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.top_bar, menu);
+        MenuItem item = menu.findItem(R.id.search);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), Seach.class);
+                startActivity(intent);
+                return false;
+            }
+        });
 
-
-
+        return super.onCreateOptionsMenu(menu);
+    }
 }

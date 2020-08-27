@@ -25,7 +25,10 @@ public class CetegoryAdapter extends FirestoreRecyclerAdapter<CetegoryModel, Cet
     protected void onBindViewHolder(@NonNull CetegoryAdapter.DataViewHolder holder, int position, @NonNull CetegoryModel model) {
         holder.productmodel.setText(model.getName());
         holder.productcategory.setText(model.getCategory());
-        Picasso.get().load(model.getImage()).into(holder.productImage);
+        Picasso.get().load(model.getImage())
+                .fit()
+                .centerInside()
+                .into(holder.productImage);
     }
 
     @NonNull
@@ -37,7 +40,6 @@ public class CetegoryAdapter extends FirestoreRecyclerAdapter<CetegoryModel, Cet
     }
 
     public class DataViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         ImageView productImage;
         TextView  productid ,productmodel ,productcategory;
         public DataViewHolder(@NonNull final View itemView) {

@@ -35,7 +35,10 @@ public class ProductViewModelAdapter   extends FirestoreRecyclerAdapter<ProductV
         holder.productcategory.setText(model.getCategory());
         holder.location.setText(model.getLocation());
         holder.time.setText(model.getTime());
-        Picasso.get().load(model.getImage()).into(holder.productImage);
+        Picasso.get().load(model.getImage())
+                .fit()
+                .centerInside()
+                .into(holder.productImage);
     }
 
     @NonNull

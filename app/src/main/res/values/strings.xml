@@ -12,6 +12,12 @@
     <string name="finalword">আমরা আপনাকে এসএমএসের মাধ্যমে সমস্ত বিবরণ পাঠাব</string>
     <string name="call">যদি আপনি কিছু জানতে চান 01737256480 এই নম্বরে কল করুন</string>
     <string name="address">আপনার ঠিকানা লিখুন:</string>
+    <string name="ad_attribution">Ad</string>
+    <string name="banner_ID_1">"ca-app-pub-3940256099942544/6300978111"</string>
+    <string name="banner_ID_2">"ca-app-pub-3940256099942544/6300978111"</string>
+    <string name="native_ID_1">"ca-app-pub-3940256099942544/2247696110"</string>
+    <string name="native_ID_2">"ca-app-pub-3940256099942544/2247696110"</string>
+    <string name="native_video_ads_id_1">ca-app-pub-3940256099942544/1044960115</string>
 
 
 </resources>

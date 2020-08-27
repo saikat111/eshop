@@ -1,11 +1,11 @@
 package com.codingburg.eshop.cetegory;
 
 public class CetegoryModel {
-
     String id;
     String name;
     String category;
     String image;
+    
 
     public CetegoryModel() {
     }

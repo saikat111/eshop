@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,14 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.formats.UnifiedNativeAd;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -58,9 +67,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductDetails extends AppCompatActivity {
-    MaterialToolbar toolbar;
     private ImageSlider imageSlider, imageSlider2;
-    private MaterialToolbar topAppBar;
     private Button  addcart, add, remove;
     private TextView price, name, quantity ,total, time, location, details, getname, getnuber;
     private int quantityValue =1;
@@ -79,6 +86,7 @@ public class ProductDetails extends AppCompatActivity {
     private DatabaseReference cartUserDb,userDb;
     private String userName,userName2, phoneNumber,phoneNumber2, key,offerone;
     private ProgressDialog progressDialog;
+    private AdView mAdView, mAdView2 ;
 
 
     @Override
@@ -86,6 +94,71 @@ public class ProductDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
         FirebaseDatabase.getInstance().goOffline();
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        //ads
+        AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.native_ID_1))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+
+        adLoader.loadAd(new AdRequest.Builder().build());
+
+        AdLoader adLoader2 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template2);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+
+        adLoader2.loadAd(new AdRequest.Builder().build());
+
+        AdLoader adLoader3 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template3);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+
+        adLoader3.loadAd(new AdRequest.Builder().build());
+
+        AdLoader adLoader4 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template4);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+
+        adLoader4.loadAd(new AdRequest.Builder().build());
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView2 = findViewById(R.id.adView2);
+        AdRequest adRequest2 = new AdRequest.Builder().build();
+        mAdView2.loadAd(adRequest);
+
+        //ads
+
+
         id = getIntent().getExtras().getString("id");
         categoryfrom = getIntent().getExtras().getString("category");
         getname = findViewById(R.id.getname);
@@ -141,19 +214,6 @@ public class ProductDetails extends AppCompatActivity {
                 });
             }
         });
-        toolbar =  findViewById(R.id.topAppBar);
-        toolbar.setOnMenuItemClickListener(new androidx.appcompat.widget.Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if(item.getItemId() == R.id.search){
-                    Intent intent = new Intent(getApplicationContext(), Seach.class);
-                    startActivity(intent);
-                }
-                return false;
-            }
-        });
-
-
 
         productDb = FirebaseFirestore.getInstance().collection("product").document(id);
         getProductDetails();
@@ -362,12 +422,7 @@ public class ProductDetails extends AppCompatActivity {
                 };
                 carouselView.setImageListener(imageListener);
                 carouselView.setPageCount(sampleImages.length);
-                carouselView.setImageClickListener(new ImageClickListener() {
-                    @Override
-                    public void onClick(int position) {
-                        Toast.makeText(getApplicationContext(), String.valueOf(position),Toast.LENGTH_SHORT).show();
-                    }
-                });
+
             }
         });
     }
@@ -382,5 +437,20 @@ public class ProductDetails extends AppCompatActivity {
         super.onStop();
         modelAdapter.stopListening();
         modelAdapter3.stopListening();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.top_bar, menu);
+        MenuItem item = menu.findItem(R.id.search);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), Seach.class);
+                startActivity(intent);
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 }

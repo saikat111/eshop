@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.codingburg.eshop">
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
@@ -26,8 +25,7 @@
         <activity android:name=".notification.Notification" />
         <activity android:name=".cart.Cart" />
         <activity
-            android:name=".productdetails.ProductDetails"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:name=".productdetails.ProductDetails" />
         <activity
             android:name=".authentication.PhoneNumber"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -48,11 +46,15 @@
 
         <activity
             android:name=".home.MainActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
+
     </application>
 
 </manifest>

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".productdetails.ProductDetails"
-
     >
     <TextView
         android:id="@+id/getname"
@@ -31,32 +30,16 @@
             android:orientation="vertical"
             android:padding="15dp"
             >
-
-            <com.google.android.material.appbar.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/topAppBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="#FFF"
-                    app:menu="@menu/top_bar"
-                    app:title="@string/name" />
-
-            </com.google.android.material.appbar.AppBarLayout>
-
             <com.synnapps.carouselview.CarouselView
-                android:layout_marginTop="13dp"
                 android:id="@+id/carouselView"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 app:fillColor="#FFFFFFFF"
                 app:pageColor="#00000000"
                 app:radius="6dp"
-                app:slideInterval="3000"
+                app:slideInterval="3500"
                 app:strokeColor="#FF777777"
-                app:strokeWidth="1dp"/>
+                app:strokeWidth="1dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -141,8 +124,15 @@
                 </TextView>
 
             </androidx.cardview.widget.CardView>
+            <com.google.android.ads.nativetemplates.TemplateView
+                android:id="@+id/my_template"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:gnt_template_type="@layout/gnt_small_template_view"
+                />
 
-<androidx.cardview.widget.CardView
+            <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="5dp"
@@ -303,8 +293,15 @@
                     </TextView>
 
                 </LinearLayout>
-
             </androidx.cardview.widget.CardView>
+            <com.google.android.ads.nativetemplates.TemplateView
+                android:id="@+id/my_template2"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:gnt_template_type="@layout/gnt_small_template_view"
+                />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -370,6 +367,21 @@
                 app:iss_delay="0"
                 app:iss_title_background="@drawable/gradient"
                 />
+            <com.google.android.ads.nativetemplates.TemplateView
+                android:id="@+id/my_template3"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:gnt_template_type="@layout/gnt_medium_template_view"
+                />
+            <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/banner_ID_2">
+            </com.google.android.gms.ads.AdView>
 
 
             <TextView
@@ -395,8 +407,25 @@
                     >
                 </androidx.recyclerview.widget.RecyclerView>
             </RelativeLayout>
-
+            <com.google.android.ads.nativetemplates.TemplateView
+                android:id="@+id/my_template4"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:gnt_template_type="@layout/gnt_medium_template_view"
+                />
+            <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/banner_ID_2">
+            </com.google.android.gms.ads.AdView>
         </LinearLayout>
+
+
+
     </androidx.core.widget.NestedScrollView>
 
     <Button
