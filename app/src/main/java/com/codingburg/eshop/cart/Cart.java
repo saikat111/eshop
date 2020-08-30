@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,6 +36,19 @@ import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
 import java.util.Map;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.VideoController;
+import com.google.android.gms.ads.formats.MediaView;
+import com.google.android.gms.ads.formats.UnifiedNativeAd;
+import com.google.android.gms.ads.formats.UnifiedNativeAdView;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.ads.nativetemplates.TemplateView;
 public class Cart extends AppCompatActivity {
     private RecyclerView recyclerView3;
     private  CardAdapter modelAdapter3 ;
@@ -43,12 +57,37 @@ public class Cart extends AppCompatActivity {
     private TextView total;
     private Button buy;
     private DatabaseReference userDb;
+    private ProgressDialog progressDialog;
+    private AdView mAdView, mAdView2, mAdView3, mAdView4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading.......");
+        progressDialog.show();
         FirebaseDatabase.getInstance().goOnline();
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        AdLoader adLoader5 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template5);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+
+        adLoader5.loadAd(new AdRequest.Builder().build());
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         buy = findViewById(R.id.buy);
         total = findViewById(R.id.total);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -123,8 +162,6 @@ public class Cart extends AppCompatActivity {
         // home product show
     }
 
-
-
     private void getTotal() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -137,15 +174,18 @@ public class Cart extends AppCompatActivity {
                             if(map.get("totalammout") != null){
                                 String tk = map.get("totalammout").toString();
                                 total.setText(tk);
+                                progressDialog.dismiss();
                             }
                         }
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+                        progressDialog.dismiss();
                     }
                 });
             }
-        },1000);
+        },5000) ;
+
 
 
 

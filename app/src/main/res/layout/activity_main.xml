@@ -42,7 +42,7 @@
                                             android:id="@+id/men"
                                             android:layout_width="150dp"
                                             android:layout_height="80dp"
-                                            android:src="@drawable/men"
+                                            app:srcCompat="@drawable/men"
                                             >
                                         </ImageView>
                                         <ImageView
@@ -50,7 +50,7 @@
                                             android:layout_marginLeft="15dp"
                                             android:layout_width="150dp"
                                             android:layout_height="80dp"
-                                            android:src="@drawable/women"
+                                            app:srcCompat="@drawable/women"
                                             >
                                         </ImageView>
                                         <ImageView
@@ -58,7 +58,7 @@
                                             android:layout_marginLeft="15dp"
                                             android:layout_width="150dp"
                                             android:layout_height="80dp"
-                                            android:src="@drawable/kids"
+                                            app:srcCompat="@drawable/kids"
                                             >
                                         </ImageView>
 

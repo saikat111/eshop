@@ -235,7 +235,7 @@ public class ProductDetails extends AppCompatActivity {
                 String productQuantity = quantity.getText().toString();
                 if(userId == null ){
                     Intent intent = new Intent(getApplicationContext(), PleaseLogin.class);
-                    intent.putExtra("category", category);
+                    intent.putExtra("category", categoryfrom);
                     intent.putExtra("id", id);
                     startActivity(intent);
                     return;
@@ -264,7 +264,7 @@ public class ProductDetails extends AppCompatActivity {
                         }
                     });
                     Map cartInfo =new HashMap();
-                    cartInfo.put("category", category);
+                    cartInfo.put("category", categoryfrom);
                     cartInfo.put("id", id);
                     cartInfo.put("totalprice", totalammout);
                     cartInfo.put("name", productname);
