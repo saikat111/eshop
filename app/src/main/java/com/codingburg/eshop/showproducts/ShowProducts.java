@@ -22,6 +22,7 @@ import com.codingburg.eshop.productviewmodel.ProductViewModel;
 import com.codingburg.eshop.productviewmodel.ProductViewModelAdapter;
 import com.codingburg.eshop.profile.Profile;
 
+import com.codingburg.eshop.search.Seach;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
@@ -184,6 +185,20 @@ public class ShowProducts extends AppCompatActivity {
         super.onStop();
         modelAdapter3.stopListening();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.top_bar, menu);
+        MenuItem item = menu.findItem(R.id.search);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), Seach.class);
+                startActivity(intent);
+                return false;
+            }
+        });
 
+        return super.onCreateOptionsMenu(menu);
+    }
 
 }

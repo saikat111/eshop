@@ -68,7 +68,7 @@ import java.util.Map;
 
 public class ProductDetails extends AppCompatActivity {
     private ImageSlider imageSlider, imageSlider2;
-    private Button  addcart, add, remove;
+    private Button  addcart, add, remove, buynow;
     private TextView price, name, quantity ,total, time, location, details, getname, getnuber;
     private int quantityValue =1;
     private String id , categoryfrom;
@@ -165,6 +165,7 @@ public class ProductDetails extends AppCompatActivity {
         getnuber = findViewById(R.id.getnumber);
         addcart = findViewById(R.id.addcard);
         add = findViewById(R.id.add);
+        buynow = findViewById(R.id.buynow);
         remove = findViewById(R.id.remove);
         price = findViewById(R.id.price);
         name = findViewById(R.id.model);
@@ -287,6 +288,18 @@ public class ProductDetails extends AppCompatActivity {
                             progressDialog.dismiss();
                         }
                     });
+                }
+            }
+        });
+        buynow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Integer.valueOf(price.getText().toString()) >= 100){
+
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Minimum  order ammount is 100 tk, You can add this item to your cart", Toast.LENGTH_LONG).show();
+                    return;
                 }
             }
         });

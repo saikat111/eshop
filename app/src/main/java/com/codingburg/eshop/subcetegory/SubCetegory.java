@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.cart.Cart;
@@ -14,6 +16,7 @@ import com.codingburg.eshop.cetegory.CetegoryAdapter;
 import com.codingburg.eshop.cetegory.CetegoryModel;
 import com.codingburg.eshop.home.MainActivity;
 import com.codingburg.eshop.profile.Profile;
+import com.codingburg.eshop.search.Seach;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdLoader;
@@ -125,5 +128,19 @@ public class SubCetegory extends AppCompatActivity {
         super.onStop();
         modelAdapter5.stopListening();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.top_bar, menu);
+        MenuItem item = menu.findItem(R.id.search);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), Seach.class);
+                startActivity(intent);
+                return false;
+            }
+        });
 
+        return super.onCreateOptionsMenu(menu);
+    }
 }

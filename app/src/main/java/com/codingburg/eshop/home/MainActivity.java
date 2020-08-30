@@ -240,8 +240,9 @@ public class MainActivity extends AppCompatActivity {
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 for(QueryDocumentSnapshot documentSnapshot : value){
                     remoteImages2.add(new SlideModel(documentSnapshot.get("image").toString(), ScaleTypes.FIT));
-                    id.add(documentSnapshot.get("id").toString());
+                    id2.add(documentSnapshot.get("id").toString());
                     category2.add(documentSnapshot.get("category").toString());
+
                 }
                 imageSlider2.setImageList(remoteImages2, ScaleTypes.FIT);
                 imageSlider2.setItemClickListener(new ItemClickListener() {

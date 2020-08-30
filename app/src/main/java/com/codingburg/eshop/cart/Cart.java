@@ -177,6 +177,9 @@ public class Cart extends AppCompatActivity {
                                 progressDialog.dismiss();
                             }
                         }
+                        else {
+                            progressDialog.dismiss();
+                        }
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
