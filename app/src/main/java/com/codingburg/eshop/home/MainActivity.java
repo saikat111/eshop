@@ -260,6 +260,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             userId = mAuth.getCurrentUser().getUid();
+            System.out.println(userId);
         } catch (Exception e) {
             e.printStackTrace();
         }

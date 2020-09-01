@@ -427,36 +427,24 @@
 
 
     </androidx.core.widget.NestedScrollView>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:orientation="vertical">
-    <Button
-        android:background="#FFEB3B"
-        android:id="@+id/addcard"
-        android:layout_alignParentBottom="true"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="add to cart"
-        android:fontFamily="@font/andika"
-        >
-    </Button>
-
-    <Button
-        android:layout_marginTop="3dp"
-        android:background="#687BEE"
-        android:id="@+id/buynow"
-        android:fontFamily="@font/andika"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Buy Now"
-        android:textColor="@color/white_with_alpha"
-
         >
-    </Button>
-</LinearLayout>
+        <Button
+            android:background="#FFEB3B"
+            android:id="@+id/addcard"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="add to cart"
+            android:fontFamily="@font/andika"
+            >
+        </Button>
 
+
+    </LinearLayout>
 
 </RelativeLayout>

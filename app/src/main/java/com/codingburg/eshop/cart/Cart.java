@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.home.MainActivity;
@@ -25,6 +26,7 @@ import com.codingburg.eshop.productviewmodel.ProductViewModelAdapter;
 import com.codingburg.eshop.profile.Profile;
 
 import com.codingburg.eshop.pyment.Pyment;
+import com.codingburg.eshop.pyment.ShippingCharge;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -141,8 +143,9 @@ public class Cart extends AppCompatActivity {
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Pyment.class);
-                if(total.getText().toString().equals(null)){
+                Intent intent = new Intent(getApplicationContext(), ShippingCharge.class);
+                if(total.getText().toString().equals(null) ||Integer.parseInt(total.getText().toString()) < 99 ){
+                    Toast.makeText(getApplicationContext(), "Minimum order amount is 100 tk", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 startActivity(intent);

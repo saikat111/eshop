@@ -3,6 +3,7 @@ package com.codingburg.eshop.productdetails;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,11 +22,15 @@ import android.widget.Toast;
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.authentication.PleaseLogin;
 
+import com.codingburg.eshop.cart.Cart;
+import com.codingburg.eshop.cetegory.Category;
+import com.codingburg.eshop.home.MainActivity;
 import com.codingburg.eshop.model.ModelAdapter;
 import com.codingburg.eshop.model.ModelAdapterList;
 import com.codingburg.eshop.model.ModelData;
 import com.codingburg.eshop.model.ModelDataList;
 
+import com.codingburg.eshop.profile.Profile;
 import com.codingburg.eshop.search.Seach;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -56,6 +61,9 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import com.luseen.spacenavigation.SpaceItem;
+import com.luseen.spacenavigation.SpaceNavigationView;
+import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
@@ -68,7 +76,7 @@ import java.util.Map;
 
 public class ProductDetails extends AppCompatActivity {
     private ImageSlider imageSlider, imageSlider2;
-    private Button  addcart, add, remove, buynow;
+    private Button  addcart, add, remove;
     private TextView price, name, quantity ,total, time, location, details, getname, getnuber;
     private int quantityValue =1;
     private String id , categoryfrom;
@@ -146,9 +154,7 @@ public class ProductDetails extends AppCompatActivity {
                     }
                 })
                 .build();
-
         adLoader4.loadAd(new AdRequest.Builder().build());
-
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -165,7 +171,6 @@ public class ProductDetails extends AppCompatActivity {
         getnuber = findViewById(R.id.getnumber);
         addcart = findViewById(R.id.addcard);
         add = findViewById(R.id.add);
-        buynow = findViewById(R.id.buynow);
         remove = findViewById(R.id.remove);
         price = findViewById(R.id.price);
         name = findViewById(R.id.model);
@@ -180,8 +185,6 @@ public class ProductDetails extends AppCompatActivity {
         final String[] getKey = new String[1];
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Adding to your cart..");
-
-
 
         try {
             userId = firebaseAuth.getCurrentUser().getUid();
@@ -288,18 +291,6 @@ public class ProductDetails extends AppCompatActivity {
                             progressDialog.dismiss();
                         }
                     });
-                }
-            }
-        });
-        buynow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Integer.valueOf(price.getText().toString()) >= 100){
-
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Minimum  order ammount is 100 tk, You can add this item to your cart", Toast.LENGTH_LONG).show();
-                    return;
                 }
             }
         });
@@ -453,13 +444,21 @@ public class ProductDetails extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.top_bar, menu);
-        MenuItem item = menu.findItem(R.id.search);
+        getMenuInflater().inflate(R.menu.cart, menu);
+        MenuItem item = menu.findItem(R.id.cart2);
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent intent = new Intent(getApplicationContext(), Seach.class);
-                startActivity(intent);
+                if(userId == null){
+                    Intent intent = new Intent(getApplicationContext(), PleaseLogin.class);
+                    startActivity(intent);
+                    return false;
+                }
+                else {
+                    Intent intent = new Intent(getApplicationContext(), Cart.class);
+                    startActivity(intent);
+                }
+
                 return false;
             }
         });

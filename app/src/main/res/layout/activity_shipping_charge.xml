@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="3dp"
+    android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="বগুড়া জেলার বাইরে আমরা কুরিয়ারের মাধ্যমে পণ্য প্রেরণ করি।"
+            android:textColor="#000"
+            android:textSize="15dp"
+            >
+        </TextView>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="এর জন্য আপনাকে কুরিয়ার সার্ভিস চার্জ দিতে হবে"
+            android:textColor="#000"
+            android:textSize="15dp"
+            >
+
+        </TextView>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="আপনি যদি আমাদের পণ্য বগুড়ায় পেতে চান তবে আমাদের ডেলিভারি চার্জ দিতে হবে।"
+            android:textColor="#000"
+            android:textSize="15dp"
+            >
+
+        </TextView>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="মোট দামের সাথে ডেলিভারি চার্জ যুক্ত করুন এবং বিকাশের মাধ্যমে প্রেরণ করুন"
+            android:textColor="#000"
+            android:textSize="15dp"
+            >
+
+        </TextView>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:fontFamily="@font/andika"
+            android:text="বগুড়ায় ডেলিভারি চার্জ"
+            android:textColor="#000"
+            >
+        </TextView>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_marginBottom="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TableLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*">
+        <TableRow>
+            <TextView
+                android:text="থানা"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:text="উপ-অফিস"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:text="চার্জ(টাকা)"
+                android:padding="3dip" />
+
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:layout_height="match_parent"
+                android:padding="3dip"
+                android:text="বগুড়া সদর"
+                android:textColor="#000" />
+            <TextView
+                android:textColor="#000"
+                android:text="বগুড়া সেনানিবাস"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="৫৫"
+                android:padding="3dip" />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="বগুড়া সদর"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="বগুড়া সদর"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="৫০"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="আলমদীঘি"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="আলমদীঘি"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১০৫"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="আলমদীঘি"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="নশরতপুর"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১১৫"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="আলমদীঘি"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="সান্তাহার"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৩০"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="শেরপুর"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="চান্দাইকোনা"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৬০"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="শেরপুর"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="পল্লী উন্নয়ন একাডেমি"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৬০"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="শেরপুর"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="শেরপুর"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৫০"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="সোনাতোলা"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="সোনাতোলা"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১২০"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="শিবগঞ্জ"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="শিবগঞ্জ"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৪০"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="সারিয়াকান্দি"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="সারিয়াকান্দি"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৪০"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="সারিয়াকান্দি"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="চন্দন বৈশা"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৫০"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="কাহালু"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="কাহালু"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৩০"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="গাবতলী"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="গাবতলী"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৩০"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="গাবতলী"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="সুখনপুকুর"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৪৫"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="দুপচাচিয়া"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="দুপচাচিয়া"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৪৫"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="দুপচাচিয়া"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="তালোড়া"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৫০"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="ধুনট"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="ধুনট"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৪০"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:layout_height="match_parent"
+                android:padding="3dip"
+                android:text="ধুনট"
+                android:textColor="#000" />
+            <TextView
+                android:textColor="#000"
+                android:text="গোসাইবাড়ি"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৪৫"
+                android:padding="3dip" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="নন্দীগ্রাম"
+                android:textColor="#000"
+                android:padding="3dip" />
+            <TextView
+                android:textColor="#000"
+                android:text="নন্দীগ্রাম"
+                android:padding="3dip" />
+
+            <TextView
+                android:textColor="#000"
+                android:text="১৪০"
+                android:padding="3dip" />
+        </TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <Button
+                android:layout_marginTop="10dp"
+                android:id="@+id/next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="পরবর্তী পৃষ্ঠা"
+                android:textColor="#FFF"
+                android:background="#2196F3"
+                >
+            </Button>
+        </LinearLayout>
+    </TableLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</LinearLayout>

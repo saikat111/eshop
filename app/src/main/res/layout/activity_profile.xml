@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="35dp"
                 android:fontFamily="@font/andika"
-                android:text="eShop"
+                android:text="@string/app_name"
                 android:textColor="#000"
 
                 >

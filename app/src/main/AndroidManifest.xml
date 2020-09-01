@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.codingburg.eshop">
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
@@ -12,8 +14,7 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
+        <activity android:name=".pyment.ShippingCharge"></activity>
         <activity android:name=".subcetegory.SubCetegory" />
         <activity android:name=".pyment.Pyment" />
         <activity android:name=".search.Seach" />
@@ -24,8 +25,7 @@
         <activity android:name=".authentication.PleaseLogin" />
         <activity android:name=".notification.Notification" />
         <activity android:name=".cart.Cart" />
-        <activity
-            android:name=".productdetails.ProductDetails" />
+        <activity android:name=".productdetails.ProductDetails" />
         <activity
             android:name=".authentication.PhoneNumber"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -40,21 +40,18 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".home.MainActivity"
-        />
+        <activity android:name=".home.MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
-
+            android:value="ca-app-pub-3940256099942544~3347511713" />
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.codingburg.eshop.R;
+import com.codingburg.eshop.authentication.PleaseLogin;
 import com.codingburg.eshop.cart.Cart;
 import com.codingburg.eshop.cetegory.CetegoryAdapter;
 import com.codingburg.eshop.cetegory.CetegoryModel;
@@ -23,6 +24,8 @@ import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -35,11 +38,18 @@ public class SubCetegory extends AppCompatActivity {
     private CetegoryAdapter modelAdapter5;
     private String id;
     private AdView mAdView;
+    private  String userId;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.products);
+        FirebaseDatabase.getInstance().goOnline();
         id = getIntent().getExtras().getString("id");
+
+
+
+
         AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.native_ID_1))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
@@ -68,7 +78,11 @@ public class SubCetegory extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-
+        try {
+            userId = mAuth.getCurrentUser().getUid();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         //buttom navigation
@@ -87,13 +101,26 @@ public class SubCetegory extends AppCompatActivity {
             }
             @Override
             public void onItemClick(int itemIndex, String itemName) {
-                if(itemIndex == 0){
-                    Intent intent = new Intent(getApplicationContext(), Profile.class);
-                    startActivity(intent);
+                if(itemIndex == 0) {
+                    if (userId == null) {
+                        Intent intent = new Intent(getApplicationContext(), PleaseLogin.class);
+                        startActivity(intent);
+                        return;
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), Profile.class);
+                        startActivity(intent);
+                    }
                 }
                 if(itemIndex == 1){
-                    Intent intent = new Intent(getApplicationContext(), Cart.class);
-                    startActivity(intent);
+                    if(userId == null){
+                        Intent intent = new Intent(getApplicationContext(), PleaseLogin.class);
+                        startActivity(intent);
+                        return;
+                    }
+                    else {
+                        Intent intent = new Intent(getApplicationContext(), Cart.class);
+                        startActivity(intent);
+                    }
                 }
             }
             @Override

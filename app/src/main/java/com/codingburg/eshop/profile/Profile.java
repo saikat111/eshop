@@ -50,12 +50,11 @@ public class Profile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseDatabase.getInstance().goOnline();
         setContentView(R.layout.activity_profile);
         number = findViewById(R.id.number);
         logout = findViewById(R.id.logout);
         name = findViewById(R.id.name);
-
-
         mAuth = FirebaseAuth.getInstance();
         try {
             userId = mAuth.getCurrentUser().getUid();
@@ -120,18 +119,26 @@ public class Profile extends AppCompatActivity {
         });
         getData();
 // home product show
-    RecyclerView    recyclerView3 = (RecyclerView) findViewById(R.id.recyclerView3);
-        recyclerView3.setLayoutManager(new LinearLayoutManager(this));
-        FirebaseRecyclerOptions<ProfileModel> options3 =
-                new FirebaseRecyclerOptions.Builder<ProfileModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("order"), ProfileModel.class)
-                        .build();
-        modelAdapter3 = new ProfileAdapter(options3);
-        recyclerView3.setAdapter(modelAdapter3);
+        try{
+            RecyclerView    recyclerView3 = (RecyclerView) findViewById(R.id.recyclerView3);
+            recyclerView3.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseRecyclerOptions<ProfileModel> options3 =
+                    new FirebaseRecyclerOptions.Builder<ProfileModel>()
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("order"), ProfileModel.class)
+                            .build();
+            modelAdapter3 = new ProfileAdapter(options3);
+            recyclerView3.setAdapter(modelAdapter3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         // home product show
     }
     private void getData() {
-        currentUserDb = FirebaseFirestore.getInstance().collection("Users").document(userId).collection("info").document(userId);
+        try{
+            currentUserDb = FirebaseFirestore.getInstance().collection("Users").document(userId).collection("info").document(userId);
+
+
         currentUserDb.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -154,15 +161,32 @@ public class Profile extends AppCompatActivity {
                 }
             }
         });
+        } catch (Exception e) {
+            Intent intent = new Intent(getApplicationContext(), PleaseLogin.class);
+            startActivity(intent);
+            return;
+        }
+
+
     }
     @Override
     protected void onStart() {
         super.onStart();
-        modelAdapter3.startListening();
+        try{
+            modelAdapter3.startListening();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
     @Override
     protected void onStop() {
         super.onStop();
-        modelAdapter3.stopListening();
+        try{
+            modelAdapter3.stopListening();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

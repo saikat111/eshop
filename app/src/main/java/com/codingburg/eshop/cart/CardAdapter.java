@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codingburg.eshop.R;
@@ -22,6 +24,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -29,11 +37,12 @@ import java.util.Map;
 
 public class CardAdapter  extends FirebaseRecyclerAdapter<CardData, CardAdapter.DataViewHolder> {
     private int count =0 ;
-    private DatabaseReference userCardDb,userCardDb2, userCardDb3, userCardDb4;
+    private DatabaseReference userCardDb,userCardDb2, userCardDb4;
     private FirebaseAuth firebaseAuth;
     private  String userId;
     private  String value, totalp, Totalammout;
     private int quantityValue =1;
+    private DocumentReference userCardDb3;
 
 
 
@@ -45,10 +54,10 @@ public class CardAdapter  extends FirebaseRecyclerAdapter<CardData, CardAdapter.
 
     @Override
     protected void onBindViewHolder(@NonNull final CardAdapter.DataViewHolder holder, final int position, @NonNull final CardData model) {
+        FirebaseDatabase.getInstance().goOnline();
       firebaseAuth = FirebaseAuth.getInstance();
       userId = firebaseAuth.getCurrentUser().getUid();
         userCardDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("totalammountofcartitem");
-        userCardDb3 = FirebaseDatabase.getInstance().getReference().child("product");
         holder.productPrice.setText(model.getTotalprice());
         holder.productmodel.setText(model.getName());
         holder.productid.setText(model.getId());
@@ -112,6 +121,7 @@ public class CardAdapter  extends FirebaseRecyclerAdapter<CardData, CardAdapter.
             });
 
             add.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(final View view) {
                     userCardDb2 = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("cart").child(key.getText().toString());
@@ -124,36 +134,41 @@ public class CardAdapter  extends FirebaseRecyclerAdapter<CardData, CardAdapter.
                                     value =  map.get("quantity").toString();
                                 }
 
-                                userCardDb3 = userCardDb3.child(productid.getText().toString());
-                                userCardDb3.addListenerForSingleValueEvent(new ValueEventListener() {
+                                userCardDb3 = FirebaseFirestore.getInstance().collection("product").document(productid.getText().toString());
+                                userCardDb3.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                                     @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if(snapshot.exists()) {
-                                            Map<String, Object> map = (Map<String, Object>) snapshot.getValue();
+                                    public void onEvent(@Nullable DocumentSnapshot data, @Nullable FirebaseFirestoreException error) {
+                                        if(error != null){
+                                            Toast.makeText(view.getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                                            return;
+                                        }
+                                        if(data.exists()) {
+                                            Map<String, Object> map = (Map<String, Object>) data.getData();
                                             if(map.get("price") !=null){
                                                 totalp =  map.get("price").toString();
+
                                             }
+                                            try{
+                                                int intValue = Integer.parseInt(value);
+                                                int result = intValue + quantityValue;
+                                                int totalpInt = Integer.parseInt(totalp);
+                                                int finalPrice = totalpInt * result;
+                                                Map updatevalue = new HashMap();
+                                                updatevalue.put("quantity", String.valueOf(result));
+                                                updatevalue.put("totalprice", String.valueOf(finalPrice));
+                                                userCardDb2.updateChildren(updatevalue);
+                                                Intent intent = new Intent(view.getContext(), Cart.class);
+                                                view.getContext().startActivity(intent);
+                                            }
+                                            catch (Exception e)  {
+                                                e.printStackTrace();
+                                            }
+
                                         }
-                                        try{
-                                            int intValue = Integer.parseInt(value);
-                                            int result = intValue + quantityValue;
-                                            int totalpInt = Integer.valueOf(totalp);
-                                            int finalPrice = totalpInt * result;
-                                            Map updatevalue = new HashMap();
-                                            updatevalue.put("quantity", String.valueOf(result));
-                                            updatevalue.put("totalprice", String.valueOf(finalPrice));
-                                            userCardDb2.updateChildren(updatevalue);
-                                            Intent intent = new Intent(view.getContext(), Cart.class);
-                                            view.getContext().startActivity(intent);
-                                        }
-                                        catch (Exception e)  {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+
                                     }
                                 });
+
                             }
                         }
                         @Override
@@ -176,47 +191,49 @@ public class CardAdapter  extends FirebaseRecyclerAdapter<CardData, CardAdapter.
                                     value =  map.get("quantity").toString();
                                 }
 
-                                userCardDb3 = userCardDb3.child(productid.getText().toString());
-                                userCardDb3.addListenerForSingleValueEvent(new ValueEventListener() {
+                                userCardDb3 = FirebaseFirestore.getInstance().collection("product").document(productid.getText().toString());
+                                userCardDb3.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                                     @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if(snapshot.exists()) {
-                                            Map<String, Object> map = (Map<String, Object>) snapshot.getValue();
+                                    public void onEvent(@Nullable DocumentSnapshot data, @Nullable FirebaseFirestoreException error) {
+                                        if(error != null){
+                                            Toast.makeText(view.getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                                            return;
+                                        }    if(data.exists()) {
+                                            Map<String, Object> map = (Map<String, Object>) data.getData();
                                             if(map.get("price") !=null){
                                                 totalp =  map.get("price").toString();
                                             }
-                                        }
-                                        try{
-                                            int intValue = Integer.parseInt(value);
-                                            int result = intValue - quantityValue;
-                                            if(result <0 ){
-                                                userCardDb2.removeValue();
+
+                                            try{
+                                                int intValue = Integer.parseInt(value);
+                                                int result = intValue - quantityValue;
+                                                if(result <0 ){
+                                                    userCardDb2.removeValue();
+                                                    Intent intent = new Intent(view.getContext(), Cart.class);
+                                                    view.getContext().startActivity(intent);
+                                                    return;
+                                                }
+                                                int totalpInt = Integer.parseInt(totalp);
+                                                int finalPrice = totalpInt * result;
+                                                if(finalPrice < 0){
+                                                    return;
+                                                }
+                                                Map updatevalue = new HashMap();
+                                                updatevalue.put("quantity", String.valueOf(result));
+                                                updatevalue.put("totalprice", String.valueOf(finalPrice));
+                                                userCardDb2.updateChildren(updatevalue);
                                                 Intent intent = new Intent(view.getContext(), Cart.class);
                                                 view.getContext().startActivity(intent);
-                                                return;
                                             }
-                                            int totalpInt = Integer.valueOf(totalp);
-                                            int finalPrice = totalpInt * result;
-                                            if(finalPrice < 0){
-                                                return;
-                                            }
-                                            Map updatevalue = new HashMap();
-                                            updatevalue.put("quantity", String.valueOf(result));
-                                            updatevalue.put("totalprice", String.valueOf(finalPrice));
-                                            userCardDb2.updateChildren(updatevalue);
-                                            Intent intent = new Intent(view.getContext(), Cart.class);
-                                            view.getContext().startActivity(intent);
-                                        }
-                                        catch (Exception e)  {
-                                            e.printStackTrace();
+                                            catch (Exception e)  {
+                                                e.printStackTrace();
 
+                                            }
                                         }
-                                    }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
 
                                     }
                                 });
+
                             }
                         }
                         @Override
