@@ -8,7 +8,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardElevation="5dp"
-    card_view:cardCornerRadius="10dp"
     card_view:cardUseCompatPadding="true"
     card_view:cardPreventCornerOverlap="false"
     android:clickable="true"
@@ -22,7 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/textshape"
 
         >
         <ImageView
@@ -39,37 +37,38 @@
             android:fontFamily="@font/andika"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
-            android:textColor="#2F39EE"
-
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="20dp"
+            android:textColor="#123891"
             >
         </TextView>
+
         <LinearLayout
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="৳"
-                android:textStyle="bold"
                 android:textColor="#000"
-                android:textSize="20dp">
+                android:textSize="18dp"
+                android:textStyle="bold">
 
             </TextView>
+
             <TextView
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center"
                 android:id="@+id/price"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
                 android:textColor="#000000"
-                android:textSize="20dp"
-                >
-            </TextView>
-
+                android:textSize="18dp"
+                android:textStyle="bold"></TextView>
 
 
         </LinearLayout>

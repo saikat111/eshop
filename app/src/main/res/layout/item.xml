@@ -9,6 +9,7 @@
     android:layout_height="150dp"
     card_view:cardBackgroundColor="#D5F8AE"
     android:clickable="true"
+    card_view:cardCornerRadius="15dp"
     android:foreground="?attr/selectableItemBackground"
     android:layout_marginLeft="5dp"
     >

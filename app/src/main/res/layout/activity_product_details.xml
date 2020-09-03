@@ -337,36 +337,49 @@
                 android:fontFamily="@font/andika"
                 android:text="Related Products"
                 android:textSize="20dp"
+                android:textStyle="bold"
 
                 >
 
             </TextView>
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:orientation="vertical"
-                >
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scrollbars="horizontal"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    >
-                </androidx.recyclerview.widget.RecyclerView>
-            </RelativeLayout>
-
-            <com.denzcoskun.imageslider.ImageSlider
-                android:layout_marginTop="15dp"
-                android:id="@+id/image_slider"
+            <androidx.cardview.widget.CardView
+                app:cardBackgroundColor="#FFA07A"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                app:iss_auto_cycle="true"
-                app:iss_period="3000"
-                app:iss_delay="0"
-                app:iss_title_background="@drawable/gradient"
-                />
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:orientation="vertical"
+                    >
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="horizontal"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        >
+                    </androidx.recyclerview.widget.RecyclerView>
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.denzcoskun.imageslider.ImageSlider
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/image_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    app:iss_auto_cycle="true"
+                    app:iss_period="3000"
+                    app:iss_delay="0"
+                    app:iss_title_background="@drawable/gradient"
+                    />
+            </androidx.cardview.widget.CardView>
+
             <com.google.android.ads.nativetemplates.TemplateView
                 android:id="@+id/my_template3"
                 android:layout_marginTop="8dp"
@@ -392,6 +405,7 @@
                 android:textColor="#614A05"
                 android:text="You may like"
                 android:textSize="20dp"
+                android:textStyle="bold"
 
                 >
 

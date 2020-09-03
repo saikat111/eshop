@@ -33,8 +33,10 @@
            android:fontFamily="@font/andika"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="13dp"
+            android:textSize="18dp"
             android:textColor="#000"
+            android:ellipsize="end"
+            android:maxLines="1"
 
             >
         </TextView>

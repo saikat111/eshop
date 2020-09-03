@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF"
     tools:context=".home.MainActivity"
     >
         <androidx.core.widget.NestedScrollView
@@ -15,18 +16,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="15dp"
+                    android:padding="5dp"
                     >
-
-                        <com.denzcoskun.imageslider.ImageSlider
-                            android:id="@+id/image_slider"
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="190dp"
-                            app:iss_auto_cycle="true"
-                            app:iss_period="3000"
-                            app:iss_delay="0"
-                            app:iss_title_background="@drawable/gradient"
-                            />
+                            android:layout_height="match_parent"
+                            android:padding="1dp"
+
+                            >
+                                <com.denzcoskun.imageslider.ImageSlider
+                                    android:id="@+id/image_slider"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="190dp"
+                                    app:iss_auto_cycle="true"
+                                    app:iss_period="3000"
+                                    app:iss_delay="0"
+                                    app:iss_title_background="@drawable/gradient"
+                                    />
+                        </androidx.cardview.widget.CardView>
+
+
 
 
                         <HorizontalScrollView
@@ -40,24 +49,24 @@
                                         android:orientation="horizontal">
                                         <ImageView
                                             android:id="@+id/men"
-                                            android:layout_width="150dp"
-                                            android:layout_height="80dp"
+                                            android:layout_width="130dp"
+                                            android:layout_height="70dp"
                                             app:srcCompat="@drawable/men"
                                             >
                                         </ImageView>
                                         <ImageView
                                             android:id="@+id/women"
-                                            android:layout_marginLeft="15dp"
-                                            android:layout_width="150dp"
-                                            android:layout_height="80dp"
+                                            android:layout_marginLeft="8dp"
+                                            android:layout_width="130dp"
+                                            android:layout_height="70dp"
                                             app:srcCompat="@drawable/women"
                                             >
                                         </ImageView>
                                         <ImageView
                                             android:id="@+id/kids"
-                                            android:layout_marginLeft="15dp"
-                                            android:layout_width="150dp"
-                                            android:layout_height="80dp"
+                                            android:layout_marginLeft="8dp"
+                                            android:layout_width="130dp"
+                                            android:layout_height="70dp"
                                             app:srcCompat="@drawable/kids"
                                             >
                                         </ImageView>
@@ -66,13 +75,7 @@
                         </HorizontalScrollView>
 
 
-                        <com.google.android.ads.nativetemplates.TemplateView
-                            android:id="@+id/my_template"
-                            android:layout_marginTop="8dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:gnt_template_type="@layout/gnt_small_template_view"
-                                />
+
 
 
                         <com.synnapps.carouselview.CarouselView
@@ -86,11 +89,23 @@
                             app:slideInterval="3000"
                             app:strokeColor="#FF777777"
                             app:strokeWidth="1dp"/>
-
-                        <androidx.cardview.widget.CardView
+                        <TextView
                             android:layout_marginTop="15dp"
+                            android:id="@+id/seeallaerro"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Categories"
+                            android:fontFamily="@font/andika"
+                            android:textColor="#614A05"
+                            android:textSize="24dp"
+                            android:textStyle="bold"
+                            >
+                        </TextView>
+                        <androidx.cardview.widget.CardView
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+
                                 android:elevation="5dp"
                                 >
                                 <LinearLayout
@@ -99,17 +114,7 @@
                                         android:orientation="vertical"
                                         >
 
-                                        <TextView
-                                            android:id="@+id/seeallaerro"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Categories"
-                                            android:fontFamily="@font/andika"
-                                            android:textColor="#614A05"
-                                            android:textSize="24dp"
-                                            android:textStyle="bold"
-                                            >
-                                        </TextView>
+
                                         <TextView
                                             android:layout_marginRight="5dp"
                                             android:id="@+id/seeall"
@@ -151,23 +156,26 @@
                             ads:adSize="BANNER"
                             ads:adUnitId="@string/banner_ID_1">
                         </com.google.android.gms.ads.AdView>
-                        <androidx.cardview.widget.CardView
+                        <TextView
+                            android:textStyle="bold"
                             android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/andika"
+                            android:text="Featured"
+                            android:textColor="#614A05"
+                            android:textSize="24dp">
+                        </TextView>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            app:cardBackgroundColor="#D4EE60"
+                            app:cardCornerRadius="10dp"
                             android:layout_height="wrap_content">
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                         android:orientation="vertical">
-                                        <TextView
-                                            android:textStyle="bold"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/andika"
-                                            android:text="Featured"
-                                            android:textColor="#614A05"
-                                            android:textSize="24dp">
-                                        </TextView>
+
                                         <RelativeLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="200dp"
@@ -212,25 +220,27 @@
                             ads:adSize="BANNER"
                             ads:adUnitId="@string/banner_ID_2">
                         </com.google.android.gms.ads.AdView>
-
-                        <androidx.cardview.widget.CardView
+                        <TextView
                             android:layout_marginTop="18dp"
+                            android:textStyle="bold"
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/andika"
+                            android:text="Best Sell"
+                            android:textColor="#614A05"
+                            android:textSize="24dp"
+                            >
+                        </TextView>
+                        <androidx.cardview.widget.CardView
+                            app:cardBackgroundColor="#FFA07A"
+                            android:layout_width="match_parent"
+                            app:cardCornerRadius="15dp"
                             android:layout_height="wrap_content">
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
-                                        <TextView
-                                            android:textStyle="bold"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/andika"
-                                            android:text="Best Sell"
-                                            android:textColor="#614A05"
-                                            android:textSize="24dp"
-                                            >
-                                        </TextView>
+
                                         <RelativeLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="200dp"
@@ -259,16 +269,25 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
-                                        <com.denzcoskun.imageslider.ImageSlider
-                                            android:layout_marginTop="10dp"
-                                            android:id="@+id/image_slider2"
+                                        <androidx.cardview.widget.CardView
                                             android:layout_width="match_parent"
-                                            android:layout_height="190dp"
-                                            app:iss_auto_cycle="true"
-                                            app:iss_period="3000"
-                                            app:iss_delay="0"
-                                            app:iss_title_background="@drawable/gradient"
-                                            />
+                                            android:layout_height="wrap_content"
+                                                >
+                                                <com.denzcoskun.imageslider.ImageSlider
+                                                    android:layout_marginTop="10dp"
+                                                    android:id="@+id/image_slider2"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="190dp"
+                                                    app:iss_auto_cycle="true"
+                                                    app:iss_period="3000"
+                                                    app:iss_delay="0"
+                                                    app:iss_title_background="@drawable/gradient"
+                                                    />
+
+                                        </androidx.cardview.widget.CardView>
+
+
+
                                         <com.google.android.ads.nativetemplates.TemplateView
                                             android:id="@+id/my_template3"
                                             android:layout_marginTop="8dp"
