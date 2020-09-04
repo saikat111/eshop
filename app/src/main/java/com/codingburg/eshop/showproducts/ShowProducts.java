@@ -62,6 +62,7 @@ public class ShowProducts extends AppCompatActivity {
     private String userId;
     private CollectionReference showCatagoryProducts;
     private AdView mAdView;
+    private ImageSlider imageSlider, imageSlider2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +110,9 @@ public class ShowProducts extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+
+
 
 
 

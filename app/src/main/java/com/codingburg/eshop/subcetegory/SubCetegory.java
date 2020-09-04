@@ -1,5 +1,6 @@
 package com.codingburg.eshop.subcetegory;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -16,8 +17,13 @@ import com.codingburg.eshop.cart.Cart;
 import com.codingburg.eshop.cetegory.CetegoryAdapter;
 import com.codingburg.eshop.cetegory.CetegoryModel;
 import com.codingburg.eshop.home.MainActivity;
+import com.codingburg.eshop.productdetails.ProductDetails;
 import com.codingburg.eshop.profile.Profile;
 import com.codingburg.eshop.search.Seach;
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.interfaces.ItemClickListener;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdLoader;
@@ -27,11 +33,18 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SubCetegory extends AppCompatActivity {
     private RecyclerView recyclerView3;
@@ -40,10 +53,11 @@ public class SubCetegory extends AppCompatActivity {
     private AdView mAdView;
     private  String userId;
     private FirebaseAuth mAuth;
+    private ImageSlider  imageSlider2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.products);
+        setContentView(R.layout.view_category);
         FirebaseDatabase.getInstance().goOnline();
         id = getIntent().getExtras().getString("id");
 
@@ -83,6 +97,10 @@ public class SubCetegory extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+
+
 
 
         //buttom navigation

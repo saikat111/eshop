@@ -249,7 +249,6 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             userId = mAuth.getCurrentUser().getUid();
-            System.out.println(userId);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -278,8 +277,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         carouselView3 = (CarouselView) findViewById(R.id.carouselView3);
-        carouselView3.setPageCount(sampleImages1.length);
         carouselView3.setImageListener(imageListener);
+        carouselView3.setPageCount(sampleImages1.length);
+
         carouselView3.setImageClickListener(new ImageClickListener() {
             @Override
             public void onClick(int position) {
@@ -289,8 +289,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         carouselView4 = (CarouselView) findViewById(R.id.carouselView4);
-        carouselView4.setPageCount(sampleImages3.length);
         carouselView4.setImageListener(imageListener2);
+        carouselView4.setPageCount(sampleImages3.length);
         carouselView4.setImageClickListener(new ImageClickListener() {
             @Override
             public void onClick(int position) {
@@ -302,6 +302,7 @@ public class MainActivity extends AppCompatActivity {
         //buttom navigation
         SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
+//        spaceNavigationView.setSpaceBackgroundColor(ContextCompat.getColor(this, R.color.gnt_blue));
         spaceNavigationView.addSpaceItem(new SpaceItem("profile", R.drawable.ic_baseline_person_outline_24));
         spaceNavigationView.addSpaceItem(new SpaceItem("cart", R.drawable.cart));
         spaceNavigationView.setCentreButtonIcon(R.drawable.ic_baseline_home_24);
