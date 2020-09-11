@@ -6,54 +6,51 @@ public class ModelDataList {
     String id;
     String name;
     String category;
+    String previousprice;
 
-    public ModelDataList(String price, String image, String id, String name, String category) {
+    public ModelDataList(String price, String image, String id, String name, String category,  String previousprice) {
         this.price = price;
         this.image = image;
         this.id = id;
         this.name = name;
         this.category = category;
+        this.previousprice = previousprice;
     }
-
+    public ModelDataList() {
+    }
+    public String getPreviousprice() {
+        return previousprice;
+    }
+    public void setPreviousprice(String previousprice) {
+        this.previousprice = previousprice;
+    }
     public String getCategory() {
         return category;
     }
-
     public void setCategory(String category) {
         this.category = category;
     }
-
-    public ModelDataList() {
-    }
-
     public String getPrice() {
         return price;
     }
-
     public void setPrice(String price) {
         this.price = price;
     }
-
     public String getImage() {
         return image;
     }
-
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
-
     public void setImage(String image) {
         this.image = image;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }

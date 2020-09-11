@@ -1,6 +1,7 @@
 package com.codingburg.eshop.model;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,12 @@ public class ModelAdapterList  extends FirestoreRecyclerAdapter<ModelDataList, M
         holder.productmodel.setText(model.getName());
         holder.productid.setText(model.getId());
         holder.productcategory.setText(model.getCategory());
+        try{
+            holder.previousprice.setText(model.previousprice);
+            holder.previousprice.setPaintFlags(holder.previousprice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Picasso.get().load(model.getImage())
                 .fit()
                 .centerInside()
@@ -47,7 +54,7 @@ public class ModelAdapterList  extends FirestoreRecyclerAdapter<ModelDataList, M
     public class DataViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView productImage;
-        TextView productPrice, productid ,productmodel ,productcategory;
+        TextView productPrice, productid ,productmodel ,productcategory,previousprice;
         public DataViewHolder(@NonNull final View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
@@ -56,6 +63,7 @@ public class ModelAdapterList  extends FirestoreRecyclerAdapter<ModelDataList, M
             productmodel = itemView.findViewById(R.id.model);
             productid = itemView.findViewById(R.id.id);
             productcategory = itemView.findViewById(R.id.category);
+            previousprice = itemView.findViewById(R.id.previceprice);
         }
         @Override
         public void onClick(View view) {

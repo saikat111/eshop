@@ -143,12 +143,17 @@ public class Cart extends AppCompatActivity {
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ShippingCharge.class);
-                if(total.getText().toString().equals(null) ||Integer.parseInt(total.getText().toString()) < 99 ){
-                    Toast.makeText(getApplicationContext(), "Minimum order amount is 100 tk", Toast.LENGTH_SHORT).show();
-                    return;
+                try{
+                    Intent intent = new Intent(getApplicationContext(), ShippingCharge.class);
+                    if(total.getText().toString().equals(null) ||Integer.parseInt(total.getText().toString()) < 99 ){
+                        Toast.makeText(getApplicationContext(), "Minimum order amount is 100 tk", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    startActivity(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                startActivity(intent);
+
             }
         });
 

@@ -121,7 +121,7 @@
 
             <TextView
                 android:textColor="#000"
-                android:text="৫৫"
+                android:text="৬০"
                 android:padding="3dip" />
 
         </TableRow>

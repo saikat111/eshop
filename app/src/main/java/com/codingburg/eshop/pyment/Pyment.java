@@ -1,16 +1,11 @@
 package com.codingburg.eshop.pyment;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.ContactsContract;
-import android.text.format.Time;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +14,6 @@ import android.widget.Toast;
 
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.home.MainActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,31 +22,40 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Pyment extends AppCompatActivity {
     private String ammount;
-    private TextView total;
+    private TextView total, type,typ2, sim1,sim2,rsim1, rsim2,helpnumber;
     private FirebaseAuth firebaseAuth;
     private String userId;
     private DatabaseReference admin,userDb;
     private Button order;
-    private EditText number, addrress;
-
-    ProgressDialog progressDialog;
+    private EditText number, addrress, contact;
+    private DatabaseReference numberDb;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pyment);
         total = findViewById(R.id.total);
+        type = findViewById(R.id.type);
+        typ2 = findViewById(R.id.type2);
+        sim1 = findViewById(R.id.sim1);
+        sim2 = findViewById(R.id.sim2);
+        rsim1 = findViewById(R.id.rsim1);
+        rsim2 = findViewById(R.id.rsim2);
         order = findViewById(R.id.order);
+        contact = findViewById(R.id.contact);
         number = findViewById(R.id.number);
+        helpnumber = findViewById(R.id.helpnumber);
         addrress = findViewById(R.id.address);
         firebaseAuth = FirebaseAuth.getInstance();
+
         progressDialog = new ProgressDialog(this);
         try {
             userId = firebaseAuth.getCurrentUser().getUid();
@@ -64,6 +67,7 @@ public class Pyment extends AppCompatActivity {
             e.printStackTrace();
         }
         getTotal();
+        getNumber();
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,9 +77,101 @@ public class Pyment extends AppCompatActivity {
 
     }
 
+    private void getNumber() {
+
+        numberDb = FirebaseDatabase.getInstance().getReference().child("number").child("bkash");
+
+         numberDb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Map<String , Object> map = (Map<String, Object>) snapshot.getValue();
+                    if(map.get("sim1") !=null){
+                        String num1 = map.get("sim1").toString();
+                        sim1.setText(num1);
+                    }
+                    if(map.get("smi2") !=null){
+                        String num2 = map.get("smi2").toString();
+                        sim2.setText(num2);
+                    }
+                    if(map.get("type") !=null){
+                        String type1 = map.get("type").toString();
+                        type.setText(type1);
+                    }
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        numberDb = FirebaseDatabase.getInstance().getReference().child("number").child("roket");
+        numberDb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Map<String , Object> map = (Map<String, Object>) snapshot.getValue();
+                    if(map.get("sim1") !=null){
+                        String num1 = map.get("sim1").toString();
+                        rsim1.setText(num1);
+                    }
+                    if(map.get("smi2") !=null){
+                        String num2 = map.get("smi2").toString();
+                        rsim2.setText(num2);
+                    }
+                    if(map.get("type") !=null){
+                        String type1 = map.get("type").toString();
+                        typ2.setText(type1);
+                    }
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+        numberDb = FirebaseDatabase.getInstance().getReference().child("number").child("helpnumber");
+        numberDb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Map<String , Object> map = (Map<String, Object>) snapshot.getValue();
+                    if(map.get("number") !=null){
+                        String num1 = map.get("number").toString();
+                        helpnumber.setText(num1);
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
+    }
+
     private void getOrder() {
         final String getnumber = number.getText().toString();
         final String getAddress =addrress.getText().toString();
+        final String getContactNumber =contact.getText().toString();
         if(getnumber.equals(null)){
             Toast.makeText(getApplicationContext(), "আপনার নম্বর লিখুন", Toast.LENGTH_SHORT).show();
 
@@ -109,6 +205,7 @@ public class Pyment extends AppCompatActivity {
                          data.put("total-tk", total.getText().toString());
                          data.put("address", getAddress);
                          data.put("bkash-number", getnumber);
+                         data.put("personal-number", getContactNumber);
                          admin.child("details").updateChildren(data);
                          Map userorderdata = new HashMap();
                          userorderdata.put("ordernumber", key);

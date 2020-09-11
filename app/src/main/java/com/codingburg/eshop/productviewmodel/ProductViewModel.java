@@ -10,11 +10,12 @@ public class ProductViewModel {
     String category;
     String time;
     String location;
+    String previousprice;
 
     public ProductViewModel() {
     }
 
-    public ProductViewModel(String price, String image, String id, String name, String category, String time, String location) {
+    public ProductViewModel(String price, String image, String id, String name, String category, String time, String location,  String previousprice) {
         this.price = price;
         this.image = image;
         this.id = id;
@@ -22,6 +23,15 @@ public class ProductViewModel {
         this.category = category;
         this.time = time;
         this.location = location;
+        this.previousprice = previousprice;
+    }
+
+    public String getPreviousprice() {
+        return previousprice;
+    }
+
+    public void setPreviousprice(String previousprice) {
+        this.previousprice = previousprice;
     }
 
     public String getTime() {

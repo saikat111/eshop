@@ -13,13 +13,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp">
         <LinearLayout
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="5dp">
+            >
 
             <RelativeLayout
-                android:layout_marginTop="20dp"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <androidx.recyclerview.widget.RecyclerView

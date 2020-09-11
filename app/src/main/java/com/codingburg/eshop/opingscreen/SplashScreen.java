@@ -12,7 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class SplashScreen extends AppCompatActivity {
-private  int SPLASH_TIME_OUT = 4000;
+private  int SPLASH_TIME_OUT = 3000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

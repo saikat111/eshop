@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -77,7 +78,7 @@ import java.util.Map;
 public class ProductDetails extends AppCompatActivity {
     private ImageSlider imageSlider, imageSlider2;
     private Button  addcart, add, remove;
-    private TextView price, name, quantity ,total, time, location, details, getname, getnuber;
+    private TextView price, name, quantity ,total, time, location, details, getname, getnuber,previousprice;
     private int quantityValue =1;
     private String id , categoryfrom;
     private DocumentReference productDb;
@@ -185,6 +186,7 @@ public class ProductDetails extends AppCompatActivity {
         final String[] getKey = new String[1];
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Adding to your cart..");
+        previousprice = findViewById(R.id.previceprice);
 
         try {
             userId = firebaseAuth.getCurrentUser().getUid();
@@ -388,6 +390,11 @@ public class ProductDetails extends AppCompatActivity {
                   if(map.get("description") != null){
                       String getValue = map.get("description").toString();
                       details.setText(getValue);
+                  }
+                  if(map.get("previousprice") != null){
+                      String getValue = map.get("previousprice").toString();
+                      previousprice.setText(getValue);
+                      previousprice.setPaintFlags(previousprice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                   }
               }
 

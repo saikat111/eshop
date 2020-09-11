@@ -5,11 +5,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cardview"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    card_view:cardElevation="10dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    card_view:cardElevation="2dp"
     android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
     android:clickable="true"
+    card_view:cardUseCompatPadding="true"
     card_view:cardBackgroundColor="#E0EF9E"
     android:foreground="?attr/selectableItemBackground"
 
@@ -27,6 +29,8 @@
             android:layout_height="110dp"
             >
         </ImageView>
+
+
         <TextView
             android:layout_gravity="center"
             android:id="@+id/model"
@@ -40,7 +44,18 @@
 
             >
         </TextView>
+        <TextView
+            android:id="@+id/previceprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textColor="#E80A0A"
+            android:textSize="16dp"
+            >
+        </TextView>
            <LinearLayout
+               android:layout_marginBottom="5dp"
                android:layout_gravity="center"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -55,7 +70,6 @@
 
                </TextView>
                <TextView
-                   android:layout_marginLeft="5dp"
                    android:layout_gravity="center"
                    android:id="@+id/price"
                    android:textStyle="bold"

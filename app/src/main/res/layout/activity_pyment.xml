@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
+    android:padding="5dp"
     android:background="#FFF"
     tools:context=".pyment.Pyment">
     <androidx.core.widget.NestedScrollView
@@ -15,7 +15,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <LinearLayout
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:text="Total Amount:(Tk)"
             android:textStyle="bold"
             android:textColor="#000"
@@ -32,21 +32,22 @@
             android:layout_gravity="center"
             >
         </TextView>
+
         <TextView
-            android:layout_marginTop="15dp"
             android:id="@+id/total"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:textColor="#000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            >
+            android:layout_marginTop="10dp"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:textStyle="bold">
+
         </TextView>
         <TextView
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:text="@string/sendmoney"
-            android:textSize="25dp"
+            android:textSize="15dp"
             android:fontFamily="@font/andika"
             android:textColor="#000"
             android:layout_width="wrap_content"
@@ -55,9 +56,9 @@
             >
         </TextView>
         <TextView
-            android:layout_marginTop="8dp"
-            android:text="@string/bikash"
-            android:textSize="25dp"
+            android:id="@+id/type"
+            android:layout_marginTop="2dp"
+            android:textSize="15dp"
             android:fontFamily="@font/andika"
             android:textColor="#000"
             android:layout_width="wrap_content"
@@ -66,9 +67,75 @@
             >
         </TextView>
         <TextView
-            android:layout_marginTop="8dp"
+            android:id="@+id/sim1"
+            android:layout_marginTop="5dp"
+            android:textSize="20dp"
+            android:fontFamily="@font/andika"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/sim2"
+            android:layout_marginTop="2dp"
+            android:textSize="15dp"
+            android:fontFamily="@font/andika"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+        </TextView>
+        <TextView
+            android:layout_marginTop="2dp"
+            android:text="@string/roket"
+            android:textSize="15dp"
+            android:fontFamily="@font/andika"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/type2"
+            android:layout_marginTop="2dp"
+            android:textSize="15dp"
+            android:fontFamily="@font/andika"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/rsim1"
+            android:layout_marginTop="2dp"
+            android:textSize="15dp"
+            android:fontFamily="@font/andika"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/rsim2"
+            android:layout_marginTop="2dp"
+            android:textSize="15dp"
+            android:fontFamily="@font/andika"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+        </TextView>
+        <TextView
+            android:layout_marginTop="2dp"
             android:text="@string/sendtext"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:fontFamily="@font/andika"
             android:textColor="#000"
             android:layout_width="wrap_content"
@@ -85,9 +152,9 @@
 
         </TextView>
         <TextView
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="2dp"
             android:text="@string/details"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:fontFamily="@font/andika"
             android:textColor="#000"
             android:layout_width="wrap_content"
@@ -104,9 +171,9 @@
 
         </TextView>
         <TextView
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="2dp"
             android:text="@string/order"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:fontFamily="@font/andika"
             android:textColor="#000"
             android:layout_width="wrap_content"
@@ -124,7 +191,7 @@
 
         </EditText>
         <TextView
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="18dp"
             android:text="@string/address"
             android:textSize="15dp"
             android:fontFamily="@font/andika"
@@ -136,10 +203,27 @@
         <EditText
             android:id="@+id/address"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-
             android:hint="ঠিকানা">
+
+        </EditText>
+        <TextView
+            android:layout_marginTop="18dp"
+            android:text="@string/contactnumber"
+            android:textSize="15dp"
+            android:fontFamily="@font/andika"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+        </TextView>
+        <EditText
+            android:id="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="নাম্বার">
 
         </EditText>
         <TextView
@@ -164,7 +248,7 @@
         </Button>
 
         <TextView
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:text="@string/finalword"
             android:textSize="15dp"
             android:fontFamily="@font/andika"
@@ -177,6 +261,17 @@
         <TextView
             android:layout_marginTop="8dp"
             android:text="@string/call"
+            android:textSize="15dp"
+            android:fontFamily="@font/andika"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/helpnumber"
+            android:layout_marginTop="8dp"
             android:textSize="15dp"
             android:fontFamily="@font/andika"
             android:textColor="#000"
