@@ -1,20 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/blog"
-        android:icon="@drawable/facebook"
-        android:title="facebook"
-        app:showAsAction="always"
-        />
-    <item
-        android:id="@+id/youtube"
-        android:icon="@drawable/youtube"
-        android:title="youtube"
-        app:showAsAction="always"
-        />
-    <item
         android:id="@+id/search"
-        android:icon="@drawable/search"
+        android:icon="@drawable/ic_baseline_search_24"
         android:title="search Data"
         app:showAsAction="ifRoom"
         />

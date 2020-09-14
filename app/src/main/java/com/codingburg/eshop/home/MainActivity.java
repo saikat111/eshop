@@ -2,6 +2,7 @@ package com.codingburg.eshop.home;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -80,6 +81,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
@@ -92,7 +101,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private ImageSlider imageSlider, imageSlider2;
     CarouselView carouselView ,carouselView2, carouselView3,carouselView4;
-    TextView seeall;
     String[] sampleImages = new String[2];
     String[] sampleImages2 = new String[2];
     private  RecyclerView recyclerView, recyclerView2, recyclerView3, recyclerView5, recyclerviewshop;
@@ -103,13 +111,13 @@ public class MainActivity extends AppCompatActivity {
     LinearLayoutManager HorizontalLayout;
     private FirebaseAuth mAuth;
     private  String userId;
-    private  TextView seeallaerro;
     private  FirebaseFirestore db;
     private DocumentReference offerTop, discount;
     private ImageView men, women, kids;
     int[] sampleImages1 = {R.drawable.image_6,R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
     int[] sampleImages3 = {R.drawable.c1,R.drawable.c2, R.drawable.c3, R.drawable.c4, R.drawable.c5, R.drawable.c6};
     private AdView mAdView, mAdView2, mAdView3, mAdView4;
+    private  Toolbar toolbar;
 
 
 
@@ -117,6 +125,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         FirebaseDatabase.getInstance().goOffline();
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -126,10 +137,9 @@ public class MainActivity extends AppCompatActivity {
         men = findViewById(R.id.men);
         women = findViewById(R.id.women);
         kids = findViewById(R.id.kids);
-        seeall = findViewById(R.id.seeall);
-        seeallaerro = findViewById(R.id.seeallaerro);
         mAuth =FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        new DrawerBuilder().withActivity(this).build();
 
 //ads
 
@@ -196,6 +206,48 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest4 = new AdRequest.Builder().build();
         mAdView4.loadAd(adRequest);
 //ads
+
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.header)
+                .addProfiles(
+                        new ProfileDrawerItem().withName("ShuvolBD").withEmail("shulovbd@gmail.com").withIcon(getResources().getDrawable(R.drawable.logo))
+                )
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
+                        return false;
+                    }
+                })
+                .build();
+        final PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Facebook");
+        final PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("Youtube");
+
+//create the drawer and remember the `Drawer` result object
+        Drawer result = new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withAccountHeader(headerResult)
+                .addDrawerItems(
+                        item1,
+                        item2
+
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        if (drawerItem == item1){
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.fb)));
+                            startActivity(browserIntent);
+                        }
+                        if (drawerItem == item2){
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.youtube)));
+                            startActivity(browserIntent);
+                        }
+                        return true;
+                    }
+                })
+                .build();
         //image silde one and two
         imageSlider = findViewById(R.id.image_slider);
         final ArrayList<String> id = new ArrayList<>();
@@ -348,20 +400,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        seeall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                startActivity(intent);
-            }
-        });
-        seeallaerro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                startActivity(intent);
-            }
-        });
+
         //buttom navigation
 
         //offer
@@ -373,10 +412,7 @@ public class MainActivity extends AppCompatActivity {
         CollectionReference collectionReference = db.collection("category");
         Query categoryName = collectionReference.orderBy("id");
         recyclerView5 = (RecyclerView)findViewById(R.id.recyclerview4);
-        RecyclerViewLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView5.setLayoutManager(RecyclerViewLayoutManager);
-        HorizontalLayout = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView5.setLayoutManager(HorizontalLayout);
+        recyclerView5.setLayoutManager(new GridLayoutManager(this, 3 ,GridLayoutManager.VERTICAL, false));
         FirestoreRecyclerOptions<CetegoryModel> options5 =
                 new FirestoreRecyclerOptions.Builder<CetegoryModel>()
                         .setQuery(categoryName, CetegoryModel.class)
@@ -485,34 +521,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.top_bar, menu);
         MenuItem item = menu.findItem(R.id.search);
-        MenuItem item2 = menu.findItem(R.id.blog);
-        MenuItem item3 = menu.findItem(R.id.youtube);
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(getApplicationContext(), Seach.class);
                 startActivity(intent);
-
                 return false;
             }
         });
-        item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.fb)));
-                startActivity(browserIntent);
-                return false;
-            }
-        });
-        item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.youtube)));
-                startActivity(browserIntent);
-                return false;
-            }
-        });
-
         return super.onCreateOptionsMenu(menu);
     }
 }
