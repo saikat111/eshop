@@ -24,7 +24,6 @@ import android.widget.Toast;
 import com.codingburg.eshop.R;
 
 import com.codingburg.eshop.authentication.PleaseLogin;
-import com.codingburg.eshop.cetegory.Category;
 import com.codingburg.eshop.cetegory.CetegoryAdapter;
 import com.codingburg.eshop.cetegory.CetegoryModel;
 import com.codingburg.eshop.discount.Discount;
@@ -89,6 +88,7 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.onesignal.OneSignal;
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
@@ -103,11 +103,11 @@ public class MainActivity extends AppCompatActivity {
     CarouselView carouselView ,carouselView2, carouselView3,carouselView4;
     String[] sampleImages = new String[2];
     String[] sampleImages2 = new String[2];
-    private  RecyclerView recyclerView, recyclerView2, recyclerView3, recyclerView5, recyclerviewshop;
+    private  RecyclerView recyclerView, recyclerView2, recyclerView3, recyclerView5, recyclerviewphone;
     private RecyclerView.LayoutManager RecyclerViewLayoutManager, RecyclerViewLayoutManager2;
     private ModelAdapter modelAdapter, modelAdapter2;
     private CetegoryAdapter modelAdapter5;
-    private ModelAdapterList modelAdapter3;
+    private ModelAdapterList modelAdapter3, modelAdapterPhone;
     LinearLayoutManager HorizontalLayout;
     private FirebaseAuth mAuth;
     private  String userId;
@@ -118,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
     int[] sampleImages3 = {R.drawable.c1,R.drawable.c2, R.drawable.c3, R.drawable.c4, R.drawable.c5, R.drawable.c6};
     private AdView mAdView, mAdView2, mAdView3, mAdView4;
     private  Toolbar toolbar;
+    private Button bazzer;
+    private   String show;
+    private  Query phoneQ;
 
 
 
@@ -125,6 +128,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Logging set to help debug issues, remove before releasing your app.
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -140,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth =FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         new DrawerBuilder().withActivity(this).build();
+        bazzer = findViewById(R.id.bazzer);
 
 //ads
 
@@ -211,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
                 .addProfiles(
-                        new ProfileDrawerItem().withName("ShuvolBD").withEmail("shulovbd@gmail.com").withIcon(getResources().getDrawable(R.drawable.logo))
+                        new ProfileDrawerItem().withName(getString(R.string.app_name)).withEmail(getString(R.string.email)).withIcon(getResources().getDrawable(R.drawable.logo))
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
@@ -222,6 +234,9 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         final PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Facebook");
         final PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("Youtube");
+        final PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(2).withName("Logout");
+        final PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(2).withName("Privacy Policy");
+        final PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(2).withName("Terms & Conditions");
 
 //create the drawer and remember the `Drawer` result object
         Drawer result = new DrawerBuilder()
@@ -230,7 +245,10 @@ public class MainActivity extends AppCompatActivity {
                 .withAccountHeader(headerResult)
                 .addDrawerItems(
                         item1,
-                        item2
+                        item2,
+                        item3,
+                        item4,
+                        item5
 
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -242,6 +260,24 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if (drawerItem == item2){
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.youtube)));
+                            startActivity(browserIntent);
+                        }
+                        if (drawerItem == item3){
+                            try {
+                                mAuth.signOut();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if (drawerItem == item4){
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://shulovshopbd.blogspot.com/p/privacy-policy-shulov-shop-bd.html"));
+                            startActivity(browserIntent);
+                        }
+                        if (drawerItem == item5){
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://shulovshopbd.blogspot.com/p/terms-conditions-shulov-shop-bd.html"));
                             startActivity(browserIntent);
                         }
                         return true;
@@ -305,6 +341,14 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        bazzer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
+                intent.putExtra("category", "bazzer");
+                startActivity(intent);
+            }
+        });
         men.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -485,6 +529,41 @@ public class MainActivity extends AppCompatActivity {
         modelAdapter3 = new ModelAdapterList(options3);
         recyclerView3.setAdapter(modelAdapter3);
         // home product show
+
+        // phone product show
+        DocumentReference reference = FirebaseFirestore.getInstance().collection("show").document("showhome");
+     reference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+         @Override
+         public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+             if(error != null){
+                 return;
+             }
+             if(value != null && value.exists()){
+                 Map<String, Object> map = (Map<String, Object>) value.getData();
+                 if(map.get("category") != null){
+                      show = map.get("category").toString();
+                 }
+                 recyclerviewphone = (RecyclerView) findViewById(R.id.recyclerviewphone);
+                 CollectionReference phone = db.collection("product");
+                 phoneQ = phone.whereEqualTo("category", show);
+                 recyclerviewphone.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2 ,GridLayoutManager.VERTICAL, false));
+                 FirestoreRecyclerOptions<ModelDataList> optionsphone =
+                         new FirestoreRecyclerOptions.Builder<ModelDataList>()
+                                 .setQuery(phoneQ, ModelDataList.class)
+                                 .build();
+                 modelAdapterPhone = new ModelAdapterList(optionsphone);
+                 recyclerviewphone.setAdapter(modelAdapterPhone);
+                 modelAdapterPhone.startListening();
+             }
+         }
+     });
+
+//        recyclerView3.setHasFixedSize(true);
+//        recyclerView3.setLayoutManager(new LinearLayoutManager(this));
+
+        // phone product show
+
+
     }
     ImageListener imageListener = new ImageListener() {
         @Override
@@ -505,6 +584,7 @@ public class MainActivity extends AppCompatActivity {
         modelAdapter2.startListening();
         modelAdapter3.startListening();
         modelAdapter5.startListening();
+
 //        shopAdapter.startListening();
     }
     @Override
@@ -514,6 +594,7 @@ public class MainActivity extends AppCompatActivity {
         modelAdapter2.stopListening();
         modelAdapter3.stopListening();
         modelAdapter5.stopListening();
+
 //        shopAdapter.stopListening();
     }
 

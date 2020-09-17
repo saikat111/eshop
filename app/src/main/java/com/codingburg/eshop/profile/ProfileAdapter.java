@@ -31,6 +31,7 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<ProfileModel, Profil
         holder.productid.setText(model.getOrdernumber());
         holder.productPrice.setText(model.getTotaltk());
         holder.status.setText(model.getStatus());
+        holder.date.setText(model.getDate());
     }
 
     @NonNull
@@ -44,13 +45,14 @@ public class ProfileAdapter extends FirebaseRecyclerAdapter<ProfileModel, Profil
     public class DataViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        TextView productPrice, productid, status;
+        TextView productPrice, productid, status, date;
         public DataViewHolder(@NonNull final View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             productPrice = itemView.findViewById(R.id.price);
             productid = itemView.findViewById(R.id.id);
             status = itemView.findViewById(R.id.status);
+            date = itemView.findViewById(R.id.date);
         }
         @Override
         public void onClick(View view) {

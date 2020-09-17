@@ -39,8 +39,8 @@
             android:layout_height="wrap_content"
             android:textSize="18dp"
             android:textColor="#000"
-            android:ellipsize="end"
-            android:maxLines="1"
+            android:maxLines="2"
+            android:gravity="center"
 
             >
         </TextView>

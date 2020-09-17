@@ -24,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -169,6 +171,9 @@ public class Pyment extends AppCompatActivity {
     }
 
     private void getOrder() {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        final String formattedDate = df.format(c.getTime());
         final String getnumber = number.getText().toString();
         final String getAddress =addrress.getText().toString();
         final String getContactNumber =contact.getText().toString();
@@ -206,11 +211,13 @@ public class Pyment extends AppCompatActivity {
                          data.put("address", getAddress);
                          data.put("bkash-number", getnumber);
                          data.put("personal-number", getContactNumber);
+                         data.put("date", formattedDate);
                          admin.child("details").updateChildren(data);
                          Map userorderdata = new HashMap();
                          userorderdata.put("ordernumber", key);
                         userorderdata.put("totaltk", total.getText().toString());
                         userorderdata.put("status","Pending");
+                        userorderdata.put("date", formattedDate);
                         userdata.updateChildren(userorderdata);
                          delete.removeValue();
                          userDb.removeValue();

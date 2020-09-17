@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ShulovBD</string>
+    <string name="app_name">Shulov Shop-BD</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="name">eshop</string>
     <string name="pattran">-------------------</string>
@@ -22,6 +22,10 @@
     <string name="youtube">https://www.youtube.com/channel/UC7sS1rBaAMypmr6nBCixIAQ?view_as=subscriber</string>
     <string name="roket">আমাদের রকেট নম্বরটি</string>
     <string name="contactnumber">আপনার ব্যক্তিগত ফোন নম্বরটি লিখুন</string>
+    <string name="email">shulovshopbd@gmail.com</string>
+    <string name="facebook_app_id">528068024671871</string>
+    <string name="fb_login_protocol_scheme">fb528068024671871</string>
+    <string name="googleadsapplicationid">ca-app-pub-3940256099942544~3347511713</string>
 
 
 </resources>

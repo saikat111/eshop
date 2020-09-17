@@ -3,7 +3,7 @@ package com.codingburg.eshop.productdetails;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,19 +20,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codingburg.eshop.comment.Post;
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.authentication.PleaseLogin;
 
 import com.codingburg.eshop.cart.Cart;
-import com.codingburg.eshop.cetegory.Category;
-import com.codingburg.eshop.home.MainActivity;
+
+import com.codingburg.eshop.comment.CommentAdapter;
+import com.codingburg.eshop.comment.CommentData;
 import com.codingburg.eshop.model.ModelAdapter;
 import com.codingburg.eshop.model.ModelAdapterList;
 import com.codingburg.eshop.model.ModelData;
 import com.codingburg.eshop.model.ModelDataList;
 
-import com.codingburg.eshop.profile.Profile;
-import com.codingburg.eshop.search.Seach;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
@@ -48,7 +48,6 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -62,12 +61,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import com.luseen.spacenavigation.SpaceItem;
-import com.luseen.spacenavigation.SpaceNavigationView;
-import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
-import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
@@ -78,7 +73,7 @@ import java.util.Map;
 public class ProductDetails extends AppCompatActivity {
     private ImageSlider imageSlider, imageSlider2;
     private Button  addcart, add, remove;
-    private TextView price, name, quantity ,total, time, location, details, getname, getnuber,previousprice;
+    private TextView price, name, quantity ,total, time, location, details, getname, getnuber,previousprice, discount;
     private int quantityValue =1;
     private String id , categoryfrom;
     private DocumentReference productDb;
@@ -96,7 +91,11 @@ public class ProductDetails extends AppCompatActivity {
     private String userName,userName2, phoneNumber,phoneNumber2, key,offerone;
     private ProgressDialog progressDialog;
     private AdView mAdView, mAdView2 ;
-
+    private Toolbar toolbar;
+    private ImageView edit;
+    private RecyclerView recyclerviewreviews;
+    private CommentAdapter modelAdapter5;
+    private  FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,6 +168,8 @@ public class ProductDetails extends AppCompatActivity {
         id = getIntent().getExtras().getString("id");
         categoryfrom = getIntent().getExtras().getString("category");
         getname = findViewById(R.id.getname);
+        edit = findViewById(R.id.edit);
+        discount = findViewById(R.id.discount);
         getnuber = findViewById(R.id.getnumber);
         addcart = findViewById(R.id.addcard);
         add = findViewById(R.id.add);
@@ -188,12 +189,31 @@ public class ProductDetails extends AppCompatActivity {
         progressDialog.setMessage("Adding to your cart..");
         previousprice = findViewById(R.id.previceprice);
 
+
         try {
             userId = firebaseAuth.getCurrentUser().getUid();
         }
         catch (Exception e){
             e.printStackTrace();
         }
+
+
+
+
+
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(userId == null){
+                    Toast.makeText(getApplicationContext(), "Pleace login", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Post exampleDialog = new Post(getIntent().getExtras().getString("id"));
+                exampleDialog.show(getSupportFragmentManager(), "example dialog");
+            }
+        });
+
 
 
         imageSlider = findViewById(R.id.image_slider);
@@ -246,7 +266,7 @@ public class ProductDetails extends AppCompatActivity {
                     startActivity(intent);
                     return;
                 }
-                if(totalammout.equals(null) || productname.equals(null) || productQuantity.equals(null)){
+                if(totalammout == null || productname == null || productQuantity == null){
                     return;
                 }
                 else if(totalammout != null || productname != null ||productQuantity != null ){
@@ -357,6 +377,20 @@ public class ProductDetails extends AppCompatActivity {
         modelAdapter3 = new ModelAdapterList(options3);
         recyclerView3.setAdapter(modelAdapter3);
         // home product show
+        //comments
+        db = FirebaseFirestore.getInstance();
+        CollectionReference newProducts = db.collection("product").document(id).collection("comments");
+        recyclerviewreviews = (RecyclerView)findViewById(R.id.recyclerviewreviews);
+        recyclerviewreviews.setLayoutManager(new LinearLayoutManager(this));
+        FirestoreRecyclerOptions<CommentData> options4 =
+                new FirestoreRecyclerOptions.Builder<CommentData>()
+                        .setQuery(newProducts, CommentData.class)
+                        .build();
+        modelAdapter5 = new CommentAdapter(options4);
+        recyclerviewreviews.setAdapter(modelAdapter5);
+
+
+
 
     }
 
@@ -395,6 +429,10 @@ public class ProductDetails extends AppCompatActivity {
                       String getValue = map.get("previousprice").toString();
                       previousprice.setText(getValue);
                       previousprice.setPaintFlags(previousprice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                  }
+                  if(map.get("discount") != null){
+                      String getValue = map.get("discount").toString();
+                      discount.setText(getValue);
                   }
               }
 
@@ -442,12 +480,14 @@ public class ProductDetails extends AppCompatActivity {
         super.onStart();
         modelAdapter.startListening();
         modelAdapter3.startListening();
+        modelAdapter5.startListening();
     }
     @Override
     protected void onStop() {
         super.onStop();
         modelAdapter.stopListening();
         modelAdapter3.stopListening();
+        modelAdapter5.stopListening();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

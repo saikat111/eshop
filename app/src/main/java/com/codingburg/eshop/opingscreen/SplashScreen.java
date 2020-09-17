@@ -24,9 +24,6 @@ private  int SPLASH_TIME_OUT = 3000;
                         Intent intent = new Intent(SplashScreen.this, MainActivity.class);
                         startActivity(intent);
                         finish();
-
-
-
             }
         }, SPLASH_TIME_OUT);
     }

@@ -1,27 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".authentication.PleaseLogin">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:textColor="#000"
+
+        android:fontFamily="@font/andika"
+        android:maxLines="2"
+        android:text="Welcome to Shulov Shop-BD explore us">
+
+    </TextView>
+    <LinearLayout
+        android:id="@+id/fb"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:background="#385795"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/fb"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Login with Facebook"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textSize="24dp"/>
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:text="or">
+
+    </TextView>
+
+        <Button
+            android:layout_marginTop="15dp"
+            android:id="@+id/login"
+            android:layout_width="214dp"
+            android:layout_height="65dp"
+            android:background="@drawable/send_otp"
+            android:text="login with phone number" />
 
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="214dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="81dp"
-        android:layout_marginLeft="81dp"
-        android:layout_marginTop="498dp"
-        android:layout_marginEnd="81dp"
-        android:layout_marginRight="81dp"
-        android:layout_marginBottom="168dp"
-        android:text="login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/send_otp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
