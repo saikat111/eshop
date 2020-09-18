@@ -153,6 +153,7 @@
                                         android:layout_height="wrap_content"
                                         android:text="Categories"
                                         android:textSize="24dp"
+                                        android:textStyle="bold"
                                         style="@style/TextAppearance.AppCompat.Title"
                                         android:textColor="#614A05"
                                         >
@@ -236,7 +237,7 @@
                             ads:adUnitId="@string/banner_ID_1">
                         </com.google.android.gms.ads.AdView>
                         <com.synnapps.carouselview.CarouselView
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="15dp"
                             android:id="@+id/carouselView4"
                             android:layout_width="match_parent"
                             android:layout_height="150dp"
@@ -249,7 +250,7 @@
 
                         <com.google.android.ads.nativetemplates.TemplateView
                             android:id="@+id/my_template2"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:gnt_template_type="@layout/gnt_small_template_view"
@@ -302,7 +303,7 @@
                         </androidx.cardview.widget.CardView>
                         <com.google.android.ads.nativetemplates.TemplateView
                             android:id="@+id/my_template4"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:gnt_template_type="@layout/gnt_small_template_view"
@@ -316,7 +317,7 @@
                                             android:layout_height="wrap_content"
                                                 >
                                                 <com.denzcoskun.imageslider.ImageSlider
-                                                    android:layout_marginTop="10dp"
+                                                    android:layout_marginTop="15dp"
                                                     android:id="@+id/image_slider2"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="150dp"
@@ -332,7 +333,7 @@
 
 
                                     <RelativeLayout
-                                        android:layout_marginTop="10dp"
+                                        android:layout_marginTop="15dp"
                                         android:layout_marginBottom="5dp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -348,23 +349,17 @@
                                             >
                                         </androidx.recyclerview.widget.RecyclerView>
                                     </RelativeLayout>
-
-
-
-
-
-
                                         <com.google.android.ads.nativetemplates.TemplateView
                                             android:id="@+id/my_template3"
-                                            android:layout_marginTop="8dp"
+                                            android:layout_marginTop="15dp"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            app:gnt_template_type="@layout/gnt_medium_template_view"
+                                            app:gnt_template_type="@layout/gnt_small_template_view"
                                             />
                                 </LinearLayout>
 
                                 <RelativeLayout
-                                    android:layout_marginTop="5dp"
+                                    android:layout_marginTop="15dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     >
@@ -380,7 +375,7 @@
 
                         <com.google.android.ads.nativetemplates.TemplateView
                             android:id="@+id/my_template5"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:gnt_template_type="@layout/gnt_medium_template_view"

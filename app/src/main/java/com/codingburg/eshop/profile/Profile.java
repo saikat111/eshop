@@ -27,6 +27,14 @@ import com.codingburg.eshop.model.ModelAdapterList;
 import com.codingburg.eshop.model.ModelDataList;
 import com.codingburg.eshop.search.Seach;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.formats.UnifiedNativeAd;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,6 +59,7 @@ public class Profile extends AppCompatActivity {
     private TextView number, name;
     private DocumentReference currentUserDb;
     private Button logout;
+    private AdView mAdView, mAdView3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +69,43 @@ public class Profile extends AppCompatActivity {
         logout = findViewById(R.id.logout);
         name = findViewById(R.id.name);
         mAuth = FirebaseAuth.getInstance();
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AdLoader adLoader5 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template5);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+
+        adLoader5.loadAd(new AdRequest.Builder().build());
+
+        AdLoader adLoader3 = new AdLoader.Builder(this, getString(R.string.native_ID_1))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template3);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+        adLoader3.loadAd(new AdRequest.Builder().build());
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView3 = findViewById(R.id.adView3);
+        AdRequest adRequest3 = new AdRequest.Builder().build();
+        mAdView3.loadAd(adRequest);
+
+
         try {
             userId = mAuth.getCurrentUser().getUid();
         } catch (Exception e) {

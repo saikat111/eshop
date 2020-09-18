@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
 
         adLoader2.loadAd(new AdRequest.Builder().build());
 
-        AdLoader adLoader5 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
+        AdLoader adLoader5 = new AdLoader.Builder(this, getString(R.string.native_ID_1))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
                     public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
 
         adLoader3.loadAd(new AdRequest.Builder().build());
 
-        AdLoader adLoader4 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
+        AdLoader adLoader4 = new AdLoader.Builder(this, getString(R.string.native_ID_1))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
                     public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
@@ -203,11 +203,9 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         adLoader4.loadAd(new AdRequest.Builder().build());
-
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
         mAdView2 = findViewById(R.id.adView2);
         AdRequest adRequest2 = new AdRequest.Builder().build();
         mAdView2.loadAd(adRequest);
@@ -223,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
                 .addProfiles(
-                        new ProfileDrawerItem().withName(getString(R.string.app_name)).withEmail(getString(R.string.email)).withIcon(getResources().getDrawable(R.drawable.logo))
+                        new ProfileDrawerItem().withName(getString(R.string.app_name)).withIcon(getResources().getDrawable(R.drawable.logo))
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override

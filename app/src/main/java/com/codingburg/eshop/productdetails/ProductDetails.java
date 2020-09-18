@@ -79,7 +79,7 @@ public class ProductDetails extends AppCompatActivity {
     private DocumentReference productDb;
     private CollectionReference showCatagoryProducts;
     private CarouselView carouselView;
-    String[] sampleImages = new String[3];
+    String[] sampleImages = new String[2];
     private RecyclerView recyclerView,  recyclerView3;
     private RecyclerView.LayoutManager RecyclerViewLayoutManager;
     private ModelAdapter modelAdapter;
@@ -87,8 +87,8 @@ public class ProductDetails extends AppCompatActivity {
     LinearLayoutManager HorizontalLayout;
     private  String userId;
     private  FirebaseAuth firebaseAuth,mAuth;
-    private DatabaseReference cartUserDb,userDb;
-    private String userName,userName2, phoneNumber,phoneNumber2, key,offerone;
+    private DatabaseReference cartUserDb;
+    private String key,offerone;
     private ProgressDialog progressDialog;
     private AdView mAdView, mAdView2 ;
     private Toolbar toolbar;
@@ -206,7 +206,7 @@ public class ProductDetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(userId == null){
-                    Toast.makeText(getApplicationContext(), "Pleace login", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please login", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Post exampleDialog = new Post(getIntent().getExtras().getString("id"));
@@ -254,7 +254,16 @@ public class ProductDetails extends AppCompatActivity {
                     cartUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("cart").child(key);
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+
+                }
+                try{
+                    String totalammout = total.getText().toString();
+                    String productname = name.getText().toString();
+                    String productQuantity = quantity.getText().toString();
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+
                 }
                 String totalammout = total.getText().toString();
                 String productname = name.getText().toString();
@@ -457,16 +466,12 @@ public class ProductDetails extends AppCompatActivity {
                         String offertwo = (String) map.get("imagetwo");
                         sampleImages[1] = offertwo;
                     }
-                    if(map.get("imagethree")!=null){
-                        String offerthree = (String) map.get("imagethree");
-                        sampleImages[2] = offerthree;
-                    }
                 }
                 carouselView = (CarouselView) findViewById(R.id.carouselView);
                 ImageListener imageListener = new ImageListener() {
                     @Override
                     public void setImageForPosition(int position, ImageView imageView) {
-                        Picasso.get().load(sampleImages[position]).fit().centerCrop().into(imageView);
+                        Picasso.get().load(sampleImages[position]).fit().centerInside().into(imageView);
                     }
                 };
                 carouselView.setImageListener(imageListener);

@@ -84,8 +84,19 @@ public class Cart extends AppCompatActivity {
                     }
                 })
                 .build();
-
         adLoader5.loadAd(new AdRequest.Builder().build());
+
+        AdLoader adLoader3 = new AdLoader.Builder(this, getString(R.string.native_ID_1))
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        TemplateView template = findViewById(R.id.my_template3);
+                        template.setNativeAd(unifiedNativeAd);
+                    }
+                })
+                .build();
+        adLoader3.loadAd(new AdRequest.Builder().build());
+
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -145,8 +156,8 @@ public class Cart extends AppCompatActivity {
             public void onClick(View view) {
                 try{
                     Intent intent = new Intent(getApplicationContext(), ShippingCharge.class);
-                    if(total.getText().toString().equals(null) ||Integer.parseInt(total.getText().toString()) < 99 ){
-                        Toast.makeText(getApplicationContext(), "Minimum order amount is 100 tk", Toast.LENGTH_SHORT).show();
+                    if(total.getText().toString().equals(null) ||Integer.parseInt(total.getText().toString()) < 199 ){
+                        Toast.makeText(getApplicationContext(), "Minimum order amount is 200 tk", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     startActivity(intent);

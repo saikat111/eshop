@@ -101,6 +101,40 @@
                     >
                 </androidx.recyclerview.widget.RecyclerView>
             </RelativeLayout>
+            <com.google.android.ads.nativetemplates.TemplateView
+                android:id="@+id/my_template3"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:gnt_template_type="@layout/gnt_small_template_view"
+                />
+
+            <com.google.android.ads.nativetemplates.TemplateView
+                android:id="@+id/my_template5"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:gnt_template_type="@layout/gnt_medium_template_view"
+                />
+            <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/banner_ID_2">
+            </com.google.android.gms.ads.AdView>
+
+            <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/banner_ID_1">
+            </com.google.android.gms.ads.AdView>
+
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
     <com.luseen.spacenavigation.SpaceNavigationView
