@@ -189,6 +189,15 @@
                             app:slideInterval="3000"
                             app:strokeColor="#FF777777"
                             app:strokeWidth="1dp"/>
+                    <com.google.android.gms.ads.AdView
+                        android:layout_marginTop="10dp"
+                        xmlns:ads="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/adView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        ads:adSize="BANNER"
+                        ads:adUnitId="@string/banner_ID_2">
+                    </com.google.android.gms.ads.AdView>
 
                         <TextView
                             android:textStyle="bold"
@@ -248,14 +257,10 @@
                             app:strokeColor="#FF777777"
                             app:strokeWidth="1dp"/>
 
-                        <com.google.android.ads.nativetemplates.TemplateView
-                            android:id="@+id/my_template2"
-                            android:layout_marginTop="15dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:gnt_template_type="@layout/gnt_small_template_view"
-                            />
+
+
                         <com.google.android.gms.ads.AdView
+                            android:layout_marginTop="10dp"
                             xmlns:ads="http://schemas.android.com/apk/res-auto"
                             android:id="@+id/adView4"
                             android:layout_width="match_parent"
@@ -308,6 +313,7 @@
                             android:layout_height="wrap_content"
                             app:gnt_template_type="@layout/gnt_small_template_view"
                             />
+
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -330,7 +336,15 @@
                                         </androidx.cardview.widget.CardView>
 
 
-
+                                    <com.google.android.gms.ads.AdView
+                                        android:layout_marginTop="10dp"
+                                        xmlns:ads="http://schemas.android.com/apk/res-auto"
+                                        android:id="@+id/adView6"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        ads:adSize="BANNER"
+                                        ads:adUnitId="@string/banner_ID_2">
+                                    </com.google.android.gms.ads.AdView>
 
                                     <RelativeLayout
                                         android:layout_marginTop="15dp"
@@ -356,6 +370,15 @@
                                             android:layout_height="wrap_content"
                                             app:gnt_template_type="@layout/gnt_small_template_view"
                                             />
+                                    <com.google.android.gms.ads.AdView
+                                        android:layout_marginTop="10dp"
+                                        xmlns:ads="http://schemas.android.com/apk/res-auto"
+                                        android:id="@+id/adView8"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        ads:adSize="BANNER"
+                                        ads:adUnitId="@string/banner_ID_2">
+                                    </com.google.android.gms.ads.AdView>
                                 </LinearLayout>
 
                                 <RelativeLayout
@@ -372,7 +395,15 @@
                                         </androidx.recyclerview.widget.RecyclerView>
                                 </RelativeLayout>
 
-
+                    <com.google.android.gms.ads.AdView
+                        android:layout_marginTop="10dp"
+                        xmlns:ads="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/adView7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        ads:adSize="BANNER"
+                        ads:adUnitId="@string/banner_ID_2">
+                    </com.google.android.gms.ads.AdView>
                         <com.google.android.ads.nativetemplates.TemplateView
                             android:id="@+id/my_template5"
                             android:layout_marginTop="15dp"

@@ -14,30 +14,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.LinearLayout;
 
 import com.codingburg.eshop.R;
-
 import com.codingburg.eshop.authentication.PleaseLogin;
 import com.codingburg.eshop.cetegory.CetegoryAdapter;
 import com.codingburg.eshop.cetegory.CetegoryModel;
-import com.codingburg.eshop.discount.Discount;
-
 import com.codingburg.eshop.productdetails.ProductDetails;
 import com.codingburg.eshop.profile.Profile;
-
 import com.codingburg.eshop.cart.Cart;
-
 import com.codingburg.eshop.model.ModelAdapter;
 import com.codingburg.eshop.model.ModelAdapterList;
 import com.codingburg.eshop.model.ModelData;
 import com.codingburg.eshop.model.ModelDataList;
-
 import com.codingburg.eshop.search.Seach;
 import com.codingburg.eshop.showproducts.ShowProducts;
 import com.codingburg.eshop.subcetegory.SubCetegory;
@@ -45,29 +35,19 @@ import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.facebook.ads.*;
+import com.facebook.ads.AudienceNetworkAds;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.ads.nativetemplates.NativeTemplateStyle;
 import com.google.android.ads.nativetemplates.TemplateView;
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.VideoController;
-import com.google.android.gms.ads.formats.MediaView;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
-import com.google.android.gms.ads.formats.UnifiedNativeAdView;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -89,7 +69,6 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.onesignal.OneSignal;
-import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
@@ -116,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView men, women, kids;
     int[] sampleImages1 = {R.drawable.image_6,R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
     int[] sampleImages3 = {R.drawable.c1,R.drawable.c2, R.drawable.c3, R.drawable.c4, R.drawable.c5, R.drawable.c6};
-    private AdView mAdView, mAdView2, mAdView3, mAdView4;
+    private AdView mAdView, mAdView2, mAdView3, mAdView4, mAdView5, mAdView6, mAdView7, mAdView8;
     private  Toolbar toolbar;
     private Button bazzer;
     private   String show;
@@ -124,10 +103,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AudienceNetworkAds.initialize(this);
         // Logging set to help debug issues, remove before releasing your app.
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
 
@@ -153,20 +136,12 @@ public class MainActivity extends AppCompatActivity {
         new DrawerBuilder().withActivity(this).build();
         bazzer = findViewById(R.id.bazzer);
 
-//ads
 
 
-        AdLoader adLoader2 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
-                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
-                    @Override
-                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                        TemplateView template = findViewById(R.id.my_template2);
-                        template.setNativeAd(unifiedNativeAd);
-                    }
-                })
-                .build();
 
-        adLoader2.loadAd(new AdRequest.Builder().build());
+
+
+
 
         AdLoader adLoader5 = new AdLoader.Builder(this, getString(R.string.native_ID_1))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
@@ -215,6 +190,18 @@ public class MainActivity extends AppCompatActivity {
         mAdView4 = findViewById(R.id.adView4);
         AdRequest adRequest4 = new AdRequest.Builder().build();
         mAdView4.loadAd(adRequest);
+        mAdView5 = findViewById(R.id.adView5);
+        AdRequest adRequest5 = new AdRequest.Builder().build();
+        mAdView5.loadAd(adRequest);
+        mAdView6 = findViewById(R.id.adView6);
+        AdRequest adRequest6 = new AdRequest.Builder().build();
+        mAdView6.loadAd(adRequest);
+        mAdView7 = findViewById(R.id.adView7);
+        AdRequest adRequest7 = new AdRequest.Builder().build();
+        mAdView7.loadAd(adRequest);
+        mAdView8 = findViewById(R.id.adView8);
+        AdRequest adRequest8 = new AdRequest.Builder().build();
+        mAdView8.loadAd(adRequest);
 //ads
 
         AccountHeader headerResult = new AccountHeaderBuilder()

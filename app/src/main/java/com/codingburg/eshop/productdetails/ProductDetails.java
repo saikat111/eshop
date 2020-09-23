@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,9 +40,11 @@ import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.initialization.InitializationStatus;
@@ -78,8 +81,6 @@ public class ProductDetails extends AppCompatActivity {
     private String id , categoryfrom;
     private DocumentReference productDb;
     private CollectionReference showCatagoryProducts;
-    private CarouselView carouselView;
-    String[] sampleImages = new String[2];
     private RecyclerView recyclerView,  recyclerView3;
     private RecyclerView.LayoutManager RecyclerViewLayoutManager;
     private ModelAdapter modelAdapter;
@@ -96,6 +97,11 @@ public class ProductDetails extends AppCompatActivity {
     private RecyclerView recyclerviewreviews;
     private CommentAdapter modelAdapter5;
     private  FirebaseFirestore db;
+    private ImageView imageproduct;
+    private AdView  mAdView6, mAdView7, mAdView8;
+    private EditText ordernote;
+    private String getOrderNote;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,29 +115,19 @@ public class ProductDetails extends AppCompatActivity {
         });
 
         //ads
-        AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.native_ID_1))
-                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
-                    @Override
-                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                        TemplateView template = findViewById(R.id.my_template);
-                        template.setNativeAd(unifiedNativeAd);
-                    }
-                })
-                .build();
 
-        adLoader.loadAd(new AdRequest.Builder().build());
 
-        AdLoader adLoader2 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
-                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
-                    @Override
-                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                        TemplateView template = findViewById(R.id.my_template2);
-                        template.setNativeAd(unifiedNativeAd);
-                    }
-                })
-                .build();
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.instatianlads1));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
 
-        adLoader2.loadAd(new AdRequest.Builder().build());
+        });
 
         AdLoader adLoader3 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
@@ -161,6 +157,15 @@ public class ProductDetails extends AppCompatActivity {
         mAdView2 = findViewById(R.id.adView2);
         AdRequest adRequest2 = new AdRequest.Builder().build();
         mAdView2.loadAd(adRequest);
+        mAdView6 = findViewById(R.id.adView6);
+        AdRequest adRequest6 = new AdRequest.Builder().build();
+        mAdView6.loadAd(adRequest);
+        mAdView7 = findViewById(R.id.adView7);
+        AdRequest adRequest7 = new AdRequest.Builder().build();
+        mAdView7.loadAd(adRequest);
+        mAdView8 = findViewById(R.id.adView8);
+        AdRequest adRequest8 = new AdRequest.Builder().build();
+        mAdView8.loadAd(adRequest);
 
         //ads
 
@@ -168,6 +173,7 @@ public class ProductDetails extends AppCompatActivity {
         id = getIntent().getExtras().getString("id");
         categoryfrom = getIntent().getExtras().getString("category");
         getname = findViewById(R.id.getname);
+        ordernote = findViewById(R.id.ordernote);
         edit = findViewById(R.id.edit);
         discount = findViewById(R.id.discount);
         getnuber = findViewById(R.id.getnumber);
@@ -188,20 +194,13 @@ public class ProductDetails extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Adding to your cart..");
         previousprice = findViewById(R.id.previceprice);
-
-
+        imageproduct = findViewById(R.id.imageproduct);
         try {
             userId = firebaseAuth.getCurrentUser().getUid();
         }
         catch (Exception e){
             e.printStackTrace();
         }
-
-
-
-
-
-
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,9 +212,6 @@ public class ProductDetails extends AppCompatActivity {
                 exampleDialog.show(getSupportFragmentManager(), "example dialog");
             }
         });
-
-
-
         imageSlider = findViewById(R.id.image_slider);
         final ArrayList<String> idP = new ArrayList<>();
         final ArrayList<String> category = new ArrayList<>();
@@ -244,9 +240,21 @@ public class ProductDetails extends AppCompatActivity {
         productDb = FirebaseFirestore.getInstance().collection("product").document(id);
         getProductDetails();
         getDiscoutItems();
+
+
         addcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+
+                }
+                try {
+                     getOrderNote = ordernote.getText().toString();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 progressDialog.show();
                 FirebaseDatabase.getInstance().goOnline();
                 try{
@@ -305,6 +313,7 @@ public class ProductDetails extends AppCompatActivity {
                     cartInfo.put("name", productname);
                     cartInfo.put("quantity", productQuantity);
                     cartInfo.put("key", key);
+                    cartInfo.put("note", getOrderNote);
                     cartInfo.put("image", offerone);
                     cartUserDb.updateChildren(cartInfo).addOnSuccessListener(new OnSuccessListener() {
                         @Override
@@ -312,6 +321,7 @@ public class ProductDetails extends AppCompatActivity {
                             FirebaseDatabase.getInstance().goOffline();
                             Toast.makeText(getApplicationContext(), "addedto your cart", Toast.LENGTH_LONG).show();
                             progressDialog.dismiss();
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -400,7 +410,6 @@ public class ProductDetails extends AppCompatActivity {
 
 
 
-
     }
 
     private void getProductDetails() {
@@ -460,23 +469,9 @@ public class ProductDetails extends AppCompatActivity {
                     Map<String , Object>map = (Map<String, Object>) value.getData();
                     if(map.get("image")!=null){
                         String offerone = (String) map.get("image");
-                        sampleImages[0] = offerone;
-                    }
-                    if(map.get("imagetwo")!=null){
-                        String offertwo = (String) map.get("imagetwo");
-                        sampleImages[1] = offertwo;
+                       Picasso.get().load(offerone).into(imageproduct);
                     }
                 }
-                carouselView = (CarouselView) findViewById(R.id.carouselView);
-                ImageListener imageListener = new ImageListener() {
-                    @Override
-                    public void setImageForPosition(int position, ImageView imageView) {
-                        Picasso.get().load(sampleImages[position]).fit().centerInside().into(imageView);
-                    }
-                };
-                carouselView.setImageListener(imageListener);
-                carouselView.setPageCount(sampleImages.length);
-
             }
         });
     }

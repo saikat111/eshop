@@ -55,6 +55,7 @@ public class SubCetegory extends AppCompatActivity {
     private  String userId;
     private FirebaseAuth mAuth;
     private ImageSlider  imageSlider2;
+    private AdView  mAdView6, mAdView7, mAdView8;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,19 +64,6 @@ public class SubCetegory extends AppCompatActivity {
         id = getIntent().getExtras().getString("id");
 
 
-
-
-        AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.native_ID_1))
-                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
-                    @Override
-                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                        TemplateView template = findViewById(R.id.my_template);
-                        template.setNativeAd(unifiedNativeAd);
-                    }
-                })
-                .build();
-
-        adLoader.loadAd(new AdRequest.Builder().build());
 
         AdLoader adLoader2 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
@@ -92,6 +80,15 @@ public class SubCetegory extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+        mAdView6 = findViewById(R.id.adView6);
+        AdRequest adRequest6 = new AdRequest.Builder().build();
+        mAdView6.loadAd(adRequest);
+        mAdView7 = findViewById(R.id.adView7);
+        AdRequest adRequest7 = new AdRequest.Builder().build();
+        mAdView7.loadAd(adRequest);
+        mAdView8 = findViewById(R.id.adView8);
+        AdRequest adRequest8 = new AdRequest.Builder().build();
+        mAdView8.loadAd(adRequest);
 
         try {
             userId = mAuth.getCurrentUser().getUid();

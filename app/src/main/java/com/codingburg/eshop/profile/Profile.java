@@ -60,6 +60,8 @@ public class Profile extends AppCompatActivity {
     private DocumentReference currentUserDb;
     private Button logout;
     private AdView mAdView, mAdView3;
+    private AdView  mAdView6, mAdView7, mAdView8;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,16 +89,7 @@ public class Profile extends AppCompatActivity {
 
         adLoader5.loadAd(new AdRequest.Builder().build());
 
-        AdLoader adLoader3 = new AdLoader.Builder(this, getString(R.string.native_ID_1))
-                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
-                    @Override
-                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                        TemplateView template = findViewById(R.id.my_template3);
-                        template.setNativeAd(unifiedNativeAd);
-                    }
-                })
-                .build();
-        adLoader3.loadAd(new AdRequest.Builder().build());
+
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -104,7 +97,15 @@ public class Profile extends AppCompatActivity {
         mAdView3 = findViewById(R.id.adView3);
         AdRequest adRequest3 = new AdRequest.Builder().build();
         mAdView3.loadAd(adRequest);
-
+        mAdView6 = findViewById(R.id.adView6);
+        AdRequest adRequest6 = new AdRequest.Builder().build();
+        mAdView6.loadAd(adRequest);
+        mAdView7 = findViewById(R.id.adView7);
+        AdRequest adRequest7 = new AdRequest.Builder().build();
+        mAdView7.loadAd(adRequest);
+        mAdView8 = findViewById(R.id.adView8);
+        AdRequest adRequest8 = new AdRequest.Builder().build();
+        mAdView8.loadAd(adRequest);
 
         try {
             userId = mAuth.getCurrentUser().getUid();

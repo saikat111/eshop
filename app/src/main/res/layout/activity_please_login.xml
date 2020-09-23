@@ -17,7 +17,7 @@
 
         android:fontFamily="@font/andika"
         android:maxLines="2"
-        android:text="Welcome to Shulov Shop-BD explore us">
+        android:text="Welcome to ShulovShop explore us">
 
     </TextView>
     <LinearLayout

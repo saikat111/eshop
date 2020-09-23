@@ -23,6 +23,9 @@
     <string name="banner_ID_2">ca-app-pub-9062631069075279/8916497144</string>
     <string name="native_ID_1">ca-app-pub-9062631069075279/8724925459</string>
     <string name="native_ID_2">ca-app-pub-9062631069075279/5907190421</string>
+    <string name="videoads1">ca-app-pub-9062631069075279/2719550613</string>
+    <string name="instatianlads1">ca-app-pub-9062631069075279/1278229012</string>
+
 
 
 
@@ -34,6 +37,7 @@
 
     <string name="facebook_app_id">528068024671871</string>
     <string name="fb_login_protocol_scheme">fb528068024671871</string>
+    <string name="fb_banner1">249933149664944_249938812997711</string>
 
 
 
