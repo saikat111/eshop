@@ -8,9 +8,75 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:73334355613:android:56c8f91b4ff8e393474674",
+        "android_client_info": {
+          "package_name": "com.codingburg.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73334355613-qmhkdv8qm84mkoga6ljo554ubkft0kgf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVMeNbNUTEF_6G4_RAc4O4-c3wrPEmSWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73334355613-qmhkdv8qm84mkoga6ljo554ubkft0kgf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:73334355613:android:2ede74dc490ef7e4474674",
         "android_client_info": {
           "package_name": "com.codingburg.eshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73334355613-0fev0tjpbcsf9aohj8nd5isaoqhfhf7p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codingburg.eshop",
+            "certificate_hash": "b47ec83c5aa6c21168a02512aeb95353b7d9f36b"
+          }
+        },
+        {
+          "client_id": "73334355613-qmhkdv8qm84mkoga6ljo554ubkft0kgf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVMeNbNUTEF_6G4_RAc4O4-c3wrPEmSWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73334355613-qmhkdv8qm84mkoga6ljo554ubkft0kgf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73334355613:android:25702a9bedac50e4474674",
+        "android_client_info": {
+          "package_name": "com.codingburg.order"
         }
       },
       "oauth_client": [
