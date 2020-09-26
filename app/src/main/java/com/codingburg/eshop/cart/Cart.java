@@ -158,7 +158,11 @@ public class Cart extends AppCompatActivity {
             public void onClick(View view) {
                 try{
                     Intent intent = new Intent(getApplicationContext(), ShippingCharge.class);
-                    if(total.getText().toString().equals(null) ||Integer.parseInt(total.getText().toString()) < 199 ){
+                    if(Integer.parseInt(total.getText().toString()) == 15){
+                        startActivity(intent);
+                        return;
+                    }
+                    if(total.getText().toString().equals(null) ||Integer.parseInt(total.getText().toString()) < 199  ){
                         Toast.makeText(getApplicationContext(), "Minimum order amount is 200 tk", Toast.LENGTH_SHORT).show();
                         return;
                     }

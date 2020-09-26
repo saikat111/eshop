@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 import com.codingburg.eshop.R;
@@ -30,6 +31,7 @@ import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.facebook.ads.AudienceNetworkAds;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.ads.nativetemplates.TemplateView;
@@ -53,17 +55,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
-import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.AccountHeaderBuilder;
-import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.facebook.ads.*;
 
 public class ShowProducts extends AppCompatActivity {
     private RecyclerView recyclerView3;
@@ -76,6 +68,7 @@ public class ShowProducts extends AppCompatActivity {
     private ImageSlider imageSlider, imageSlider2;
     private Toolbar toolbar;
     private AdView  mAdView6, mAdView7, mAdView8;
+    private com.facebook.ads.AdView adView, adView2;
 
 
     @Override
@@ -83,11 +76,24 @@ public class ShowProducts extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.products);
         FirebaseDatabase.getInstance().goOffline();
+        AudienceNetworkAds.initialize(this);
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
+
+
+        adView = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
+        adContainer.addView(adView);
+        adView.loadAd();
+        adView2 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer2 = (LinearLayout) findViewById(R.id.banner_container2);
+        adContainer2.addView(adView2);
+        adView2.loadAd();
+
+
         category = getIntent().getExtras().getString("category");
         mAuth = FirebaseAuth.getInstance();
         try {
@@ -113,9 +119,6 @@ public class ShowProducts extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        mAdView6 = findViewById(R.id.adView6);
-        AdRequest adRequest6 = new AdRequest.Builder().build();
-        mAdView6.loadAd(adRequest);
         mAdView7 = findViewById(R.id.adView7);
         AdRequest adRequest7 = new AdRequest.Builder().build();
         mAdView7.loadAd(adRequest);
@@ -215,6 +218,16 @@ public class ShowProducts extends AppCompatActivity {
 
 
         return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    protected void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        if (adView2 != null) {
+            adView2.destroy();
+        }
+        super.onDestroy();
     }
 
 }

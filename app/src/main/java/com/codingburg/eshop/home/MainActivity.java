@@ -21,7 +21,10 @@ import com.codingburg.eshop.R;
 import com.codingburg.eshop.authentication.PleaseLogin;
 import com.codingburg.eshop.cetegory.CetegoryAdapter;
 import com.codingburg.eshop.cetegory.CetegoryModel;
+import com.codingburg.eshop.offer.ProductViewModelAdapterOffer;
+import com.codingburg.eshop.offer.ProductViewModelOffer;
 import com.codingburg.eshop.productdetails.ProductDetails;
+import com.codingburg.eshop.productviewmodel.ProductViewModelAdapter;
 import com.codingburg.eshop.profile.Profile;
 import com.codingburg.eshop.cart.Cart;
 import com.codingburg.eshop.model.ModelAdapter;
@@ -82,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     CarouselView carouselView ,carouselView2, carouselView3,carouselView4;
     String[] sampleImages = new String[2];
     String[] sampleImages2 = new String[2];
-    private  RecyclerView recyclerView, recyclerView2, recyclerView3, recyclerView5, recyclerviewphone;
+    private  RecyclerView recyclerView, recyclerView2, recyclerView3, recyclerView5, recyclerviewphone, recyclerviewoffer;
     private RecyclerView.LayoutManager RecyclerViewLayoutManager, RecyclerViewLayoutManager2;
     private ModelAdapter modelAdapter, modelAdapter2;
     private CetegoryAdapter modelAdapter5;
@@ -99,8 +102,9 @@ public class MainActivity extends AppCompatActivity {
     private  Toolbar toolbar;
     private Button bazzer;
     private   String show;
-    private  Query phoneQ;
-
+    private  Query phoneQ, offer;
+    private ProductViewModelAdapterOffer modelAdapteroffer;
+    private com.facebook.ads.AdView adView, adView2, adView3,adView4,adView5,adView6;
 
 
 
@@ -135,8 +139,31 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         new DrawerBuilder().withActivity(this).build();
         bazzer = findViewById(R.id.bazzer);
-
-
+        AudienceNetworkAds.initialize(this);
+        adView = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
+        adContainer.addView(adView);
+        adView.loadAd();
+        adView2 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer2 = (LinearLayout) findViewById(R.id.banner_container2);
+        adContainer2.addView(adView2);
+        adView2.loadAd();
+        adView3 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer3 = (LinearLayout) findViewById(R.id.banner_container3);
+        adContainer3.addView(adView3);
+        adView3.loadAd();
+        adView4 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer4 = (LinearLayout) findViewById(R.id.banner_container4);
+        adContainer4.addView(adView4);
+        adView4.loadAd();
+        adView5 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer5 = (LinearLayout) findViewById(R.id.banner_container5);
+        adContainer5.addView(adView5);
+        adView5.loadAd();
+        adView6 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer6 = (LinearLayout) findViewById(R.id.banner_container6);
+        adContainer6.addView(adView6);
+        adView6.loadAd();
 
 
 
@@ -190,18 +217,16 @@ public class MainActivity extends AppCompatActivity {
         mAdView4 = findViewById(R.id.adView4);
         AdRequest adRequest4 = new AdRequest.Builder().build();
         mAdView4.loadAd(adRequest);
-        mAdView5 = findViewById(R.id.adView5);
-        AdRequest adRequest5 = new AdRequest.Builder().build();
-        mAdView5.loadAd(adRequest);
-        mAdView6 = findViewById(R.id.adView6);
-        AdRequest adRequest6 = new AdRequest.Builder().build();
-        mAdView6.loadAd(adRequest);
         mAdView7 = findViewById(R.id.adView7);
         AdRequest adRequest7 = new AdRequest.Builder().build();
         mAdView7.loadAd(adRequest);
         mAdView8 = findViewById(R.id.adView8);
         AdRequest adRequest8 = new AdRequest.Builder().build();
         mAdView8.loadAd(adRequest);
+
+
+
+
 //ads
 
         AccountHeader headerResult = new AccountHeaderBuilder()
@@ -468,7 +493,21 @@ public class MainActivity extends AppCompatActivity {
 //        recyclerviewshop.setAdapter(shopAdapter);
 ////recyclerView new shop
 
+//offer
 
+        recyclerviewoffer = (RecyclerView) findViewById(R.id.recyclervieowffer);
+        recyclerviewoffer.setHasFixedSize(true);
+        recyclerviewoffer.setLayoutManager(new LinearLayoutManager(this));
+        CollectionReference offerc = db.collection("product");
+        offer = offerc.whereEqualTo("category", "Service");
+        FirestoreRecyclerOptions<ProductViewModelOffer> optionoffer =
+                new FirestoreRecyclerOptions.Builder<ProductViewModelOffer>()
+                        .setQuery(offer, ProductViewModelOffer.class)
+                        .build();
+        modelAdapteroffer = new ProductViewModelAdapterOffer(optionoffer);
+        recyclerviewoffer.setAdapter(modelAdapteroffer);
+        modelAdapteroffer.startListening();
+        //offer
 
 
 
@@ -565,21 +604,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        modelAdapteroffer.startListening();
         modelAdapter.startListening();
         modelAdapter2.startListening();
         modelAdapter3.startListening();
         modelAdapter5.startListening();
+
 
 //        shopAdapter.startListening();
     }
     @Override
     protected void onStop() {
         super.onStop();
+        modelAdapteroffer.startListening();
         modelAdapter.stopListening();
         modelAdapter2.stopListening();
         modelAdapter3.stopListening();
         modelAdapter5.stopListening();
-
+        modelAdapteroffer.stopListening();
 //        shopAdapter.stopListening();
     }
 
@@ -596,5 +638,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    protected void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        if (adView2 != null) {
+            adView2.destroy();
+        }
+        if (adView3 != null) {
+            adView3.destroy();
+        }
+        if (adView4 != null) {
+            adView4.destroy();
+        }
+        if (adView5 != null) {
+            adView5.destroy();
+        }
+        if (adView6 != null) {
+            adView6.destroy();
+        }
+        super.onDestroy();
     }
 }

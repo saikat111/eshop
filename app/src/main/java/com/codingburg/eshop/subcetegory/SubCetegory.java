@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.authentication.PleaseLogin;
@@ -25,6 +26,8 @@ import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AudienceNetworkAds;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdLoader;
@@ -56,12 +59,23 @@ public class SubCetegory extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ImageSlider  imageSlider2;
     private AdView  mAdView6, mAdView7, mAdView8;
+    private com.facebook.ads.AdView adView, adView2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_category);
         FirebaseDatabase.getInstance().goOnline();
         id = getIntent().getExtras().getString("id");
+
+        AudienceNetworkAds.initialize(this);
+        adView = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
+        adContainer.addView(adView);
+        adView.loadAd();
+        adView2 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer2 = (LinearLayout) findViewById(R.id.banner_container2);
+        adContainer2.addView(adView2);
+        adView2.loadAd();
 
 
 
@@ -80,9 +94,6 @@ public class SubCetegory extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        mAdView6 = findViewById(R.id.adView6);
-        AdRequest adRequest6 = new AdRequest.Builder().build();
-        mAdView6.loadAd(adRequest);
         mAdView7 = findViewById(R.id.adView7);
         AdRequest adRequest7 = new AdRequest.Builder().build();
         mAdView7.loadAd(adRequest);
@@ -188,5 +199,15 @@ public class SubCetegory extends AppCompatActivity {
 
 
         return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    protected void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        if (adView2 != null) {
+            adView2.destroy();
+        }
+        super.onDestroy();
     }
 }

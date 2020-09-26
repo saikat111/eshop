@@ -271,9 +271,10 @@
                         android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#CF7429"
-                        android:textSize="20dp"
-                        android:text="Write your Order Note/ Type product size you  want"
+                        android:textStyle="bold"
+                        android:textColor="#000"
+                        android:textSize="18dp"
+                        android:text="Write your Order Note/ Type product size you want/color"
                         android:fontFamily="@font/andika"
                         >
                     </TextView>
