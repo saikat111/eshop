@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,8 @@ import com.codingburg.eshop.model.ModelAdapter;
 import com.codingburg.eshop.model.ModelAdapterList;
 import com.codingburg.eshop.model.ModelDataList;
 import com.codingburg.eshop.search.Seach;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AudienceNetworkAds;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdLoader;
@@ -61,6 +64,8 @@ public class Profile extends AppCompatActivity {
     private Button logout;
     private AdView mAdView, mAdView3;
     private AdView  mAdView6, mAdView7, mAdView8;
+    private com.facebook.ads.AdView adView, adView2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +81,15 @@ public class Profile extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-
+        AudienceNetworkAds.initialize(this);
+        adView = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
+        adContainer.addView(adView);
+        adView.loadAd();
+        adView2 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer2 = (LinearLayout) findViewById(R.id.banner_container2);
+        adContainer2.addView(adView2);
+        adView2.loadAd();
         AdLoader adLoader5 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
@@ -97,12 +110,6 @@ public class Profile extends AppCompatActivity {
         mAdView3 = findViewById(R.id.adView3);
         AdRequest adRequest3 = new AdRequest.Builder().build();
         mAdView3.loadAd(adRequest);
-        mAdView6 = findViewById(R.id.adView6);
-        AdRequest adRequest6 = new AdRequest.Builder().build();
-        mAdView6.loadAd(adRequest);
-        mAdView7 = findViewById(R.id.adView7);
-        AdRequest adRequest7 = new AdRequest.Builder().build();
-        mAdView7.loadAd(adRequest);
         mAdView8 = findViewById(R.id.adView8);
         AdRequest adRequest8 = new AdRequest.Builder().build();
         mAdView8.loadAd(adRequest);
@@ -257,5 +264,15 @@ public class Profile extends AppCompatActivity {
 
 
         return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    protected void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        if (adView2 != null) {
+            adView2.destroy();
+        }
+        super.onDestroy();
     }
 }

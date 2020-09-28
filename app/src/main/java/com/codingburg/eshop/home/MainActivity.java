@@ -1,4 +1,5 @@
 package com.codingburg.eshop.home;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,15 +8,18 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.authentication.PleaseLogin;
@@ -24,7 +28,6 @@ import com.codingburg.eshop.cetegory.CetegoryModel;
 import com.codingburg.eshop.offer.ProductViewModelAdapterOffer;
 import com.codingburg.eshop.offer.ProductViewModelOffer;
 import com.codingburg.eshop.productdetails.ProductDetails;
-import com.codingburg.eshop.productviewmodel.ProductViewModelAdapter;
 import com.codingburg.eshop.profile.Profile;
 import com.codingburg.eshop.cart.Cart;
 import com.codingburg.eshop.model.ModelAdapter;
@@ -82,32 +85,28 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private ImageSlider imageSlider, imageSlider2;
-    CarouselView carouselView ,carouselView2, carouselView3,carouselView4;
-    String[] sampleImages = new String[2];
-    String[] sampleImages2 = new String[2];
-    private  RecyclerView recyclerView, recyclerView2, recyclerView3, recyclerView5, recyclerviewphone, recyclerviewoffer;
+    CarouselView carouselView3, carouselView4;
+    private RecyclerView recyclerView, recyclerView2, recyclerView3, recyclerView5, recyclerviewphone, recyclerviewoffer;
     private RecyclerView.LayoutManager RecyclerViewLayoutManager, RecyclerViewLayoutManager2;
     private ModelAdapter modelAdapter, modelAdapter2;
     private CetegoryAdapter modelAdapter5;
     private ModelAdapterList modelAdapter3, modelAdapterPhone;
     LinearLayoutManager HorizontalLayout;
     private FirebaseAuth mAuth;
-    private  String userId;
-    private  FirebaseFirestore db;
-    private DocumentReference offerTop, discount;
+    private String userId;
+    private FirebaseFirestore db;
     private ImageView men, women, kids;
-    int[] sampleImages1 = {R.drawable.image_6,R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
-    int[] sampleImages3 = {R.drawable.c1,R.drawable.c2, R.drawable.c3, R.drawable.c4, R.drawable.c5, R.drawable.c6};
-    private AdView mAdView, mAdView2, mAdView3, mAdView4, mAdView5, mAdView6, mAdView7, mAdView8;
-    private  Toolbar toolbar;
+    int[] sampleImages1 = {R.drawable.image_6, R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
+    int[] sampleImages3 = {R.drawable.c1, R.drawable.c2, R.drawable.c3, R.drawable.c4, R.drawable.c5, R.drawable.c6};
+    private AdView mAdView, mAdView3;
+    private Toolbar toolbar;
     private Button bazzer;
-    private   String show;
-    private  Query phoneQ, offer;
+    private String show;
+    private Query phoneQ, offer;
     private ProductViewModelAdapterOffer modelAdapteroffer;
-    private com.facebook.ads.AdView adView, adView2, adView3,adView4,adView5,adView6;
-
-
-
+    private com.facebook.ads.AdView adView, adView2, adView3, adView4, adView5, adView6;
+    private InterstitialAd interstitialAd;
+    private com.google.android.gms.ads.InterstitialAd mInterstitialAd;
 
 
     @Override
@@ -115,10 +114,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AudienceNetworkAds.initialize(this);
-        // Logging set to help debug issues, remove before releasing your app.
+        AdSettings.addTestDevice("HASHED ID");
+        interstitialAd = new InterstitialAd(this, getString(R.string.fb_int_1));
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
-
-        // OneSignal Initialization
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
@@ -135,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         men = findViewById(R.id.men);
         women = findViewById(R.id.women);
         kids = findViewById(R.id.kids);
-        mAuth =FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         new DrawerBuilder().withActivity(this).build();
         bazzer = findViewById(R.id.bazzer);
@@ -144,32 +142,26 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
         adContainer.addView(adView);
         adView.loadAd();
-        adView2 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
+        adView2 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
         LinearLayout adContainer2 = (LinearLayout) findViewById(R.id.banner_container2);
         adContainer2.addView(adView2);
         adView2.loadAd();
-        adView3 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
+        adView3 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
         LinearLayout adContainer3 = (LinearLayout) findViewById(R.id.banner_container3);
         adContainer3.addView(adView3);
         adView3.loadAd();
-        adView4 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
+        adView4 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
         LinearLayout adContainer4 = (LinearLayout) findViewById(R.id.banner_container4);
         adContainer4.addView(adView4);
         adView4.loadAd();
-        adView5 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
+        adView5 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
         LinearLayout adContainer5 = (LinearLayout) findViewById(R.id.banner_container5);
         adContainer5.addView(adView5);
         adView5.loadAd();
-        adView6 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
+        adView6 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
         LinearLayout adContainer6 = (LinearLayout) findViewById(R.id.banner_container6);
         adContainer6.addView(adView6);
         adView6.loadAd();
-
-
-
-
-
-
         AdLoader adLoader5 = new AdLoader.Builder(this, getString(R.string.native_ID_1))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
@@ -179,9 +171,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .build();
-
         adLoader5.loadAd(new AdRequest.Builder().build());
-
         AdLoader adLoader3 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
@@ -191,9 +181,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .build();
-
         adLoader3.loadAd(new AdRequest.Builder().build());
-
         AdLoader adLoader4 = new AdLoader.Builder(this, getString(R.string.native_ID_1))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
@@ -203,32 +191,26 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .build();
-
         adLoader4.loadAd(new AdRequest.Builder().build());
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        mAdView2 = findViewById(R.id.adView2);
-        AdRequest adRequest2 = new AdRequest.Builder().build();
-        mAdView2.loadAd(adRequest);
         mAdView3 = findViewById(R.id.adView3);
         AdRequest adRequest3 = new AdRequest.Builder().build();
         mAdView3.loadAd(adRequest);
-        mAdView4 = findViewById(R.id.adView4);
-        AdRequest adRequest4 = new AdRequest.Builder().build();
-        mAdView4.loadAd(adRequest);
-        mAdView7 = findViewById(R.id.adView7);
-        AdRequest adRequest7 = new AdRequest.Builder().build();
-        mAdView7.loadAd(adRequest);
-        mAdView8 = findViewById(R.id.adView8);
-        AdRequest adRequest8 = new AdRequest.Builder().build();
-        mAdView8.loadAd(adRequest);
 
+        mInterstitialAd = new com.google.android.gms.ads.InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.instatianlads1));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new com.google.android.gms.ads.AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
 
-
-
+        });
 //ads
-
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
@@ -247,7 +229,6 @@ public class MainActivity extends AppCompatActivity {
         final PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(2).withName("Logout");
         final PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(2).withName("Privacy Policy");
         final PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(2).withName("Terms & Conditions");
-
 //create the drawer and remember the `Drawer` result object
         Drawer result = new DrawerBuilder()
                 .withActivity(this)
@@ -259,20 +240,19 @@ public class MainActivity extends AppCompatActivity {
                         item3,
                         item4,
                         item5
-
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        if (drawerItem == item1){
+                        if (drawerItem == item1) {
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.fb)));
                             startActivity(browserIntent);
                         }
-                        if (drawerItem == item2){
+                        if (drawerItem == item2) {
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.youtube)));
                             startActivity(browserIntent);
                         }
-                        if (drawerItem == item3){
+                        if (drawerItem == item3) {
                             try {
                                 mAuth.signOut();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -282,11 +262,11 @@ public class MainActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-                        if (drawerItem == item4){
+                        if (drawerItem == item4) {
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://shulovshopbd.blogspot.com/p/privacy-policy-shulov-shop-bd.html"));
                             startActivity(browserIntent);
                         }
-                        if (drawerItem == item5){
+                        if (drawerItem == item5) {
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://shulovshopbd.blogspot.com/p/terms-conditions-shulov-shop-bd.html"));
                             startActivity(browserIntent);
                         }
@@ -302,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection("promote").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                for(QueryDocumentSnapshot documentSnapshot : value){
+                for (QueryDocumentSnapshot documentSnapshot : value) {
                     remoteImages.add(new SlideModel(documentSnapshot.get("image").toString(), ScaleTypes.FIT));
                     id.add(documentSnapshot.get("id").toString());
                     category.add(documentSnapshot.get("category").toString());
@@ -326,11 +306,10 @@ public class MainActivity extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection("discount").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                for(QueryDocumentSnapshot documentSnapshot : value){
+                for (QueryDocumentSnapshot documentSnapshot : value) {
                     remoteImages2.add(new SlideModel(documentSnapshot.get("image").toString(), ScaleTypes.FIT));
                     id2.add(documentSnapshot.get("id").toString());
                     category2.add(documentSnapshot.get("category").toString());
-
                 }
                 imageSlider2.setImageList(remoteImages2, ScaleTypes.FIT);
                 imageSlider2.setItemClickListener(new ItemClickListener() {
@@ -386,13 +365,70 @@ public class MainActivity extends AppCompatActivity {
         carouselView3 = (CarouselView) findViewById(R.id.carouselView3);
         carouselView3.setImageListener(imageListener);
         carouselView3.setPageCount(sampleImages1.length);
-
         carouselView3.setImageClickListener(new ImageClickListener() {
             @Override
             public void onClick(int position) {
-                Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
-                intent.putExtra("category", "games");
-               startActivity(intent);
+
+                // Create listeners for the Interstitial Ad
+                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+                    @Override
+                    public void onInterstitialDisplayed(Ad ad) {
+                        // Interstitial ad displayed callback
+
+                    }
+
+                    @Override
+                    public void onInterstitialDismissed(Ad ad) {
+                        // Interstitial dismissed callback
+//                        Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
+//                        intent.putExtra("category", "games");
+//                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onError(Ad ad, AdError adError) {
+                        // Ad error callback
+//                        Toast.makeText(getApplicationContext(), "Try again",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
+                        intent.putExtra("category", "games");
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onAdLoaded(Ad ad) {
+                        // Interstitial ad is loaded and ready to be displayed
+
+                        // Show the ad
+                        if(interstitialAd.isAdInvalidated()) {
+                            return;
+                        }
+                        // Show the ad
+                        interstitialAd.show();
+
+                    }
+
+                    @Override
+                    public void onAdClicked(Ad ad) {
+                        // Ad clicked callback
+
+                    }
+
+                    @Override
+                    public void onLoggingImpression(Ad ad) {
+                        // Ad impression logged callback
+                        Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
+                        intent.putExtra("category", "games");
+                        startActivity(intent);
+                    }
+                };
+
+                // For auto play video ads, it's recommended to load the ad
+                // at least 30 seconds before it is shown
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
+
             }
         });
         carouselView4 = (CarouselView) findViewById(R.id.carouselView4);
@@ -401,9 +437,16 @@ public class MainActivity extends AppCompatActivity {
         carouselView4.setImageClickListener(new ImageClickListener() {
             @Override
             public void onClick(int position) {
-                Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
-                intent.putExtra("category", "course");
-                startActivity(intent);
+                // Create listeners for the Interstitial Ad
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+
+                }
+                        Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
+                        intent.putExtra("category", "course");
+                        startActivity(intent);
+
             }
         });
         //buttom navigation
@@ -421,52 +464,47 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
+
             @Override
             public void onItemClick(int itemIndex, String itemName) {
-                if(itemIndex == 0){
-                    if(userId == null){
+                if (itemIndex == 0) {
+                    if (userId == null) {
                         Intent intent = new Intent(getApplicationContext(), PleaseLogin.class);
                         startActivity(intent);
                         return;
-                    }
-                    else {
+                    } else {
                         Intent intent = new Intent(getApplicationContext(), Profile.class);
                         startActivity(intent);
                     }
                 }
-                if(itemIndex == 1){
-                        if(userId == null){
-                            Intent intent = new Intent(getApplicationContext(), PleaseLogin.class);
-                            startActivity(intent);
-                            return;
-                        }
-                        else {
-                            Intent intent = new Intent(getApplicationContext(), Cart.class);
-                            startActivity(intent);
-                        }
+                if (itemIndex == 1) {
+                    if (userId == null) {
+                        Intent intent = new Intent(getApplicationContext(), PleaseLogin.class);
+                        startActivity(intent);
+                        return;
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), Cart.class);
+                        startActivity(intent);
+                    }
                 }
             }
+
             @Override
             public void onItemReselected(int itemIndex, String itemName) {
-                if(itemIndex == 0){
+                if (itemIndex == 0) {
                     Intent intent = new Intent(getApplicationContext(), Profile.class);
                     startActivity(intent);
                 }
             }
         });
-
         //buttom navigation
-
         //offer
-
-
-
 //recyclerView new cetegory
         db = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = db.collection("category");
         Query categoryName = collectionReference.orderBy("id");
-        recyclerView5 = (RecyclerView)findViewById(R.id.recyclerview4);
-        recyclerView5.setLayoutManager(new GridLayoutManager(this, 3 ,GridLayoutManager.VERTICAL, false));
+        recyclerView5 = (RecyclerView) findViewById(R.id.recyclerview4);
+        recyclerView5.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false));
         FirestoreRecyclerOptions<CetegoryModel> options5 =
                 new FirestoreRecyclerOptions.Builder<CetegoryModel>()
                         .setQuery(categoryName, CetegoryModel.class)
@@ -474,27 +512,7 @@ public class MainActivity extends AppCompatActivity {
         modelAdapter5 = new CetegoryAdapter(options5);
         recyclerView5.setAdapter(modelAdapter5);
 //recyclerView new cetegory
-
-
-//        //recyclerView new shop
-//        CollectionReference shop =db.collection("shop");
-//        com.google.firebase.firestore.Query shopId = shop.orderBy("id");
-//        recyclerviewshop = (RecyclerView)findViewById(R.id.recyclerviewshop);
-//        RecyclerViewLayoutManager = new LinearLayoutManager(getApplicationContext());
-//        recyclerviewshop.setLayoutManager(RecyclerViewLayoutManager);
-//        HorizontalLayout = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-//        recyclerviewshop.setLayoutManager(HorizontalLayout);
-//        FirestoreRecyclerOptions<ShopModel> options6 =
-//                new FirestoreRecyclerOptions.Builder<ShopModel>()
-//                        .setQuery(shopId, ShopModel.class)
-//                        .build();
-//
-//        shopAdapter = new ShopAdapter(options6);
-//        recyclerviewshop.setAdapter(shopAdapter);
-////recyclerView new shop
-
 //offer
-
         recyclerviewoffer = (RecyclerView) findViewById(R.id.recyclervieowffer);
         recyclerviewoffer.setHasFixedSize(true);
         recyclerviewoffer.setLayoutManager(new LinearLayoutManager(this));
@@ -506,14 +524,10 @@ public class MainActivity extends AppCompatActivity {
                         .build();
         modelAdapteroffer = new ProductViewModelAdapterOffer(optionoffer);
         recyclerviewoffer.setAdapter(modelAdapteroffer);
-        modelAdapteroffer.startListening();
         //offer
-
-
-
 //recyclerView new products
         CollectionReference newProducts = db.collection("new");
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         RecyclerViewLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(RecyclerViewLayoutManager);
         HorizontalLayout = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
@@ -525,10 +539,9 @@ public class MainActivity extends AppCompatActivity {
         modelAdapter = new ModelAdapter(options);
         recyclerView.setAdapter(modelAdapter);
 //recyclerView new products
-
 //recyclerView top products
         CollectionReference topProducts = db.collection("top");
-        recyclerView2 = (RecyclerView)findViewById(R.id.recyclerview2);
+        recyclerView2 = (RecyclerView) findViewById(R.id.recyclerview2);
         RecyclerViewLayoutManager2 = new LinearLayoutManager(getApplicationContext());
         recyclerView2.setLayoutManager(RecyclerViewLayoutManager2);
         HorizontalLayout = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
@@ -540,12 +553,11 @@ public class MainActivity extends AppCompatActivity {
         modelAdapter2 = new ModelAdapter(options2);
         recyclerView2.setAdapter(modelAdapter2);
 //recyclerView top products
-
- // home product show
+        // home product show
         recyclerView3 = (RecyclerView) findViewById(R.id.recyclerView3);
 //        recyclerView3.setHasFixedSize(true);
 //        recyclerView3.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView3.setLayoutManager(new GridLayoutManager(this, 2 ,GridLayoutManager.VERTICAL, false));
+        recyclerView3.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
         FirestoreRecyclerOptions<ModelDataList> options3 =
                 new FirestoreRecyclerOptions.Builder<ModelDataList>()
                         .setQuery(db.collection("homepage"), ModelDataList.class)
@@ -553,42 +565,39 @@ public class MainActivity extends AppCompatActivity {
         modelAdapter3 = new ModelAdapterList(options3);
         recyclerView3.setAdapter(modelAdapter3);
         // home product show
-
         // phone product show
         DocumentReference reference = FirebaseFirestore.getInstance().collection("show").document("showhome");
-     reference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-         @Override
-         public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-             if(error != null){
-                 return;
-             }
-             if(value != null && value.exists()){
-                 Map<String, Object> map = (Map<String, Object>) value.getData();
-                 if(map.get("category") != null){
-                      show = map.get("category").toString();
-                 }
-                 recyclerviewphone = (RecyclerView) findViewById(R.id.recyclerviewphone);
-                 CollectionReference phone = db.collection("product");
-                 phoneQ = phone.whereEqualTo("category", show);
-                 recyclerviewphone.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2 ,GridLayoutManager.VERTICAL, false));
-                 FirestoreRecyclerOptions<ModelDataList> optionsphone =
-                         new FirestoreRecyclerOptions.Builder<ModelDataList>()
-                                 .setQuery(phoneQ, ModelDataList.class)
-                                 .build();
-                 modelAdapterPhone = new ModelAdapterList(optionsphone);
-                 recyclerviewphone.setAdapter(modelAdapterPhone);
-                 modelAdapterPhone.startListening();
-             }
-         }
-     });
-
+        reference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    return;
+                }
+                if (value != null && value.exists()) {
+                    Map<String, Object> map = (Map<String, Object>) value.getData();
+                    if (map.get("category") != null) {
+                        show = map.get("category").toString();
+                    }
+                    recyclerviewphone = (RecyclerView) findViewById(R.id.recyclerviewphone);
+                    CollectionReference phone = db.collection("product");
+                    phoneQ = phone.whereEqualTo("category", show);
+                    recyclerviewphone.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2, GridLayoutManager.VERTICAL, false));
+                    FirestoreRecyclerOptions<ModelDataList> optionsphone =
+                            new FirestoreRecyclerOptions.Builder<ModelDataList>()
+                                    .setQuery(phoneQ, ModelDataList.class)
+                                    .build();
+                    modelAdapterPhone = new ModelAdapterList(optionsphone);
+                    recyclerviewphone.setAdapter(modelAdapterPhone);
+                    modelAdapterPhone.startListening();
+                }
+            }
+        });
 //        recyclerView3.setHasFixedSize(true);
 //        recyclerView3.setLayoutManager(new LinearLayoutManager(this));
-
         // phone product show
 
-
     }
+
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
@@ -601,6 +610,7 @@ public class MainActivity extends AppCompatActivity {
             imageView.setImageResource(sampleImages3[position]);
         }
     };
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -609,19 +619,17 @@ public class MainActivity extends AppCompatActivity {
         modelAdapter2.startListening();
         modelAdapter3.startListening();
         modelAdapter5.startListening();
-
-
 //        shopAdapter.startListening();
     }
+
     @Override
     protected void onStop() {
         super.onStop();
-        modelAdapteroffer.startListening();
+        modelAdapteroffer.stopListening();
         modelAdapter.stopListening();
         modelAdapter2.stopListening();
         modelAdapter3.stopListening();
         modelAdapter5.stopListening();
-        modelAdapteroffer.stopListening();
 //        shopAdapter.stopListening();
     }
 
@@ -637,8 +645,18 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        MenuItem item2 = menu.findItem(R.id.refresh);
+        item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                return false;
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     protected void onDestroy() {
         if (adView != null) {
@@ -658,6 +676,9 @@ public class MainActivity extends AppCompatActivity {
         }
         if (adView6 != null) {
             adView6.destroy();
+        }
+        if (interstitialAd != null) {
+            interstitialAd.destroy();
         }
         super.onDestroy();
     }

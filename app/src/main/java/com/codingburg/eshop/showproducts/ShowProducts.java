@@ -76,14 +76,14 @@ public class ShowProducts extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.products);
         FirebaseDatabase.getInstance().goOffline();
-        AudienceNetworkAds.initialize(this);
+
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
 
-
+        AudienceNetworkAds.initialize(this);
         adView = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
         LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
         adContainer.addView(adView);
@@ -214,7 +214,15 @@ public class ShowProducts extends AppCompatActivity {
                 return false;
             }
         });
-
+        MenuItem item2 = menu.findItem(R.id.refresh);
+        item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                finish();
+                startActivity(getIntent());
+                return false;
+            }
+        });
 
 
         return super.onCreateOptionsMenu(menu);

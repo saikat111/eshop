@@ -9,9 +9,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.codingburg.eshop.R;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AudienceNetworkAds;
 import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdLoader;
@@ -31,6 +34,8 @@ public class ShippingCharge extends AppCompatActivity {
     private Button next;
     private AdView mAdView, mAdView3;
     private RewardedAd rewardedAd;
+    private com.facebook.ads.AdView adView, adView2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,18 @@ public class ShippingCharge extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
+
+        AudienceNetworkAds.initialize(this);
+        adView = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
+        adContainer.addView(adView);
+        adView.loadAd();
+        adView2 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer2 = (LinearLayout) findViewById(R.id.banner_container2);
+        adContainer2.addView(adView2);
+        adView2.loadAd();
+
+
         rewardedAd = new RewardedAd(this,
                 getString(R.string.videoads1));
 
@@ -124,5 +141,15 @@ public class ShippingCharge extends AppCompatActivity {
         mAdView3 = findViewById(R.id.adView3);
         AdRequest adRequest3 = new AdRequest.Builder().build();
         mAdView3.loadAd(adRequest);
+    }
+    @Override
+    protected void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        if (adView2 != null) {
+            adView2.destroy();
+        }
+        super.onDestroy();
     }
 }

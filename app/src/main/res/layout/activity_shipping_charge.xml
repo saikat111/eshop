@@ -158,6 +158,20 @@
             >
         </Button>
     </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:id="@+id/banner_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        />
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:id="@+id/banner_container2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        />
     <com.google.android.ads.nativetemplates.TemplateView
         android:id="@+id/my_template3"
         android:layout_marginTop="15dp"

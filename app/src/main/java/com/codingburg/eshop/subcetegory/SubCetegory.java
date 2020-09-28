@@ -196,6 +196,15 @@ public class SubCetegory extends AppCompatActivity {
                 return false;
             }
         });
+        MenuItem item2 = menu.findItem(R.id.refresh);
+        item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                finish();
+                startActivity(getIntent());
+                return false;
+            }
+        });
 
 
         return super.onCreateOptionsMenu(menu);

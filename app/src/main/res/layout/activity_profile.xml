@@ -102,7 +102,20 @@
                 </androidx.recyclerview.widget.RecyclerView>
             </RelativeLayout>
 
-
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:id="@+id/banner_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                />
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:id="@+id/banner_container2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                />
             <com.google.android.ads.nativetemplates.TemplateView
                 android:id="@+id/my_template5"
                 android:layout_marginTop="15dp"
@@ -136,24 +149,7 @@
                 ads:adSize="BANNER"
                 ads:adUnitId="@string/banner_ID_2">
             </com.google.android.gms.ads.AdView>
-            <com.google.android.gms.ads.AdView
-                android:layout_marginTop="10dp"
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/adView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/banner_ID_2">
-            </com.google.android.gms.ads.AdView>
-            <com.google.android.gms.ads.AdView
-                android:layout_marginTop="10dp"
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/adView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/banner_ID_2">
-            </com.google.android.gms.ads.AdView>
+
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

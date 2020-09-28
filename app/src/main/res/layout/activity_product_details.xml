@@ -35,7 +35,7 @@
            <ImageView
                android:id="@+id/imageproduct"
                android:layout_width="match_parent"
-               android:layout_height="380dp"
+               android:layout_height="300dp"
                >
 
            </ImageView>
@@ -150,15 +150,13 @@
                 </TextView>
 
             </androidx.cardview.widget.CardView>
-            <com.google.android.gms.ads.AdView
-                android:layout_marginTop="10dp"
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/adView6"
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:id="@+id/banner_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/banner_ID_2">
-            </com.google.android.gms.ads.AdView>
+                android:orientation="vertical"
+                />
 
 
             <androidx.cardview.widget.CardView
@@ -419,6 +417,13 @@
                     >
                 </androidx.recyclerview.widget.RecyclerView>
             </RelativeLayout>
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:id="@+id/banner_container2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                />
 <androidx.cardview.widget.CardView
     android:layout_marginTop="10dp"
     android:layout_width="match_parent"
@@ -469,7 +474,13 @@
                 </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
-
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:id="@+id/banner_container6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                />
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -491,6 +502,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:gnt_template_type="@layout/gnt_small_template_view"
+                />
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:id="@+id/banner_container3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 />
             <com.google.android.gms.ads.AdView
                 xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -526,12 +544,19 @@
                     >
                 </androidx.recyclerview.widget.RecyclerView>
             </RelativeLayout>
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:id="@+id/banner_container4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                />
             <com.google.android.ads.nativetemplates.TemplateView
                 android:id="@+id/my_template4"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:gnt_template_type="@layout/gnt_medium_template_view"
+                app:gnt_template_type="@layout/gnt_small_template_view"
                 />
             <com.google.android.gms.ads.AdView
                 xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -541,6 +566,13 @@
                 ads:adSize="BANNER"
                 ads:adUnitId="@string/banner_ID_2">
             </com.google.android.gms.ads.AdView>
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:id="@+id/banner_container5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                />
         </LinearLayout>
 
 
