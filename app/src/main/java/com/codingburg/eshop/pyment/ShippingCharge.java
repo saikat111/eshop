@@ -70,7 +70,8 @@ public class ShippingCharge extends AppCompatActivity {
             }
             @Override
             public void onRewardedAdFailedToLoad(LoadAdError adError) {
-              Toast.makeText(getApplicationContext(), adError.toString(),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Pyment.class);
+                startActivity(intent);
             }
         };
         rewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);

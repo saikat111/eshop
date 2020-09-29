@@ -64,55 +64,9 @@
                         android:layout_height="wrap_content"
                         android:background="#F4E136"
                         android:text="Buy Now">
-
                     </Button>
-
-
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
-            <com.google.android.ads.nativetemplates.TemplateView
-                android:id="@+id/my_template3"
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:gnt_template_type="@layout/gnt_small_template_view"
-                />
-            <com.google.android.gms.ads.AdView
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/adView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/banner_ID_2">
-            </com.google.android.gms.ads.AdView>
-            <com.google.android.gms.ads.AdView
-                android:layout_marginTop="10dp"
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/adView8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/banner_ID_2">
-            </com.google.android.gms.ads.AdView>
-            <com.google.android.gms.ads.AdView
-                android:layout_marginTop="10dp"
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/adView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/banner_ID_2">
-            </com.google.android.gms.ads.AdView>
-            <com.google.android.gms.ads.AdView
-                android:layout_marginTop="10dp"
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/adView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/banner_ID_2">
-            </com.google.android.gms.ads.AdView>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

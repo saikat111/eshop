@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import com.codingburg.eshop.cetegory.CetegoryAdapter;
 import com.codingburg.eshop.cetegory.CetegoryModel;
 import com.codingburg.eshop.offer.ProductViewModelAdapterOffer;
 import com.codingburg.eshop.offer.ProductViewModelOffer;
+import com.codingburg.eshop.opingscreen.Note;
 import com.codingburg.eshop.productdetails.ProductDetails;
 import com.codingburg.eshop.profile.Profile;
 import com.codingburg.eshop.cart.Cart;
@@ -34,6 +36,8 @@ import com.codingburg.eshop.model.ModelAdapter;
 import com.codingburg.eshop.model.ModelAdapterList;
 import com.codingburg.eshop.model.ModelData;
 import com.codingburg.eshop.model.ModelDataList;
+import com.codingburg.eshop.pyment.Pyment;
+import com.codingburg.eshop.pyment.ShippingCharge;
 import com.codingburg.eshop.search.Seach;
 import com.codingburg.eshop.showproducts.ShowProducts;
 import com.codingburg.eshop.subcetegory.SubCetegory;
@@ -48,10 +52,15 @@ import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdCallback;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
@@ -107,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
     private com.facebook.ads.AdView adView, adView2, adView3, adView4, adView5, adView6;
     private InterstitialAd interstitialAd;
     private com.google.android.gms.ads.InterstitialAd mInterstitialAd;
+    private RewardedAd rewardedAd;
 
 
     @Override
@@ -114,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AudienceNetworkAds.initialize(this);
-        AdSettings.addTestDevice("HASHED ID");
+//        AdSettings.addTestDevice("HASHED ID");
         interstitialAd = new InterstitialAd(this, getString(R.string.fb_int_1));
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
         OneSignal.startInit(this)
@@ -226,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         final PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Facebook");
         final PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("Youtube");
+        final PrimaryDrawerItem item6 = new PrimaryDrawerItem().withIdentifier(2).withName("Donate");
         final PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(2).withName("Logout");
         final PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(2).withName("Privacy Policy");
         final PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(2).withName("Terms & Conditions");
@@ -239,7 +250,8 @@ public class MainActivity extends AppCompatActivity {
                         item2,
                         item3,
                         item4,
-                        item5
+                        item5,
+                        item6
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -268,6 +280,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if (drawerItem == item5) {
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://shulovshopbd.blogspot.com/p/terms-conditions-shulov-shop-bd.html"));
+                            startActivity(browserIntent);
+                        }
+                        if (drawerItem == item6) {
+                            Intent browserIntent = new Intent(getApplicationContext(), Note.class);
                             startActivity(browserIntent);
                         }
                         return true;
@@ -449,6 +465,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        rewardedAd = new RewardedAd(this,
+                getString(R.string.videoads1));
+
+        RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
+            @Override
+            public void onRewardedAdLoaded() {
+
+            }
+            @Override
+            public void onRewardedAdFailedToLoad(LoadAdError adError) {
+                Intent intent = new Intent(getApplicationContext(), Profile.class);
+                startActivity(intent);
+            }
+        };
         //buttom navigation
         SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
@@ -473,8 +504,38 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         return;
                     } else {
-                        Intent intent = new Intent(getApplicationContext(), Profile.class);
-                        startActivity(intent);
+                        if (rewardedAd.isLoaded()) {
+                            Activity activityContext = MainActivity.this;
+                            RewardedAdCallback adCallback = new RewardedAdCallback() {
+                                @Override
+                                public void onRewardedAdOpened() {
+
+                                }
+
+                                @Override
+                                public void onRewardedAdClosed() {
+
+                                    Intent intent = new Intent(getApplicationContext(), Profile.class);
+                                    startActivity(intent);
+                                }
+
+                                @Override
+                                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                                    Intent intent = new Intent(getApplicationContext(), Profile.class);
+                                    startActivity(intent);
+                                }
+
+                                @Override
+                                public void onRewardedAdFailedToShow(com.google.android.gms.ads.AdError adError) {
+                                    Intent intent = new Intent(getApplicationContext(), Profile.class);
+                                    startActivity(intent);
+                                }
+                            };
+                            rewardedAd.show(activityContext, adCallback);
+                        } else {
+
+                        }
+
                     }
                 }
                 if (itemIndex == 1) {

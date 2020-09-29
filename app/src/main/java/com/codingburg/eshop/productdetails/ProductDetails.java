@@ -271,11 +271,6 @@ public class ProductDetails extends AppCompatActivity {
         addcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
-
-                }
                 try {
                     getOrderNote = ordernote.getText().toString();
                 } catch (Exception e) {
@@ -343,8 +338,13 @@ public class ProductDetails extends AppCompatActivity {
                         @Override
                         public void onSuccess(Object o) {
                             FirebaseDatabase.getInstance().goOffline();
-                            Toast.makeText(getApplicationContext(), "addedto your cart", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "added to your cart", Toast.LENGTH_LONG).show();
                             progressDialog.dismiss();
+                            if (mInterstitialAd.isLoaded()) {
+                                mInterstitialAd.show();
+                            } else {
+
+                            }
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {

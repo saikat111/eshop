@@ -20,12 +20,7 @@ import android.widget.Toast;
 
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.home.MainActivity;
-
-import com.codingburg.eshop.productviewmodel.ProductViewModel;
-import com.codingburg.eshop.productviewmodel.ProductViewModelAdapter;
 import com.codingburg.eshop.profile.Profile;
-
-import com.codingburg.eshop.pyment.Pyment;
 import com.codingburg.eshop.pyment.ShippingCharge;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,31 +32,18 @@ import com.google.firebase.database.ValueEventListener;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
+
 import java.util.Map;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdLoader;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.VideoController;
-import com.google.android.gms.ads.formats.MediaView;
-import com.google.android.gms.ads.formats.UnifiedNativeAd;
-import com.google.android.gms.ads.formats.UnifiedNativeAdView;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.ads.nativetemplates.TemplateView;
+
 public class Cart extends AppCompatActivity {
     private RecyclerView recyclerView3;
-    private  CardAdapter modelAdapter3 ;
+    private CardAdapter modelAdapter3;
     private FirebaseAuth firebaseAuth;
     private String userId;
     private TextView total;
     private Button buy;
     private DatabaseReference userDb;
     private ProgressDialog progressDialog;
-    private AdView mAdView, mAdView2, mAdView3, mAdView4;
-    private AdView  mAdView6, mAdView7, mAdView8;
 
 
     @Override
@@ -72,43 +54,12 @@ public class Cart extends AppCompatActivity {
         progressDialog.setMessage("Loading.......");
         progressDialog.show();
         FirebaseDatabase.getInstance().goOnline();
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-
-        AdLoader adLoader3 = new AdLoader.Builder(this, getString(R.string.native_ID_1))
-                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
-                    @Override
-                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                        TemplateView template = findViewById(R.id.my_template3);
-                        template.setNativeAd(unifiedNativeAd);
-                    }
-                })
-                .build();
-        adLoader3.loadAd(new AdRequest.Builder().build());
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        mAdView6 = findViewById(R.id.adView6);
-        AdRequest adRequest6 = new AdRequest.Builder().build();
-        mAdView6.loadAd(adRequest);
-        mAdView7 = findViewById(R.id.adView7);
-        AdRequest adRequest7 = new AdRequest.Builder().build();
-        mAdView7.loadAd(adRequest);
-        mAdView8 = findViewById(R.id.adView8);
-        AdRequest adRequest8 = new AdRequest.Builder().build();
-        mAdView8.loadAd(adRequest);
-
         buy = findViewById(R.id.buy);
         total = findViewById(R.id.total);
         firebaseAuth = FirebaseAuth.getInstance();
         try {
             userId = firebaseAuth.getCurrentUser().getUid();
-            if(userId.equals(null)){
+            if (userId.equals(null)) {
                 return;
             }
             userDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("totalammountofcartitem");
@@ -130,20 +81,22 @@ public class Cart extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
+
             @Override
             public void onItemClick(int itemIndex, String itemName) {
-                if(itemIndex == 0){
+                if (itemIndex == 0) {
                     Intent intent = new Intent(getApplicationContext(), Profile.class);
                     startActivity(intent);
                 }
-                if(itemIndex == 1){
+                if (itemIndex == 1) {
                     Intent intent = new Intent(getApplicationContext(), Cart.class);
                     startActivity(intent);
                 }
             }
+
             @Override
             public void onItemReselected(int itemIndex, String itemName) {
-                if(itemIndex == 1){
+                if (itemIndex == 1) {
                     Intent intent = new Intent(getApplicationContext(), Cart.class);
                     startActivity(intent);
                 }
@@ -156,13 +109,13 @@ public class Cart extends AppCompatActivity {
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try{
+                try {
                     Intent intent = new Intent(getApplicationContext(), ShippingCharge.class);
-                    if(Integer.parseInt(total.getText().toString()) == 15){
+                    if (Integer.parseInt(total.getText().toString()) == 15) {
                         startActivity(intent);
                         return;
                     }
-                    if(total.getText().toString().equals(null) ||Integer.parseInt(total.getText().toString()) < 199  ){
+                    if (total.getText().toString().equals(null) || Integer.parseInt(total.getText().toString()) < 199) {
                         Toast.makeText(getApplicationContext(), "Minimum order amount is 200 tk", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -194,32 +147,28 @@ public class Cart extends AppCompatActivity {
                 userDb.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            Map<String , Object> map = (Map<String, Object>) snapshot.getValue();
-                            if(map.get("totalammout") != null){
+                        if (snapshot.exists()) {
+                            Map<String, Object> map = (Map<String, Object>) snapshot.getValue();
+                            if (map.get("totalammout") != null) {
                                 String tk = map.get("totalammout").toString();
                                 total.setText(tk);
                                 progressDialog.dismiss();
                             }
-                        }
-                        else {
+                        } else {
                             progressDialog.dismiss();
                         }
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         progressDialog.dismiss();
                     }
                 });
             }
-        },5000) ;
-
-
+        }, 7000);
 
 
     }
-
-
 
 
     @Override
@@ -227,17 +176,19 @@ public class Cart extends AppCompatActivity {
         super.onStart();
         modelAdapter3.startListening();
     }
+
     @Override
     protected void onStop() {
         super.onStop();
         modelAdapter3.stopListening();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.top_app_bar, menu);
         MenuItem item = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView)item.getActionView();
+        SearchView searchView = (SearchView) item.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {

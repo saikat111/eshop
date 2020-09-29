@@ -121,7 +121,7 @@
             android:maxLines="2"
             android:gravity="center"
             android:fontFamily="@font/andika"
-            android:text=" বগুড়া সদর ব্যাতিত বগুড়ার ভিতর এ সকল স্থান আর জন্য ডেলিভারি চার্জ "
+            android:text=" বগুড়া সদর ব্যাতিত বগুড়ার ভিতর এ সকল স্থান এর  জন্য ডেলিভারি চার্জ "
             android:textColor="#000"
             >
         </TextView>
