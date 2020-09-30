@@ -23,6 +23,9 @@ import com.codingburg.eshop.home.MainActivity;
 import com.codingburg.eshop.profile.Profile;
 import com.codingburg.eshop.pyment.ShippingCharge;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,12 +47,22 @@ public class Cart extends AppCompatActivity {
     private Button buy;
     private DatabaseReference userDb;
     private ProgressDialog progressDialog;
-
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.instatianlads1));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
+        });
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading.......");
         progressDialog.show();
@@ -87,10 +100,12 @@ public class Cart extends AppCompatActivity {
                 if (itemIndex == 0) {
                     Intent intent = new Intent(getApplicationContext(), Profile.class);
                     startActivity(intent);
+                    finish();
                 }
                 if (itemIndex == 1) {
                     Intent intent = new Intent(getApplicationContext(), Cart.class);
                     startActivity(intent);
+                    finish();
                 }
             }
 
@@ -99,6 +114,12 @@ public class Cart extends AppCompatActivity {
                 if (itemIndex == 1) {
                     Intent intent = new Intent(getApplicationContext(), Cart.class);
                     startActivity(intent);
+                    finish();
+                }
+                if (itemIndex == 0) {
+                    Intent intent = new Intent(getApplicationContext(), Profile.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -113,13 +134,24 @@ public class Cart extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), ShippingCharge.class);
                     if (Integer.parseInt(total.getText().toString()) == 15) {
                         startActivity(intent);
+                        if (mInterstitialAd.isLoaded()) {
+                            mInterstitialAd.show();
+                        } else {
+
+                        }
                         return;
                     }
-                    if (total.getText().toString().equals(null) || Integer.parseInt(total.getText().toString()) < 199) {
-                        Toast.makeText(getApplicationContext(), "Minimum order amount is 200 tk", Toast.LENGTH_SHORT).show();
+                    if (total.getText().toString().equals(null) || Integer.parseInt(total.getText().toString()) < 149) {
+                        Toast.makeText(getApplicationContext(), "Minimum order amount is 150 tk", Toast.LENGTH_SHORT).show();
+
                         return;
                     }
                     startActivity(intent);
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+                    } else {
+
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

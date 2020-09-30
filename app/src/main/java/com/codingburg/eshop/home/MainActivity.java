@@ -352,6 +352,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
                 intent.putExtra("category", "bazzer");
                 startActivity(intent);
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+
+                }
             }
         });
         men.setOnClickListener(new View.OnClickListener() {
@@ -376,6 +381,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), SubCetegory.class);
                 intent.putExtra("id", "child");
                 startActivity(intent);
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+
+                }
             }
         });
         carouselView3 = (CarouselView) findViewById(R.id.carouselView3);

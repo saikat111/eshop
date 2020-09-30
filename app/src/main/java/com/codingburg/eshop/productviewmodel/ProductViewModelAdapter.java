@@ -19,11 +19,11 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 public class ProductViewModelAdapter   extends FirestoreRecyclerAdapter<ProductViewModel, ProductViewModelAdapter.DataViewHolder> {
-
     public ProductViewModelAdapter(@NonNull FirestoreRecyclerOptions<ProductViewModel> options) {
         super(options);
     }

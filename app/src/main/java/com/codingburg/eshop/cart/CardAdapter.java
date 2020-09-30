@@ -207,7 +207,7 @@ public class CardAdapter  extends FirebaseRecyclerAdapter<CardData, CardAdapter.
                                             try{
                                                 int intValue = Integer.parseInt(value);
                                                 int result = intValue - quantityValue;
-                                                if(result <0 ){
+                                                if(result <=0 ){
                                                     userCardDb2.removeValue();
                                                     Intent intent = new Intent(view.getContext(), Cart.class);
                                                     view.getContext().startActivity(intent);
@@ -215,7 +215,7 @@ public class CardAdapter  extends FirebaseRecyclerAdapter<CardData, CardAdapter.
                                                 }
                                                 int totalpInt = Integer.parseInt(totalp);
                                                 int finalPrice = totalpInt * result;
-                                                if(finalPrice < 0){
+                                                if(finalPrice <=0){
                                                     return;
                                                 }
                                                 Map updatevalue = new HashMap();
@@ -243,18 +243,14 @@ public class CardAdapter  extends FirebaseRecyclerAdapter<CardData, CardAdapter.
 
                 }
             });
-
-
-
-
-
         }
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), ProductDetails.class);
-            intent.putExtra("id", productid.getText().toString());
-            intent.putExtra("category", productcategory.getText().toString());
-            view.getContext().startActivity(intent);
+//            Intent intent = new Intent(view.getContext(), ProductDetails.class);
+//            intent.putExtra("id", productid.getText().toString());
+//            intent.putExtra("category", productcategory.getText().toString());
+//            view.getContext().startActivity(intent);
+
         }
     }
 }

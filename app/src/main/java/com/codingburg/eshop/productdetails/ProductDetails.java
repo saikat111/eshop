@@ -103,7 +103,6 @@ public class ProductDetails extends AppCompatActivity {
     private AdView mAdView7, mAdView8;
     private EditText ordernote;
     private String getOrderNote;
-    private InterstitialAd mInterstitialAd;
     private com.facebook.ads.AdView adView, adView2, adView3, adView4, adView5, adView6;
 
 
@@ -111,8 +110,6 @@ public class ProductDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
-        FirebaseDatabase.getInstance().goOffline();
-
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -145,20 +142,6 @@ public class ProductDetails extends AppCompatActivity {
         LinearLayout adContainer6 = (LinearLayout) findViewById(R.id.banner_container6);
         adContainer6.addView(adView6);
         adView6.loadAd();
-
-
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId(getString(R.string.instatianlads1));
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                // Load the next interstitial.
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-
-        });
-
         AdLoader adLoader3 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
@@ -271,20 +254,20 @@ public class ProductDetails extends AppCompatActivity {
         addcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseDatabase.getInstance().goOnline();
                 try {
                     getOrderNote = ordernote.getText().toString();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 progressDialog.show();
-                FirebaseDatabase.getInstance().goOnline();
+
                 try {
                     key = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("cart").push().getKey();
                     cartUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("cart").child(key);
 
                 } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
-
+                    e.printStackTrace();
                 }
                 try {
                     String totalammout = total.getText().toString();
@@ -337,15 +320,9 @@ public class ProductDetails extends AppCompatActivity {
                     cartUserDb.updateChildren(cartInfo).addOnSuccessListener(new OnSuccessListener() {
                         @Override
                         public void onSuccess(Object o) {
-                            FirebaseDatabase.getInstance().goOffline();
                             Toast.makeText(getApplicationContext(), "added to your cart", Toast.LENGTH_LONG).show();
                             progressDialog.dismiss();
-                            if (mInterstitialAd.isLoaded()) {
-                                mInterstitialAd.show();
-                            } else {
-
-                            }
-
+                            FirebaseDatabase.getInstance().goOffline();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -354,6 +331,7 @@ public class ProductDetails extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
                             Toast.makeText(getApplicationContext(), "Try againg...", Toast.LENGTH_LONG).show();
                             progressDialog.dismiss();
+                            FirebaseDatabase.getInstance().goOffline();
                         }
                     });
                 }
