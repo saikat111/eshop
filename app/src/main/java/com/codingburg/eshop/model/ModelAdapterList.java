@@ -37,10 +37,7 @@ public class ModelAdapterList  extends FirestoreRecyclerAdapter<ModelDataList, M
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Picasso.get().load(model.getImage())
-                .fit()
-                .centerInside()
-                .into(holder.productImage);
+        Picasso.get().load(model.getImage()).resize(200,150).centerInside().into(holder.productImage);
     }
 
     @NonNull

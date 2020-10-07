@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.codingburg.eshop.comment.Post;
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.authentication.PleaseLogin;
@@ -33,8 +36,6 @@ import com.codingburg.eshop.comment.CommentData;
 import com.codingburg.eshop.model.ModelAdapter;
 import com.codingburg.eshop.model.ModelAdapterList;
 import com.codingburg.eshop.model.ModelData;
-import com.codingburg.eshop.model.ModelDataList;
-
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
@@ -43,11 +44,9 @@ import com.facebook.ads.AdSize;
 import com.facebook.ads.AudienceNetworkAds;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.ads.nativetemplates.TemplateView;
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.initialization.InitializationStatus;
@@ -67,9 +66,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import com.squareup.picasso.Picasso;
-import com.synnapps.carouselview.CarouselView;
-import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,16 +96,16 @@ public class ProductDetails extends AppCompatActivity {
     private CommentAdapter modelAdapter5;
     private FirebaseFirestore db;
     private ImageView imageproduct;
-    private AdView mAdView7, mAdView8;
     private EditText ordernote;
     private String getOrderNote;
-    private com.facebook.ads.AdView adView, adView2, adView3, adView4, adView5, adView6;
+    private AlertDialog.Builder builder;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
+        builder = new AlertDialog.Builder(this);
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -118,43 +114,8 @@ public class ProductDetails extends AppCompatActivity {
 
         //ads
         AudienceNetworkAds.initialize(this);
-        adView = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
-        adContainer.addView(adView);
-        adView.loadAd();
-        adView2 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer2 = (LinearLayout) findViewById(R.id.banner_container2);
-        adContainer2.addView(adView2);
-        adView2.loadAd();
-        adView3 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer3 = (LinearLayout) findViewById(R.id.banner_container3);
-        adContainer3.addView(adView3);
-        adView3.loadAd();
-        adView4 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer4 = (LinearLayout) findViewById(R.id.banner_container4);
-        adContainer4.addView(adView4);
-        adView4.loadAd();
-        adView5 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer5 = (LinearLayout) findViewById(R.id.banner_container5);
-        adContainer5.addView(adView5);
-        adView5.loadAd();
-        adView6 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer6 = (LinearLayout) findViewById(R.id.banner_container6);
-        adContainer6.addView(adView6);
-        adView6.loadAd();
+
         AdLoader adLoader3 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
-                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
-                    @Override
-                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                        TemplateView template = findViewById(R.id.my_template3);
-                        template.setNativeAd(unifiedNativeAd);
-                    }
-                })
-                .build();
-
-        adLoader3.loadAd(new AdRequest.Builder().build());
-
-        AdLoader adLoader4 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
                     public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
@@ -163,19 +124,9 @@ public class ProductDetails extends AppCompatActivity {
                     }
                 })
                 .build();
-        adLoader4.loadAd(new AdRequest.Builder().build());
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        mAdView2 = findViewById(R.id.adView2);
-        AdRequest adRequest2 = new AdRequest.Builder().build();
-        mAdView2.loadAd(adRequest);
-        mAdView7 = findViewById(R.id.adView7);
-        AdRequest adRequest7 = new AdRequest.Builder().build();
-        mAdView7.loadAd(adRequest);
-        mAdView8 = findViewById(R.id.adView8);
-        AdRequest adRequest8 = new AdRequest.Builder().build();
-        mAdView8.loadAd(adRequest);
+
+        adLoader3.loadAd(new AdRequest.Builder().build());
+
 
         //ads
 
@@ -254,6 +205,7 @@ public class ProductDetails extends AppCompatActivity {
         addcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                builder.setMessage(R.string.dialog_message) .setTitle(R.string.dialog_title);
                 FirebaseDatabase.getInstance().goOnline();
                 try {
                     getOrderNote = ordernote.getText().toString();
@@ -323,6 +275,28 @@ public class ProductDetails extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "added to your cart", Toast.LENGTH_LONG).show();
                             progressDialog.dismiss();
                             FirebaseDatabase.getInstance().goOffline();
+                            builder.setMessage(getString(R.string.alert))
+                                    .setCancelable(false)
+                                    .setPositiveButton(getString(R.string.addmore), new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            finish();
+                                            startActivity(getIntent());
+                                        }
+                                    })
+                                    .setNegativeButton(getString(R.string.butnow), new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            //  Action for 'NO' Button
+                                            Intent intent = new Intent(getApplicationContext(), Cart.class);
+                                            startActivity(intent);
+                                            dialog.cancel();
+
+                                        }
+                                    });
+                            //Creating dialog box
+                            AlertDialog alert = builder.create();
+                            //Setting the title manually
+                            alert.setTitle("সতর্কতা!");
+                            alert.show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -387,16 +361,7 @@ public class ProductDetails extends AppCompatActivity {
         modelAdapter = new ModelAdapter(options);
         recyclerView.setAdapter(modelAdapter);
 //recyclerView new products
-        // home product show
-        recyclerView3 = (RecyclerView) findViewById(R.id.recyclerView3);
-//        recyclerView3.setHasFixedSize(true);
-        recyclerView3.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
-        FirestoreRecyclerOptions<ModelDataList> options3 =
-                new FirestoreRecyclerOptions.Builder<ModelDataList>()
-                        .setQuery(FirebaseFirestore.getInstance().collection("top"), ModelDataList.class)
-                        .build();
-        modelAdapter3 = new ModelAdapterList(options3);
-        recyclerView3.setAdapter(modelAdapter3);
+
         // home product show
         //comments
         db = FirebaseFirestore.getInstance();
@@ -471,7 +436,8 @@ public class ProductDetails extends AppCompatActivity {
                     Map<String, Object> map = (Map<String, Object>) value.getData();
                     if (map.get("image") != null) {
                         String offerone = (String) map.get("image");
-                        Picasso.get().load(offerone).into(imageproduct);
+                        Glide.with(getApplicationContext()).load(offerone).into(imageproduct);
+
                     }
                 }
             }
@@ -482,7 +448,6 @@ public class ProductDetails extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         modelAdapter.startListening();
-        modelAdapter3.startListening();
         modelAdapter5.startListening();
     }
 
@@ -490,7 +455,6 @@ public class ProductDetails extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         modelAdapter.stopListening();
-        modelAdapter3.stopListening();
         modelAdapter5.stopListening();
     }
 
@@ -517,26 +481,4 @@ public class ProductDetails extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    protected void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
-        if (adView2 != null) {
-            adView2.destroy();
-        }
-        if (adView3 != null) {
-            adView3.destroy();
-        }
-        if (adView4 != null) {
-            adView4.destroy();
-        }
-        if (adView5 != null) {
-            adView5.destroy();
-        }
-        if (adView6 != null) {
-            adView6.destroy();
-        }
-        super.onDestroy();
-    }
 }

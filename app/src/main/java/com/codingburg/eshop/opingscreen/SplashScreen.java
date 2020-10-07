@@ -11,7 +11,7 @@ import com.codingburg.eshop.R;
 import com.codingburg.eshop.home.MainActivity;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static com.codingburg.eshop.opingscreen.Note.SHARED_PREFS;
+
 
 
 public class SplashScreen extends AppCompatActivity {

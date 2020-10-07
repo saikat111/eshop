@@ -15,7 +15,8 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".opingscreen.Note"></activity>
+        <activity android:name=".opingscreen.Tutorial"></activity>
+        <activity android:name=".opingscreen.Note" />
         <activity android:name=".offer.OfferDetail" />
         <activity
             android:name=".opingscreen.SplashScreen"

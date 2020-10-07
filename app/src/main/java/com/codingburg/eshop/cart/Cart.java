@@ -47,22 +47,11 @@ public class Cart extends AppCompatActivity {
     private Button buy;
     private DatabaseReference userDb;
     private ProgressDialog progressDialog;
-    private InterstitialAd mInterstitialAd;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId(getString(R.string.instatianlads1));
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            }
 
-        });
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading.......");
         progressDialog.show();
@@ -132,33 +121,17 @@ public class Cart extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     Intent intent = new Intent(getApplicationContext(), ShippingCharge.class);
-                    if (Integer.parseInt(total.getText().toString()) == 15) {
-                        startActivity(intent);
-                        if (mInterstitialAd.isLoaded()) {
-                            mInterstitialAd.show();
-                        } else {
-
-                        }
-                        return;
-                    }
-                    if (total.getText().toString().equals(null) || Integer.parseInt(total.getText().toString()) < 149) {
-                        Toast.makeText(getApplicationContext(), "Minimum order amount is 150 tk", Toast.LENGTH_SHORT).show();
-
+                    if (total.getText().toString().equals(null) || Integer.parseInt(total.getText().toString()) < 9) {
+                        Toast.makeText(getApplicationContext(), "Minimum order amount is 10 tk", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     startActivity(intent);
-                    if (mInterstitialAd.isLoaded()) {
-                        mInterstitialAd.show();
-                    } else {
-
-                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
             }
         });
-
         // home product show
         recyclerView3 = (RecyclerView) findViewById(R.id.recyclerView3);
 //        recyclerView3.setHasFixedSize(true);
@@ -197,27 +170,20 @@ public class Cart extends AppCompatActivity {
                     }
                 });
             }
-        }, 7000);
-
-
+        }, 6000);
     }
-
-
     @Override
     protected void onStart() {
         super.onStart();
         modelAdapter3.startListening();
     }
-
     @Override
     protected void onStop() {
         super.onStop();
         modelAdapter3.stopListening();
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.top_app_bar, menu);
         MenuItem item = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) item.getActionView();

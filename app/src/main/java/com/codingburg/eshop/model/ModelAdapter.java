@@ -31,10 +31,7 @@ public class ModelAdapter extends FirestoreRecyclerAdapter<ModelData, ModelAdapt
         holder.productPrice.setText(model.getPrice());
         holder.productid.setText(model.getId());
         holder.productcategory.setText(model.getCategory());
-        Picasso.get().load(model.getImage())
-                .fit()
-                .centerInside()
-                .into(holder.productImage);
+        Picasso.get().load(model.getImage()).resize(200,150).centerInside().into(holder.productImage);
     }
     @NonNull
     @Override

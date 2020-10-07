@@ -18,11 +18,11 @@ import com.synnapps.carouselview.ImageListener;
 
 public class Note extends AppCompatActivity {
     private String text;
-    public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String TEXT = "text";
     CarouselView  carouselView4;
     int[] sampleImages1 = {R.drawable.i1, R.drawable.i13, R.drawable.i14};
     private Button next;
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String TEXT = "text";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,6 @@ public class Note extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(TEXT, "done");
         editor.apply();
-
     }
     ImageListener imageListener2 = new ImageListener() {
         @Override

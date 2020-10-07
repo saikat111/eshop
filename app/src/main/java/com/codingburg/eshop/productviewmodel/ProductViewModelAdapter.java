@@ -34,7 +34,6 @@ public class ProductViewModelAdapter   extends FirestoreRecyclerAdapter<ProductV
         holder.productmodel.setText(model.getName());
         holder.productid.setText(model.getId());
         holder.productcategory.setText(model.getCategory());
-        holder.location.setText(model.getLocation());
         holder.time.setText(model.getTime());
         try{
             holder.previousprice.setText(model.previousprice);
@@ -42,13 +41,7 @@ public class ProductViewModelAdapter   extends FirestoreRecyclerAdapter<ProductV
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-        Picasso.get().load(model.getImage())
-                .fit()
-                .centerInside()
-                .into(holder.productImage);
+        Picasso.get().load(model.getImage()).resize(200,150).centerInside().into(holder.productImage);
     }
 
     @NonNull
@@ -62,7 +55,7 @@ public class ProductViewModelAdapter   extends FirestoreRecyclerAdapter<ProductV
     public class DataViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView productImage;
-        TextView productPrice, productid ,productmodel ,productcategory, time, location, previousprice;
+        TextView productPrice, productid ,productmodel ,productcategory, time, previousprice;
         public DataViewHolder(@NonNull final View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
@@ -72,7 +65,6 @@ public class ProductViewModelAdapter   extends FirestoreRecyclerAdapter<ProductV
             productid = itemView.findViewById(R.id.id);
             productcategory = itemView.findViewById(R.id.category);
             time = itemView.findViewById(R.id.time);
-            location = itemView.findViewById(R.id.location);
             previousprice = itemView.findViewById(R.id.previceprice);
         }
         @Override

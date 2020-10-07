@@ -64,7 +64,7 @@ public class CardAdapter  extends FirebaseRecyclerAdapter<CardData, CardAdapter.
         holder.productcategory.setText(model.getCategory());
         holder.quantity.setText(model.getQuantity());
         holder.key.setText(model.getKey());
-        Picasso.get().load(model.getImage()).into(holder.productImage);
+        Picasso.get().load(model.getImage()).resize(150,100).into(holder.productImage);
        try{
 
            count = count + Integer.parseInt(model.getTotalprice()) ;

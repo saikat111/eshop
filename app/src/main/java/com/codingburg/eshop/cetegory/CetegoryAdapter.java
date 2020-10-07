@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.showproducts.ShowProducts;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -26,9 +28,8 @@ public class CetegoryAdapter extends FirestoreRecyclerAdapter<CetegoryModel, Cet
         holder.productmodel.setText(model.getName());
         holder.productcategory.setText(model.getCategory());
         Picasso.get().load(model.getImage())
-                .fit()
-                .centerInside()
                 .into(holder.productImage);
+
     }
 
     @NonNull

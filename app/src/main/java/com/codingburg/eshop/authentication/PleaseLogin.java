@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.codingburg.eshop.R;
+import com.codingburg.eshop.home.MainActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -35,7 +36,6 @@ public class PleaseLogin extends AppCompatActivity {
     private LinearLayout fb;
     private CallbackManager mCallbackManager;
     private FirebaseAuth mAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,12 +62,8 @@ public class PleaseLogin extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), PhoneNumber.class);
                     startActivity(intent);
                 }
-
-
-
             }
         });
-
         mAuth = FirebaseAuth.getInstance();
         mCallbackManager = CallbackManager.Factory.create();
         fb = findViewById(R.id.fb);
@@ -123,8 +119,13 @@ public class PleaseLogin extends AppCompatActivity {
                             Toast.makeText(PleaseLogin.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }

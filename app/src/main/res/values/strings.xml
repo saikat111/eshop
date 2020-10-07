@@ -17,20 +17,20 @@
     <string name="contactnumber">আপনার ব্যক্তিগত ফোন নম্বরটি লিখুন</string>
     <string name="ad_attribution">Ad</string>
 
-        <!--main-->
+    <!--main-->
     <!--        admob-->
-        <string name="googleadsapplicationid">ca-app-pub-3884253968161128~5921117388</string>
-        <string name="banner_ID_1">ca-app-pub-3884253968161128/3458605570</string>
-        <string name="banner_ID_2">ca-app-pub-3884253968161128/3458605570</string>
-        <string name="native_ID_1">ca-app-pub-3884253968161128/6823135517</string>
-        <string name="native_ID_2">ca-app-pub-3884253968161128/6823135517</string>
-        <string name="videoads1">ca-app-pub-3884253968161128/3622257107</string>
-        <string name="instatianlads1">ca-app-pub-3884253968161128/1379237141</string>
+            <string name="googleadsapplicationid">ca-app-pub-3884253968161128~5921117388</string>
+            <string name="banner_ID_1">ca-app-pub-3884253968161128/3458605570</string>
+            <string name="banner_ID_2">ca-app-pub-3884253968161128/3458605570</string>
+            <string name="native_ID_1">ca-app-pub-3884253968161128/6823135517</string>
+            <string name="native_ID_2">ca-app-pub-3884253968161128/6823135517</string>
+            <string name="videoads1">ca-app-pub-3884253968161128/3622257107</string>
+            <string name="instatianlads1">ca-app-pub-3884253968161128/1379237141</string>
 
-    <!--    main fb-->
+    <!--    &lt;!&ndash;    main fb&ndash;&gt;-->
 
-            <string name="fb_banner1">249933149664944_249938812997711</string>
-            <string name="fb_int_1">249933149664944_253704842621108</string>
+                <string name="fb_banner1">249933149664944_249938812997711</string>
+                <string name="fb_int_1">249933149664944_253704842621108</string>
 
 
     <string name="fb">https://www.facebook.com/groups/1166929073679754</string>
@@ -46,8 +46,8 @@
     <!--    fb ads-->
 
 
-<!--    &lt;!&ndash;    &lt;!&ndash;    test:&ndash;&gt;&ndash;&gt;-->
-<!--    &lt;!&ndash;    &lt;!&ndash;    admob + fb &ndash;&gt;&ndash;&gt;-->
+    <!--    &lt;!&ndash;    &lt;!&ndash;    test:&ndash;&gt;&ndash;&gt;-->
+    <!--    &lt;!&ndash;    &lt;!&ndash;    admob + fb &ndash;&gt;&ndash;&gt;-->
 <!--    <string name="googleadsapplicationid">ca-app-pub-3940256099942544~3347511713</string>-->
 <!--    <string name="banner_ID_1">"ca-app-pub-3940256099942544/6300978111"</string>-->
 <!--    <string name="banner_ID_2">"ca-app-pub-3940256099942544/6300978111"</string>-->
@@ -55,13 +55,18 @@
 <!--    <string name="native_ID_2">"ca-app-pub-3940256099942544/2247696110"</string>-->
 <!--    <string name="videoads1">ca-app-pub-3940256099942544/5224354917</string>-->
 <!--    <string name="instatianlads1">ca-app-pub-3940256099942544/8691691433</string>-->
-<!--    &lt;!&ndash;&lt;!&ndash;    fb&ndash;&gt;&ndash;&gt;-->
+    <!--    &lt;!&ndash;&lt;!&ndash;    fb&ndash;&gt;&ndash;&gt;-->
 <!--    <string name="fb_banner1">IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID</string>-->
 <!--    <string name="fb_int_1">YOUR_PLACEMENT_ID</string>-->
-<!--    &lt;!&ndash;    &lt;!&ndash;    admob + fb &ndash;&gt;&ndash;&gt;-->
+    <!--    &lt;!&ndash;    &lt;!&ndash;    admob + fb &ndash;&gt;&ndash;&gt;-->
 
     <string name="title">ShulovShop শুধু একটি ব্যবসা কেন্দ্রিক অ্যাপস নয়।</string>
     <string name="full">আমরা সমাজের সুবিধাবঞ্চিত মানুষদের নিয়েও কাজ করে থাকি। ShulovShop অ্যাপসটিতে আমরা যে কিছু পরিমাণ অ্যাডস্ ডিসপ্লে করে থাকি সেখান থেকে যে অর্থ উপার্জন হয় তার বেশিরভাগই আমরা ব্যয় করে থাকি সুবিধাবঞ্চিত মানুষদের জন্য। এই কাজে অংশীদার হতে পারেন আপনিও। কারণ আপনার দেখা কিছু অ্যাডস্ থেকেই যে অর্থ উপার্জন হবে আমরা তা  পৌঁছে দিব সমাজের সুবিধাবঞ্চিতদের কাছে।</string>
 
+    <string name="dialog_message">Welcome to Alert Dialog</string>
+    <string name="dialog_title">Javatpoint Alert Dialog</string>
+    <string name="alert">আপনি আরও পণ্য যুক্ত করতে চান? বা আপনি এখন এই পণ্য কিনতে চান?</string>
+    <string name="addmore">আমি আরও পণ্য যুক্ত করতে চাই</string>
+    <string name="butnow">আমি এখন এটি কিনতে চাই</string>
 
 </resources>

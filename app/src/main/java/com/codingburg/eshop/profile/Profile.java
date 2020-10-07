@@ -62,11 +62,6 @@ public class Profile extends AppCompatActivity {
     private TextView number, name;
     private DocumentReference currentUserDb;
     private Button logout;
-    private AdView mAdView, mAdView3;
-    private AdView  mAdView6, mAdView7, mAdView8;
-    private com.facebook.ads.AdView adView, adView2;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,15 +76,6 @@ public class Profile extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        AudienceNetworkAds.initialize(this);
-        adView = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
-        adContainer.addView(adView);
-        adView.loadAd();
-        adView2 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer2 = (LinearLayout) findViewById(R.id.banner_container2);
-        adContainer2.addView(adView2);
-        adView2.loadAd();
         AdLoader adLoader5 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
@@ -102,17 +88,6 @@ public class Profile extends AppCompatActivity {
 
         adLoader5.loadAd(new AdRequest.Builder().build());
 
-
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        mAdView3 = findViewById(R.id.adView3);
-        AdRequest adRequest3 = new AdRequest.Builder().build();
-        mAdView3.loadAd(adRequest);
-        mAdView8 = findViewById(R.id.adView8);
-        AdRequest adRequest8 = new AdRequest.Builder().build();
-        mAdView8.loadAd(adRequest);
 
         try {
             userId = mAuth.getCurrentUser().getUid();
@@ -245,7 +220,6 @@ public class Profile extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -264,15 +238,5 @@ public class Profile extends AppCompatActivity {
 
 
         return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    protected void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
-        if (adView2 != null) {
-            adView2.destroy();
-        }
-        super.onDestroy();
     }
 }

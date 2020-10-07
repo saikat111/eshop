@@ -57,28 +57,12 @@ public class SubCetegory extends AppCompatActivity {
     private AdView mAdView;
     private  String userId;
     private FirebaseAuth mAuth;
-    private ImageSlider  imageSlider2;
-    private AdView  mAdView6, mAdView7, mAdView8;
-    private com.facebook.ads.AdView adView, adView2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_category);
         FirebaseDatabase.getInstance().goOnline();
         id = getIntent().getExtras().getString("id");
-
-        AudienceNetworkAds.initialize(this);
-        adView = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
-        adContainer.addView(adView);
-        adView.loadAd();
-        adView2 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer2 = (LinearLayout) findViewById(R.id.banner_container2);
-        adContainer2.addView(adView2);
-        adView2.loadAd();
-
-
-
         AdLoader adLoader2 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
@@ -90,28 +74,11 @@ public class SubCetegory extends AppCompatActivity {
                 .build();
 
         adLoader2.loadAd(new AdRequest.Builder().build());
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        mAdView7 = findViewById(R.id.adView7);
-        AdRequest adRequest7 = new AdRequest.Builder().build();
-        mAdView7.loadAd(adRequest);
-        mAdView8 = findViewById(R.id.adView8);
-        AdRequest adRequest8 = new AdRequest.Builder().build();
-        mAdView8.loadAd(adRequest);
-
         try {
             userId = mAuth.getCurrentUser().getUid();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-
-
-
         //buttom navigation
         SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
@@ -205,18 +172,6 @@ public class SubCetegory extends AppCompatActivity {
                 return false;
             }
         });
-
-
         return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    protected void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
-        if (adView2 != null) {
-            adView2.destroy();
-        }
-        super.onDestroy();
     }
 }

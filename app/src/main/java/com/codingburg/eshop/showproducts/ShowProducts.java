@@ -1,38 +1,24 @@
 package com.codingburg.eshop.showproducts;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
-
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.authentication.PleaseLogin;
 import com.codingburg.eshop.cart.Cart;
 import com.codingburg.eshop.home.MainActivity;
-
-import com.codingburg.eshop.productdetails.ProductDetails;
 import com.codingburg.eshop.productviewmodel.ProductViewModel;
 import com.codingburg.eshop.productviewmodel.ProductViewModelAdapter;
 import com.codingburg.eshop.profile.Profile;
-
 import com.codingburg.eshop.search.Seach;
 import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.interfaces.ItemClickListener;
-import com.denzcoskun.imageslider.models.SlideModel;
 import com.facebook.ads.AudienceNetworkAds;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdLoader;
@@ -43,15 +29,10 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
@@ -64,11 +45,7 @@ public class ShowProducts extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String userId;
     private CollectionReference showCatagoryProducts;
-    private AdView mAdView;
-    private ImageSlider imageSlider, imageSlider2;
     private Toolbar toolbar;
-    private AdView  mAdView6, mAdView7, mAdView8;
-    private com.facebook.ads.AdView adView, adView2;
 
 
     @Override
@@ -82,18 +59,7 @@ public class ShowProducts extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-
         AudienceNetworkAds.initialize(this);
-        adView = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
-        adContainer.addView(adView);
-        adView.loadAd();
-        adView2 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer2 = (LinearLayout) findViewById(R.id.banner_container2);
-        adContainer2.addView(adView2);
-        adView2.loadAd();
-
-
         category = getIntent().getExtras().getString("category");
         mAuth = FirebaseAuth.getInstance();
         try {
@@ -101,9 +67,6 @@ public class ShowProducts extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
         AdLoader adLoader2 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
@@ -113,21 +76,7 @@ public class ShowProducts extends AppCompatActivity {
                     }
                 })
                 .build();
-
         adLoader2.loadAd(new AdRequest.Builder().build());
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        mAdView7 = findViewById(R.id.adView7);
-        AdRequest adRequest7 = new AdRequest.Builder().build();
-        mAdView7.loadAd(adRequest);
-        mAdView8 = findViewById(R.id.adView8);
-        AdRequest adRequest8 = new AdRequest.Builder().build();
-        mAdView8.loadAd(adRequest);
-
-
-
         //buttom navigation
         SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
@@ -229,12 +178,6 @@ public class ShowProducts extends AppCompatActivity {
     }
     @Override
     protected void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
-        if (adView2 != null) {
-            adView2.destroy();
-        }
         super.onDestroy();
     }
 

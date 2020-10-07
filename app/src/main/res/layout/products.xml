@@ -5,10 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EAE7DC"
-
-
-
-
     >
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -35,70 +31,15 @@
             </RelativeLayout>
 
             <com.google.android.ads.nativetemplates.TemplateView
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:id="@+id/my_template2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:gnt_template_type="@layout/gnt_small_template_view"
+                app:gnt_template_type="@layout/gnt_medium_template_view"
                 />
-            <LinearLayout
-                android:layout_marginTop="8dp"
-                android:id="@+id/banner_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                />
-            <LinearLayout
-                android:layout_marginTop="8dp"
-                android:id="@+id/banner_container2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-                <com.google.android.gms.ads.AdView
-                    xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/adView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    ads:adSize="BANNER"
-                    ads:adUnitId="@string/banner_ID_2">
-                </com.google.android.gms.ads.AdView>
-                <com.google.android.gms.ads.AdView
-                    android:layout_marginTop="10dp"
-                    xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/adView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    ads:adSize="BANNER"
-                    ads:adUnitId="@string/banner_ID_2">
-                </com.google.android.gms.ads.AdView>
-                <com.google.android.gms.ads.AdView
-                    android:layout_marginTop="10dp"
-                    xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/adView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    ads:adSize="BANNER"
-                    ads:adUnitId="@string/banner_ID_2">
-                </com.google.android.gms.ads.AdView>
-
-            </LinearLayout>
-
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
-
-
-
-
-
-
-
-
     <com.luseen.spacenavigation.SpaceNavigationView
         android:id="@+id/space"
         android:layout_width="match_parent"
@@ -107,7 +48,5 @@
         android:layout_gravity="bottom"
 
         />
-
-
 </RelativeLayout>
 

@@ -243,7 +243,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:background="@drawable/send_otp"
-            android:text="Order"
+            android:text="অর্ডার"
             >
         </Button>
 

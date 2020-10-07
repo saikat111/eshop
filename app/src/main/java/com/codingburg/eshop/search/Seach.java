@@ -61,8 +61,7 @@ public class Seach extends AppCompatActivity {
     private AdView mAdView;
     private  FirebaseAuth mAuth;
     private String userId;
-    private AdView  mAdView6, mAdView7, mAdView8;
-    private com.facebook.ads.AdView adView, adView2;
+
 
 
 
@@ -77,15 +76,6 @@ public class Seach extends AppCompatActivity {
             }
         });
 
-        AudienceNetworkAds.initialize(this);
-        adView = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
-        adContainer.addView(adView);
-        adView.loadAd();
-        adView2 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer2 = (LinearLayout) findViewById(R.id.banner_container2);
-        adContainer2.addView(adView2);
-        adView2.loadAd();
 
         mAuth = FirebaseAuth.getInstance();
     try {
@@ -161,19 +151,8 @@ public class Seach extends AppCompatActivity {
                 }
             })
             .build();
-
-
-
     adLoader2.loadAd(new AdRequest.Builder().build());
-    mAdView = findViewById(R.id.adView);
-    AdRequest adRequest = new AdRequest.Builder().build();
-    mAdView.loadAd(adRequest);
-    mAdView7 = findViewById(R.id.adView7);
-    AdRequest adRequest7 = new AdRequest.Builder().build();
-    mAdView7.loadAd(adRequest);
-    mAdView8 = findViewById(R.id.adView8);
-    AdRequest adRequest8 = new AdRequest.Builder().build();
-    mAdView8.loadAd(adRequest);
+
         //ads
 
 
@@ -238,16 +217,6 @@ public class Seach extends AppCompatActivity {
         recyclerView3.setAdapter(modelAdapter3);
         //
 
-    }
-    @Override
-    protected void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
-        if (adView2 != null) {
-            adView2.destroy();
-        }
-        super.onDestroy();
     }
 
 }

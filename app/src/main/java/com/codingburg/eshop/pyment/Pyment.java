@@ -3,7 +3,9 @@ package com.codingburg.eshop.pyment;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codingburg.eshop.R;
+import com.codingburg.eshop.cart.Cart;
 import com.codingburg.eshop.home.MainActivity;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,7 +43,8 @@ public class Pyment extends AppCompatActivity {
     private EditText number, addrress, contact;
     private DatabaseReference numberDb;
     private ProgressDialog progressDialog;
-
+    private com.google.android.gms.ads.InterstitialAd mInterstitialAd;
+    private AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +62,19 @@ public class Pyment extends AppCompatActivity {
         helpnumber = findViewById(R.id.helpnumber);
         addrress = findViewById(R.id.address);
         firebaseAuth = FirebaseAuth.getInstance();
-
+        builder = new AlertDialog.Builder(this);
         progressDialog = new ProgressDialog(this);
+        mInterstitialAd = new com.google.android.gms.ads.InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.instatianlads1));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new com.google.android.gms.ads.AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
+        });
         try {
             userId = firebaseAuth.getCurrentUser().getUid();
             if(userId.equals(null)){
@@ -222,8 +238,38 @@ public class Pyment extends AppCompatActivity {
                          delete.removeValue();
                          userDb.removeValue();
                          progressDialog.dismiss();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
+                        builder.setMessage(getString(R.string.alert))
+                                .setCancelable(false)
+                                .setPositiveButton("পরবর্তী পৃষ্ঠা", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        finish();
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(intent);
+                                        if (mInterstitialAd.isLoaded()) {
+                                            mInterstitialAd.show();
+                                        } else {
+
+                                        }
+                                    }
+                                })
+                                .setNegativeButton("পরবর্তী পৃষ্ঠা", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        //  Action for 'NO' Button
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(intent);
+                                        dialog.cancel();
+                                        if (mInterstitialAd.isLoaded()) {
+                                            mInterstitialAd.show();
+                                        } else {
+
+                                        }
+                                    }
+                                });
+                        //Creating dialog box
+                        AlertDialog alert = builder.create();
+                        //Setting the title manually
+                        alert.setTitle("আপনার অর্ডার সম্পন্ন হয়েছে!");
+                        alert.show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

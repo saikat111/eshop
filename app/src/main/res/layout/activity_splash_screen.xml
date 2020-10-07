@@ -5,22 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:background="#FFF"
     tools:context=".opingscreen.SplashScreen">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/sg1">
+        android:layout_height="match_parent"
+        android:background="@drawable/splashlogo">
 
     </ImageView>
 
-    <pl.droidsonroids.gif.GifImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/sg2"
 
-        />
 
 </LinearLayout>
