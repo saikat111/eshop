@@ -193,12 +193,12 @@ public class Pyment extends AppCompatActivity {
         final String getnumber = number.getText().toString();
         final String getAddress =addrress.getText().toString();
         final String getContactNumber =contact.getText().toString();
-        if(getnumber.equals(null)){
+        if(getnumber == null){
             Toast.makeText(getApplicationContext(), "আপনার নম্বর লিখুন", Toast.LENGTH_SHORT).show();
 
             return;
         }
-        if(getAddress.equals(null)){
+        if(getAddress == null){
             Toast.makeText(getApplicationContext(), "দয়া করে আপনার ঠিকানা লিখুন", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -238,7 +238,7 @@ public class Pyment extends AppCompatActivity {
                          delete.removeValue();
                          userDb.removeValue();
                          progressDialog.dismiss();
-                        builder.setMessage(getString(R.string.alert))
+                        builder.setMessage("আমাদের কাছ থেকে কেনাকাটা করার জন্য ধন্যবাদ")
                                 .setCancelable(false)
                                 .setPositiveButton("পরবর্তী পৃষ্ঠা", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {

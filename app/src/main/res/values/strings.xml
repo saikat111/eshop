@@ -31,6 +31,7 @@
 
                 <string name="fb_banner1">249933149664944_249938812997711</string>
                 <string name="fb_int_1">249933149664944_253704842621108</string>
+                <string name="fb_rectangle_ads">249933149664944_260150465309879</string>
 
 
     <string name="fb">https://www.facebook.com/groups/1166929073679754</string>
@@ -68,5 +69,6 @@
     <string name="alert">আপনি আরও পণ্য যুক্ত করতে চান? বা আপনি এখন এই পণ্য কিনতে চান?</string>
     <string name="addmore">আমি আরও পণ্য যুক্ত করতে চাই</string>
     <string name="butnow">আমি এখন এটি কিনতে চাই</string>
+
 
 </resources>

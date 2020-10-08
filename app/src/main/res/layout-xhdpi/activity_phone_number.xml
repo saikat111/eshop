@@ -5,33 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#FFF"
 
     >
+
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="#4ABDFF"
-        app:srcCompat="@drawable/phone"
+        android:layout_gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/logo"
 
         />
+
     <TextView
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="#4ABDFF"
+        android:textColor="#24282B"
         android:textSize="17dp"
         android:text="Enter your phone number "
         />
     <TextView
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:textColor="#959C9F"
-        android:textSize="17dp"
         android:text="We will send you a OTP message"
-        />
+        android:textColor="#24282B"
+        android:textSize="17dp" />
     <Spinner
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
@@ -47,7 +49,7 @@
         android:layout_marginTop="15dp"
         android:layout_width="250dp"
         android:textColorHint="#4ABDFF"
-        android:hint="Enter your mobile number"
+        android:hint="number"
         android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/buttonContinue"

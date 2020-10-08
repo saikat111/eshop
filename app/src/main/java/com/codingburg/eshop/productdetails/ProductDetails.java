@@ -40,8 +40,12 @@ import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
 import com.facebook.ads.AdSize;
 import com.facebook.ads.AudienceNetworkAds;
+import com.facebook.ads.InterstitialAd;
+import com.facebook.ads.InterstitialAdListener;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdLoader;
@@ -99,7 +103,7 @@ public class ProductDetails extends AppCompatActivity {
     private EditText ordernote;
     private String getOrderNote;
     private AlertDialog.Builder builder;
-
+    private InterstitialAd interstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +115,6 @@ public class ProductDetails extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-
         //ads
         AudienceNetworkAds.initialize(this);
 
@@ -129,6 +132,7 @@ public class ProductDetails extends AppCompatActivity {
 
 
         //ads
+        interstitialAd = new InterstitialAd(this, getString(R.string.fb_int_1));
 
 
         id = getIntent().getExtras().getString("id");
@@ -279,16 +283,105 @@ public class ProductDetails extends AppCompatActivity {
                                     .setCancelable(false)
                                     .setPositiveButton(getString(R.string.addmore), new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
-                                            finish();
-                                            startActivity(getIntent());
+                                            InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+                                                @Override
+                                                public void onInterstitialDisplayed(Ad ad) {
+                                                    // Interstitial ad displayed callback
+
+                                                }
+
+                                                @Override
+                                                public void onInterstitialDismissed(Ad ad) {
+                                                    finish();
+                                                    startActivity(getIntent());
+                                                }
+
+                                                @Override
+                                                public void onError(Ad ad, AdError adError) {
+                                                    finish();
+                                                    startActivity(getIntent());
+                                                }
+
+                                                @Override
+                                                public void onAdLoaded(Ad ad) {
+                                                    interstitialAd.show();
+                                                }
+
+                                                @Override
+                                                public void onAdClicked(Ad ad) {
+
+
+                                                }
+
+                                                @Override
+                                                public void onLoggingImpression(Ad ad) {
+                                                    finish();
+                                                    startActivity(getIntent());
+
+                                                }
+                                            };
+
+                                            // For auto play video ads, it's recommended to load the ad
+                                            // at least 30 seconds before it is shown
+                                            interstitialAd.loadAd(
+                                                    interstitialAd.buildLoadAdConfig()
+                                                            .withAdListener(interstitialAdListener)
+                                                            .build());
+
                                         }
                                     })
                                     .setNegativeButton(getString(R.string.butnow), new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
+                                        public void onClick(final DialogInterface dialog, int id) {
                                             //  Action for 'NO' Button
-                                            Intent intent = new Intent(getApplicationContext(), Cart.class);
-                                            startActivity(intent);
-                                            dialog.cancel();
+                                            InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+                                                @Override
+                                                public void onInterstitialDisplayed(Ad ad) {
+                                                    // Interstitial ad displayed callback
+
+                                                }
+
+                                                @Override
+                                                public void onInterstitialDismissed(Ad ad) {
+                                                    Intent intent = new Intent(getApplicationContext(), Cart.class);
+                                                    startActivity(intent);
+                                                    dialog.cancel();
+
+                                                }
+
+                                                @Override
+                                                public void onError(Ad ad, AdError adError) {
+                                                    Intent intent = new Intent(getApplicationContext(), Cart.class);
+                                                    startActivity(intent);
+                                                    dialog.cancel();
+
+                                                }
+
+                                                @Override
+                                                public void onAdLoaded(Ad ad) {
+                                                    interstitialAd.show();
+                                                }
+
+                                                @Override
+                                                public void onAdClicked(Ad ad) {
+
+
+                                                }
+
+                                                @Override
+                                                public void onLoggingImpression(Ad ad) {
+                                                    Intent intent = new Intent(getApplicationContext(), Cart.class);
+                                                    startActivity(intent);
+                                                    dialog.cancel();
+
+                                                }
+                                            };
+
+                                            // For auto play video ads, it's recommended to load the ad
+                                            // at least 30 seconds before it is shown
+                                            interstitialAd.loadAd(
+                                                    interstitialAd.buildLoadAdConfig()
+                                                            .withAdListener(interstitialAdListener)
+                                                            .build());
 
                                         }
                                     });

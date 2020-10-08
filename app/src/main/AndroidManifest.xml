@@ -34,7 +34,9 @@
         <activity android:name=".discount.Discount" />
         <activity android:name=".profile.Profile" />
         <activity android:name=".showproducts.ShowProducts" />
-        <activity android:name=".authentication.PleaseLogin" />
+        <activity android:name=".authentication.PleaseLogin"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            />
         <activity android:name=".notification.Notification" />
         <activity android:name=".cart.Cart" />
         <activity android:name=".productdetails.ProductDetails" />

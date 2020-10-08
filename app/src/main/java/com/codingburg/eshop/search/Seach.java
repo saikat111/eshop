@@ -159,13 +159,14 @@ public class Seach extends AppCompatActivity {
 //create the drawer and remember the `Drawer` result object
 
         // home product show
-        databaseReferenced = FirebaseFirestore.getInstance().collection("new");
+        databaseReferenced = FirebaseFirestore.getInstance().collection("product");
+        Query query = databaseReferenced.whereEqualTo("category", "cookedfood");
         recyclerView3 = (RecyclerView) findViewById(R.id.recyclerView10);
 //        recyclerView3.setHasFixedSize(true);
         recyclerView3.setLayoutManager(new GridLayoutManager(this, 2 ,GridLayoutManager.VERTICAL, false));
         FirestoreRecyclerOptions<ProductViewModel> options3 =
                 new FirestoreRecyclerOptions.Builder<ProductViewModel>()
-                        .setQuery(databaseReferenced, ProductViewModel.class)
+                        .setQuery(query, ProductViewModel.class)
                         .build();
         modelAdapter3 = new ProductViewModelAdapter(options3);
         recyclerView3.setAdapter(modelAdapter3);
@@ -213,8 +214,11 @@ public class Seach extends AppCompatActivity {
                         .setQuery(query, ProductViewModel.class)
                         .build();
         modelAdapter3 = new ProductViewModelAdapter(options3);
-        modelAdapter3.startListening();
         recyclerView3.setAdapter(modelAdapter3);
+        modelAdapter3.startListening();
+//        modelAdapter3.stopListening();
+
+
         //
 
     }

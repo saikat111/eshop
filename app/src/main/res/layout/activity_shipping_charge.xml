@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:fontFamily="@font/andika"
-            android:text="৫৫ টাকা"
+            android:text="৫০ টাকা"
             android:textColor="#000"
             >
         </TextView>
@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:fontFamily="@font/andika"
-            android:text="১০৫ টাকা"
+            android:text="১০০ টাকা"
             android:textColor="#000"
             >
         </TextView>

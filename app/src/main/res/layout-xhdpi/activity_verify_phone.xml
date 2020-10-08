@@ -5,21 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     >
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="#4ABDFF"
-        app:srcCompat="@drawable/v"
-
+        android:layout_gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/logo"
         />
     <TextView
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="#4ABDFF"
+        android:textColor="#000"
         android:textSize="17dp"
         android:text="Enter OTP"
         />
@@ -28,13 +26,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="#959C9F"
+        android:textColor="#000"
         android:textSize="17dp"
         android:text="We have sent a OTP on your number"
         />
-
     <EditText
-
         android:padding="10dp"
         android:id="@+id/editTextCode"
         android:layout_gravity="center"
@@ -57,5 +53,4 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone" />
-
 </LinearLayout>

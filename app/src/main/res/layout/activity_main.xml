@@ -122,57 +122,27 @@
             <HorizontalScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:fillViewport="true">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-                    <Button
-                        android:id="@+id/bazzer"
-                        android:layout_width="90dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/button5"
-                        android:text="Bazzer"
-                        android:textColor="#000">
-                    </Button>
-                    <Button
-                        android:id="@+id/women"
-                        android:layout_width="90dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/buttom_degine3"
-                        android:layout_marginLeft="10dp"
-                        android:text="Food"
-                        android:textColor="#000"
-                        ></Button>
-                    <Button
-                        android:id="@+id/kids"
-                        android:layout_width="90dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/button_degine"
-                        android:layout_marginLeft="10dp"
-                        android:text="Grocery"
-                        android:textColor="#000"
-                        ></Button>
-                    <Button
-                        android:id="@+id/phone"
-                        android:layout_width="90dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/button6"
-                        android:layout_marginLeft="10dp"
-                        android:text="Phone"
-                        android:textColor="#000"
-                        ></Button>
-                    <Button
-                        android:layout_marginLeft="10dp"
-                        android:id="@+id/men"
-                        android:layout_width="90dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/button_degine2"
-                        android:text="Man"
-                        android:textColor="#000"
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="6dp"
+                        android:orientation="vertical">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerviewh"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            >
 
-                       ></Button>
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </RelativeLayout>
                 </LinearLayout>
             </HorizontalScrollView>
             <TextView
@@ -228,8 +198,6 @@
                 android:text="You may like"
                 android:textSize="24dp"
                 android:textStyle="bold"></TextView>
-
-
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -240,7 +208,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:orientation="vertical">
-
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerviewphone"
                         android:layout_width="wrap_content"
@@ -254,25 +221,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                app:gnt_template_type="@layout/gnt_medium_template_view" />
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scrollbars="vertical"></androidx.recyclerview.widget.RecyclerView>
-            </RelativeLayout>
-
+                app:gnt_template_type="@layout/gnt_small_template_view" />
             <com.google.android.ads.nativetemplates.TemplateView
                 android:id="@+id/my_template5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                app:gnt_template_type="@layout/gnt_medium_template_view" />
+                app:gnt_template_type="@layout/gnt_small_template_view" />
         </LinearLayout>
 
 

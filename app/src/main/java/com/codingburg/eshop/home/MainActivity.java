@@ -37,6 +37,8 @@ import com.codingburg.eshop.model.ModelDataList;
 import com.codingburg.eshop.search.Seach;
 import com.codingburg.eshop.showproducts.ShowProducts;
 import com.codingburg.eshop.subcetegory.SubCetegory;
+import com.codingburg.eshop.topCetegory.CetegoryAdapterTo;
+import com.codingburg.eshop.topCetegory.CetegoryModelTop;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
@@ -89,19 +91,17 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private ImageSlider imageSlider;
-    private RecyclerView  recyclerView3, recyclerView5, recyclerviewphone, recyclerviewoffer;
+    private RecyclerView  recyclerView3, recyclerView5, recyclerviewphone, recyclerviewoffer, recyclerView6;
     private RecyclerView.LayoutManager RecyclerViewLayoutManager, RecyclerViewLayoutManager2;
     private ModelAdapter modelAdapter, modelAdapter2;
     private CetegoryAdapter modelAdapter5;
+    private CetegoryAdapterTo modelAdapterTop;
     private ModelAdapterList modelAdapter3, modelAdapterPhone;
     LinearLayoutManager HorizontalLayout;
     private FirebaseAuth mAuth;
     private String userId;
     private FirebaseFirestore db;
-    private Button men, food, grocery;
-    int[] sampleImages1 = {R.drawable.image_6, R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
     private Toolbar toolbar;
-    private Button bazzer, phone;
     private String show;
     private Query phoneQ, offer;
     private ProductViewModelAdapterOffer modelAdapteroffer;
@@ -131,14 +131,9 @@ public class MainActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        men = findViewById(R.id.men);
-        phone = findViewById(R.id.phone);
-        food = findViewById(R.id.women);
-        grocery = findViewById(R.id.kids);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         new DrawerBuilder().withActivity(this).build();
-        bazzer = findViewById(R.id.bazzer);
         AudienceNetworkAds.initialize(this);
         AdLoader adLoader5 = new AdLoader.Builder(this, getString(R.string.native_ID_1))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
@@ -282,7 +277,6 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-
         //image silde one and two
 
         try {
@@ -290,100 +284,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        bazzer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
-                intent.putExtra("category", "bazzer");
-                startActivity(intent);
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
-
-                }
-            }
-        });
-        phone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
-                intent.putExtra("category", "phone");
-                startActivity(intent);
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
-
-                }
-            }
-        });
-        men.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SubCetegory.class);
-                intent.putExtra("id", "men");
-                startActivity(intent);
-            }
-        });
-        food.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
-                    @Override
-                    public void onInterstitialDisplayed(Ad ad) {
-                    }
-                    @Override
-                    public void onInterstitialDismissed(Ad ad) {
-                        // Interstitial dismissed callback
-//                        Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
-//                        intent.putExtra("category", "games");
-//                        startActivity(intent);
-                    }
-                    @Override
-                    public void onError(Ad ad, AdError adError) {
-                        Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
-                        intent.putExtra("category", "food");
-                        startActivity(intent);
-                    }
-                    @Override
-                    public void onAdLoaded(Ad ad) {
-                        if(interstitialAd.isAdInvalidated()) {
-                            return;
-                        }
-                        interstitialAd.show();
-                    }
-                    @Override
-                    public void onAdClicked(Ad ad) {
-                        // Ad clicked callback
-                    }
-                    @Override
-                    public void onLoggingImpression(Ad ad) {
-                        // Ad impression logged callback
-                        Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
-                        intent.putExtra("category", "food");
-                        startActivity(intent);
-                    }
-                };
-                interstitialAd.loadAd(
-                        interstitialAd.buildLoadAdConfig()
-                                .withAdListener(interstitialAdListener)
-                                .build());
-
-            }
-        });
-        grocery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
-                intent.putExtra("category", "grocery");
-                startActivity(intent);
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
-
-                }
-            }
-        });
-
         rewardedAd = new RewardedAd(this,
                 getString(R.string.videoads1));
 
@@ -474,6 +374,25 @@ public class MainActivity extends AppCompatActivity {
         });
         //buttom navigation
         //offer
+        //recyclerView top cetegory
+        db = FirebaseFirestore.getInstance();
+        CollectionReference collectionReference1 = db.collection("category");
+        Query categoryName1 = collectionReference1.whereEqualTo("top", "yes");
+        recyclerView6 = (RecyclerView) findViewById(R.id.recyclerviewh);
+        HorizontalLayout
+                = new LinearLayoutManager(
+                MainActivity.this,
+                LinearLayoutManager.HORIZONTAL,
+                false);
+        recyclerView6.setLayoutManager(HorizontalLayout);
+        FirestoreRecyclerOptions<CetegoryModelTop> options6 =
+                new FirestoreRecyclerOptions.Builder<CetegoryModelTop>()
+                        .setQuery(categoryName1, CetegoryModelTop.class)
+                        .build();
+        modelAdapterTop = new CetegoryAdapterTo(options6);
+        recyclerView6.setAdapter(modelAdapterTop);
+//recyclerView top cetegory
+
 //recyclerView new cetegory
         db = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = db.collection("category");
@@ -500,18 +419,6 @@ public class MainActivity extends AppCompatActivity {
         modelAdapteroffer = new ProductViewModelAdapterOffer(optionoffer);
         recyclerviewoffer.setAdapter(modelAdapteroffer);
         //offer
-        // home product show
-        recyclerView3 = (RecyclerView) findViewById(R.id.recyclerView3);
-//        recyclerView3.setHasFixedSize(true);
-//        recyclerView3.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView3.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
-        FirestoreRecyclerOptions<ModelDataList> options3 =
-                new FirestoreRecyclerOptions.Builder<ModelDataList>()
-                        .setQuery(db.collection("homepage"), ModelDataList.class)
-                        .build();
-        modelAdapter3 = new ModelAdapterList(options3);
-        recyclerView3.setAdapter(modelAdapter3);
-        // home product show
         // phone product show
         DocumentReference reference = FirebaseFirestore.getInstance().collection("show").document("showhome");
         reference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -550,8 +457,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         modelAdapteroffer.startListening();
-        modelAdapter3.startListening();
         modelAdapter5.startListening();
+        modelAdapterTop.startListening();
 //        shopAdapter.startListening();
     }
 
@@ -559,8 +466,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         modelAdapteroffer.stopListening();
-        modelAdapter3.stopListening();
         modelAdapter5.stopListening();
+        modelAdapterTop.stopListening();
 //        shopAdapter.stopListening();
     }
 
