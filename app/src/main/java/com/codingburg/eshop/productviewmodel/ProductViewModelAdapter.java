@@ -34,7 +34,7 @@ public class ProductViewModelAdapter   extends FirestoreRecyclerAdapter<ProductV
         holder.productmodel.setText(model.getName());
         holder.productid.setText(model.getId());
         holder.productcategory.setText(model.getCategory());
-        holder.time.setText(model.getTime());
+//        holder.time.setText(model.getTime());
         try{
             holder.previousprice.setText(model.previousprice);
             holder.previousprice.setPaintFlags(holder.previousprice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
@@ -64,7 +64,7 @@ public class ProductViewModelAdapter   extends FirestoreRecyclerAdapter<ProductV
             productmodel = itemView.findViewById(R.id.model);
             productid = itemView.findViewById(R.id.id);
             productcategory = itemView.findViewById(R.id.category);
-            time = itemView.findViewById(R.id.time);
+//            time = itemView.findViewById(R.id.time);
             previousprice = itemView.findViewById(R.id.previceprice);
         }
         @Override

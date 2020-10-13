@@ -41,18 +41,6 @@
 
            </ImageView>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                >
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="--------------------------"
-                    android:textSize="35dp">
-                </TextView>
-            </LinearLayout>
                 <TextView
                     android:id="@+id/discount"
                     android:layout_width="wrap_content"
@@ -70,7 +58,7 @@
 
                 >
                 <LinearLayout
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -108,7 +96,7 @@
             <TextView
                 android:id="@+id/model"
                 android:fontFamily="@font/andika"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
@@ -143,7 +131,7 @@
     >
 
     <LinearLayout
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -190,7 +178,7 @@
     </LinearLayout>
 </androidx.cardview.widget.CardView>
             <LinearLayout
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -237,7 +225,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
@@ -249,7 +237,7 @@
                     </TextView>
                     <EditText
                         android:id="@+id/ordernote"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:textStyle="bold"
@@ -261,7 +249,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardElevation="5dp"

@@ -81,6 +81,7 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.onesignal.OneSignal;
+import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
@@ -91,10 +92,10 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private ImageSlider imageSlider;
-    private RecyclerView  recyclerView3, recyclerView5, recyclerviewphone, recyclerviewoffer, recyclerView6;
+    private RecyclerView  recyclerView3, recyclerView5, recyclerviewphone, recyclerviewoffer, recyclerView6, recyclerView7,recyclerView8;
     private RecyclerView.LayoutManager RecyclerViewLayoutManager, RecyclerViewLayoutManager2;
     private ModelAdapter modelAdapter, modelAdapter2;
-    private CetegoryAdapter modelAdapter5;
+    private CetegoryAdapter modelAdapter5, modelAdapterfood,modelAdapterlan;
     private CetegoryAdapterTo modelAdapterTop;
     private ModelAdapterList modelAdapter3, modelAdapterPhone;
     LinearLayoutManager HorizontalLayout;
@@ -108,7 +109,9 @@ public class MainActivity extends AppCompatActivity {
     private InterstitialAd interstitialAd;
     private com.google.android.gms.ads.InterstitialAd mInterstitialAd;
     private RewardedAd rewardedAd;
-
+    String[] sampleImages = new String[3];
+    private CarouselView carouselView;
+    private DocumentReference foodimage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -252,6 +255,53 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .build();
+
+        //food slider
+
+        foodimage = FirebaseFirestore.getInstance().collection("foodslideimage").document("imageone");
+        foodimage.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(error !=null){
+                    return;
+                }
+                if (value.exists()) {
+                    Map<String, Object> map = (Map<String, Object>) value.getData();
+                    if (map.get("imageone") != null) {
+                        String imageone = map.get("imageone").toString();
+                        sampleImages[0] = imageone;
+                    }
+                    if (map.get("imagetwo") != null) {
+                        String imagetwo = map.get("imagetwo").toString();
+                        sampleImages[1] = imagetwo;
+                    }
+                    if (map.get("imagethree") != null) {
+                        String imagethree = map.get("imagethree").toString();
+                        sampleImages[2] = imagethree;
+                    }
+                    carouselView = (CarouselView) findViewById(R.id.carouselView);
+                    ImageListener imageListener = new ImageListener() {
+                        @Override
+                        public void setImageForPosition(int position, ImageView imageView) {
+                            Picasso.get().load(sampleImages[position]).into(imageView);
+                        }
+                    };
+                    carouselView.setImageListener(imageListener);
+                    carouselView.setPageCount(sampleImages.length);
+                    carouselView.setImageClickListener(new ImageClickListener() {
+                        @Override
+                        public void onClick(int position) {
+                            Intent intent = new Intent(getApplicationContext(), SubCetegory.class);
+                            intent.putExtra("id", "food");
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+        });
+        //food slider
+
+
         //image silde one and two
         imageSlider = findViewById(R.id.image_slider);
         final ArrayList<String> id = new ArrayList<>();
@@ -374,6 +424,32 @@ public class MainActivity extends AppCompatActivity {
         });
         //buttom navigation
         //offer
+        //food
+
+
+        FirebaseFirestore find = FirebaseFirestore.getInstance();
+        CollectionReference collectionReferencefood = find.collection("category");
+        Query queryfood = collectionReferencefood.orderBy("category").startAt("food").endAt("food" + "\uf8ff");
+        recyclerView7 = (RecyclerView) findViewById(R.id.recyclerviewfood);
+        recyclerView7.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false));
+        FirestoreRecyclerOptions<CetegoryModel> options7 =
+                new FirestoreRecyclerOptions.Builder<CetegoryModel>()
+                        .setQuery(queryfood, CetegoryModel.class)
+                        .build();
+        modelAdapterfood = new CetegoryAdapter(options7);
+        recyclerView7.setAdapter(modelAdapterfood);
+        //food
+        FirebaseFirestore find2 = FirebaseFirestore.getInstance();
+        CollectionReference collectionReferencelan = find2.collection("category");
+        Query querylan = collectionReferencelan.whereEqualTo("category", "food-lunch");
+        recyclerView8 = (RecyclerView) findViewById(R.id.recyclerviewl);
+        recyclerView8.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false));
+        FirestoreRecyclerOptions<CetegoryModel> options8 =
+                new FirestoreRecyclerOptions.Builder<CetegoryModel>()
+                        .setQuery(querylan, CetegoryModel.class)
+                        .build();
+        modelAdapterlan = new CetegoryAdapter(options8);
+        recyclerView8.setAdapter(modelAdapterlan);
         //recyclerView top cetegory
         db = FirebaseFirestore.getInstance();
         CollectionReference collectionReference1 = db.collection("category");
@@ -396,12 +472,12 @@ public class MainActivity extends AppCompatActivity {
 //recyclerView new cetegory
         db = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = db.collection("category");
-        Query categoryName = collectionReference.orderBy("id");
+        Query querycategoryName = collectionReference.whereLessThan("id", "50");
         recyclerView5 = (RecyclerView) findViewById(R.id.recyclerview4);
         recyclerView5.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false));
         FirestoreRecyclerOptions<CetegoryModel> options5 =
                 new FirestoreRecyclerOptions.Builder<CetegoryModel>()
-                        .setQuery(categoryName, CetegoryModel.class)
+                        .setQuery(querycategoryName, CetegoryModel.class)
                         .build();
         modelAdapter5 = new CetegoryAdapter(options5);
         recyclerView5.setAdapter(modelAdapter5);
@@ -459,6 +535,8 @@ public class MainActivity extends AppCompatActivity {
         modelAdapteroffer.startListening();
         modelAdapter5.startListening();
         modelAdapterTop.startListening();
+        modelAdapterfood.startListening();
+        modelAdapterlan.startListening();
 //        shopAdapter.startListening();
     }
 
@@ -468,6 +546,8 @@ public class MainActivity extends AppCompatActivity {
         modelAdapteroffer.stopListening();
         modelAdapter5.stopListening();
         modelAdapterTop.stopListening();
+        modelAdapterfood.stopListening();
+        modelAdapterlan.stopListening();
 //        shopAdapter.stopListening();
     }
 
