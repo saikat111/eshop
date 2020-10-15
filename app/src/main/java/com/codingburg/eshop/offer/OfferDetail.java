@@ -97,7 +97,6 @@ public class OfferDetail extends AppCompatActivity {
     private AdView  mAdView7, mAdView8;
     private EditText ordernote;
     private String getOrderNote;
-    private com.facebook.ads.AdView adView, adView2, adView3,adView4,adView5,adView6;
     private InterstitialAd mInterstitialAd;
 
 
@@ -126,30 +125,7 @@ public class OfferDetail extends AppCompatActivity {
 
         //ads
         AudienceNetworkAds.initialize(this);
-        adView = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1), AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
-        adContainer.addView(adView);
-        adView.loadAd();
-        adView2 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer2 = (LinearLayout) findViewById(R.id.banner_container2);
-        adContainer2.addView(adView2);
-        adView2.loadAd();
-        adView3 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer3 = (LinearLayout) findViewById(R.id.banner_container3);
-        adContainer3.addView(adView3);
-        adView3.loadAd();
-        adView4 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer4 = (LinearLayout) findViewById(R.id.banner_container4);
-        adContainer4.addView(adView4);
-        adView4.loadAd();
-        adView5 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer5 = (LinearLayout) findViewById(R.id.banner_container5);
-        adContainer5.addView(adView5);
-        adView5.loadAd();
-        adView6 = new com.facebook.ads.AdView(this, getString(R.string.fb_banner1),  AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer6 = (LinearLayout) findViewById(R.id.banner_container6);
-        adContainer6.addView(adView6);
-        adView6.loadAd();
+
 
 
 
@@ -489,26 +465,5 @@ public class OfferDetail extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
-    @Override
-    protected void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
-        if (adView2 != null) {
-            adView2.destroy();
-        }
-        if (adView3 != null) {
-            adView3.destroy();
-        }
-        if (adView4 != null) {
-            adView4.destroy();
-        }
-        if (adView5 != null) {
-            adView5.destroy();
-        }
-        if (adView6 != null) {
-            adView6.destroy();
-        }
-        super.onDestroy();
-    }
+
 }

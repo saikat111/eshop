@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,7 +36,7 @@ import java.util.Map;
 
 public class Pyment extends AppCompatActivity {
     private String ammount;
-    private TextView total, type,typ2, sim1,sim2,rsim1, rsim2,helpnumber;
+    private TextView total, sim1,sim2,rsim1, rsim2,helpnumber;
     private FirebaseAuth firebaseAuth;
     private String userId;
     private DatabaseReference admin,userDb;
@@ -50,8 +51,6 @@ public class Pyment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pyment);
         total = findViewById(R.id.total);
-        type = findViewById(R.id.type);
-        typ2 = findViewById(R.id.type2);
         sim1 = findViewById(R.id.sim1);
         sim2 = findViewById(R.id.sim2);
         rsim1 = findViewById(R.id.rsim1);
@@ -112,10 +111,6 @@ public class Pyment extends AppCompatActivity {
                         String num2 = map.get("smi2").toString();
                         sim2.setText(num2);
                     }
-                    if(map.get("type") !=null){
-                        String type1 = map.get("type").toString();
-                        type.setText(type1);
-                    }
 
                 }
 
@@ -141,10 +136,7 @@ public class Pyment extends AppCompatActivity {
                         String num2 = map.get("smi2").toString();
                         rsim2.setText(num2);
                     }
-                    if(map.get("type") !=null){
-                        String type1 = map.get("type").toString();
-                        typ2.setText(type1);
-                    }
+
 
                 }
 
@@ -193,13 +185,16 @@ public class Pyment extends AppCompatActivity {
         final String getnumber = number.getText().toString();
         final String getAddress =addrress.getText().toString();
         final String getContactNumber =contact.getText().toString();
-        if(getnumber == null){
+        if(TextUtils.isEmpty(getnumber)){
             Toast.makeText(getApplicationContext(), "আপনার নম্বর লিখুন", Toast.LENGTH_SHORT).show();
-
             return;
         }
-        if(getAddress == null){
+        if(TextUtils.isEmpty(getAddress)){
             Toast.makeText(getApplicationContext(), "দয়া করে আপনার ঠিকানা লিখুন", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(getContactNumber)){
+            Toast.makeText(getApplicationContext(), "আপনার নম্বর লিখুন", Toast.LENGTH_SHORT).show();
             return;
         }
         final String key = FirebaseDatabase.getInstance().getReference().child("admin").child("user").push().getKey();

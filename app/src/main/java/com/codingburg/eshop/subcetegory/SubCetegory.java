@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.authentication.PleaseLogin;
@@ -54,15 +55,20 @@ public class SubCetegory extends AppCompatActivity {
     private RecyclerView recyclerView3;
     private CetegoryAdapter modelAdapter5;
     private String id;
-    private AdView mAdView;
+    private AdView mAdView, mAdView1;
     private  String userId;
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_category);
         FirebaseDatabase.getInstance().goOnline();
         id = getIntent().getExtras().getString("id");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView1 = findViewById(R.id.adView1);
         AdLoader adLoader2 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
@@ -157,8 +163,9 @@ public class SubCetegory extends AppCompatActivity {
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent intent = new Intent(getApplicationContext(), Seach.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(), Seach.class);
+//                startActivity(intent);
+                Toast.makeText(getApplicationContext(),"Search option will be available soon", Toast.LENGTH_SHORT).show();
 
                 return false;
             }

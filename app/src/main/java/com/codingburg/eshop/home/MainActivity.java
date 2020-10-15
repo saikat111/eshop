@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.authentication.PleaseLogin;
@@ -89,6 +90,7 @@ import com.synnapps.carouselview.ImageListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends AppCompatActivity {
     private ImageSlider imageSlider;
@@ -112,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
     String[] sampleImages = new String[3];
     private CarouselView carouselView;
     private DocumentReference foodimage;
+    private AdView mAdView, mAdView1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,16 +141,6 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         new DrawerBuilder().withActivity(this).build();
         AudienceNetworkAds.initialize(this);
-        AdLoader adLoader5 = new AdLoader.Builder(this, getString(R.string.native_ID_1))
-                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
-                    @Override
-                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                        TemplateView template = findViewById(R.id.my_template5);
-                        template.setNativeAd(unifiedNativeAd);
-                    }
-                })
-                .build();
-        adLoader5.loadAd(new AdRequest.Builder().build());
         AdLoader adLoader = new AdLoader.Builder(this, getString(R.string.native_ID_1))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
@@ -170,6 +163,13 @@ public class MainActivity extends AppCompatActivity {
 
         });
 //ads
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView1 = findViewById(R.id.adView1);
+        AdRequest adRequest1 = new AdRequest.Builder().build();
+        mAdView1.loadAd(adRequest1);
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
@@ -291,9 +291,17 @@ public class MainActivity extends AppCompatActivity {
                     carouselView.setImageClickListener(new ImageClickListener() {
                         @Override
                         public void onClick(int position) {
-                            Intent intent = new Intent(getApplicationContext(), SubCetegory.class);
-                            intent.putExtra("id", "food");
-                            startActivity(intent);
+                            if(position == 1){
+                                Intent intent = new Intent(getApplicationContext(), SubCetegory.class);
+                                intent.putExtra("id", "food");
+                                startActivity(intent);
+                            }
+                            if(position == 2){
+                                Intent intent = new Intent(getApplicationContext(), ShowProducts.class);
+                                intent.putExtra("category", "bazzer");
+                                startActivity(intent);
+                            }
+
                         }
                     });
                 }
@@ -558,8 +566,9 @@ public class MainActivity extends AppCompatActivity {
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent intent = new Intent(getApplicationContext(), Seach.class);
-                startActivity(intent);
+                Toast.makeText(getApplicationContext(),"Search option will be available soon", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(getApplicationContext(), Seach.class);
+//                startActivity(intent);
                 return false;
             }
         });

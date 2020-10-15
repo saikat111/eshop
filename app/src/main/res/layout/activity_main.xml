@@ -6,26 +6,20 @@
     android:layout_height="match_parent"
 
     tools:context=".home.MainActivity">
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="3dp"
-
+            android:padding="5dp"
             >
-
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
                 android:background="#FFF">
-
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
@@ -34,7 +28,6 @@
                     >
                 </com.google.android.material.appbar.MaterialToolbar>
             </com.google.android.material.appbar.AppBarLayout>
-
             <!-- Note: A RecyclerView can also be used -->
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -42,7 +35,6 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
                 <!-- Scrollable content -->
             </androidx.core.widget.NestedScrollView>
-
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -150,12 +142,10 @@
                             android:layout_centerVertical="true"
                             android:layout_centerHorizontal="true"
                             >
-
                         </androidx.recyclerview.widget.RecyclerView>
                     </RelativeLayout>
                 </LinearLayout>
             </HorizontalScrollView>
-
             <TextView
                 style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="wrap_content"
@@ -165,8 +155,6 @@
                 android:text="All Categories"
                 android:textSize="24dp"
                 android:textStyle="bold"></TextView>
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -177,7 +165,6 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="6dp"
                     android:orientation="vertical">
-
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerview4"
                         android:layout_width="wrap_content"
@@ -185,21 +172,18 @@
                         android:scrollbars="vertical"></androidx.recyclerview.widget.RecyclerView>
                 </RelativeLayout>
             </LinearLayout>
-
             <RelativeLayout
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:orientation="vertical">
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclervieowffer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scrollbars="vertical"></androidx.recyclerview.widget.RecyclerView>
             </RelativeLayout>
-
             <TextView
                 style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="wrap_content"
@@ -227,30 +211,43 @@
                         ></androidx.recyclerview.widget.RecyclerView>
                 </RelativeLayout>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                ads:adSize="SMART_BANNER"
+                ads:adUnitId="@string/banner_ID_2">
+            </com.google.android.gms.ads.AdView>
+            <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                ads:adSize="SMART_BANNER"
+                ads:adUnitId="@string/banner_ID_1">
+            </com.google.android.gms.ads.AdView>
+            </LinearLayout>
             <com.google.android.ads.nativetemplates.TemplateView
                 android:id="@+id/my_template"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 app:gnt_template_type="@layout/gnt_small_template_view" />
-            <com.google.android.ads.nativetemplates.TemplateView
-                android:id="@+id/my_template5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                app:gnt_template_type="@layout/gnt_small_template_view" />
         </LinearLayout>
-
-
     </androidx.core.widget.NestedScrollView>
-
     <com.luseen.spacenavigation.SpaceNavigationView
         android:id="@+id/space"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-
         />
 
 

@@ -45,28 +45,6 @@
 
         </TextView>
         <TextView
-            android:layout_marginTop="5dp"
-            android:text="@string/sendmoney"
-            android:textSize="15dp"
-            android:fontFamily="@font/andika"
-            android:textColor="#000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            >
-        </TextView>
-        <TextView
-            android:id="@+id/type"
-            android:layout_marginTop="2dp"
-            android:textSize="15dp"
-            android:fontFamily="@font/andika"
-            android:textColor="#000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            >
-        </TextView>
-        <TextView
             android:id="@+id/sim1"
             android:layout_marginTop="5dp"
             android:textSize="20dp"
@@ -89,31 +67,9 @@
             >
         </TextView>
         <TextView
-            android:layout_marginTop="2dp"
-            android:text="@string/roket"
-            android:textSize="15dp"
-            android:fontFamily="@font/andika"
-            android:textColor="#000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            >
-        </TextView>
-        <TextView
-            android:id="@+id/type2"
-            android:layout_marginTop="2dp"
-            android:textSize="15dp"
-            android:fontFamily="@font/andika"
-            android:textColor="#000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            >
-        </TextView>
-        <TextView
             android:id="@+id/rsim1"
             android:layout_marginTop="2dp"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:fontFamily="@font/andika"
             android:textColor="#000"
             android:layout_width="wrap_content"
@@ -205,7 +161,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="ঠিকানা">
+            >
 
         </EditText>
         <TextView
@@ -223,7 +179,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="নাম্বার">
+            >
 
         </EditText>
         <TextView

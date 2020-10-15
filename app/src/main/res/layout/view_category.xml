@@ -29,7 +29,29 @@
                     >
                 </androidx.recyclerview.widget.RecyclerView>
             </RelativeLayout>
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <com.google.android.gms.ads.AdView
+                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/adView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    ads:adSize="SMART_BANNER"
+                    ads:adUnitId="@string/banner_ID_2">
+                </com.google.android.gms.ads.AdView>
+                <com.google.android.gms.ads.AdView
+                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/adView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    ads:adSize="SMART_BANNER"
+                    ads:adUnitId="@string/banner_ID_1">
+                </com.google.android.gms.ads.AdView>
+            </LinearLayout>
             <com.google.android.ads.nativetemplates.TemplateView
                 android:layout_marginTop="15dp"
                 android:id="@+id/my_template2"

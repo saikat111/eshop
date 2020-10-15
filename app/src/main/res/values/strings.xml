@@ -6,7 +6,7 @@
 
     <string name="sendmoney">আমাদের বিকাশ নম্বরটি</string>
     <string name="bikash">01755111413(personal)</string>
-    <string name="sendtext">বিকাশের মাধ্যমে এই নম্বরটিতে আপনার অর্থ প্রেরণ করুন</string>
+    <string name="sendtext">নম্বরটিতে আপনার অর্থ প্রেরণ করুন</string>
     <string name="details">টাকা পাঠানোর পরে নীচের লিখিত নিয়মগুলি অনুসরণ করুন:</string>
     <string name="order">আপনার বিকাশ নম্বরটি লিখুন যা থেকে আপনি আমাদের টাকা পাঠিয়েছেন :</string>
     <string name="finalorder">যদি প্রতিটি জিনিস ঠিক থাকে তবে অর্ডার বোতামটি টিপুন</string>
@@ -19,13 +19,13 @@
 
     <!--main-->
     <!--        admob-->
-            <string name="googleadsapplicationid">ca-app-pub-3884253968161128~5921117388</string>
-            <string name="banner_ID_1">ca-app-pub-3884253968161128/3458605570</string>
-            <string name="banner_ID_2">ca-app-pub-3884253968161128/3458605570</string>
-            <string name="native_ID_1">ca-app-pub-3884253968161128/6823135517</string>
-            <string name="native_ID_2">ca-app-pub-3884253968161128/6823135517</string>
-            <string name="videoads1">ca-app-pub-3884253968161128/3622257107</string>
-            <string name="instatianlads1">ca-app-pub-3884253968161128/1379237141</string>
+            <string name="googleadsapplicationid">ca-app-pub-9062631069075279~4813600600</string>
+            <string name="banner_ID_1">ca-app-pub-9062631069075279/9299640527</string>
+            <string name="banner_ID_2">ca-app-pub-9062631069075279/8916497144</string>
+            <string name="native_ID_1">ca-app-pub-9062631069075279/8724925459</string>
+            <string name="native_ID_2">ca-app-pub-9062631069075279/5907190421</string>
+            <string name="videoads1">ca-app-pub-9062631069075279/2719550613</string>
+            <string name="instatianlads1">ca-app-pub-9062631069075279/1278229012</string>
 
     <!--    &lt;!&ndash;    main fb&ndash;&gt;-->
 

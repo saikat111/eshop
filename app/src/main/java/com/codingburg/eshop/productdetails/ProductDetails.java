@@ -117,7 +117,12 @@ public class ProductDetails extends AppCompatActivity {
         });
         //ads
         AudienceNetworkAds.initialize(this);
-
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView2 = findViewById(R.id.adView1);
+        AdRequest adRequest1 = new AdRequest.Builder().build();
+        mAdView2.loadAd(adRequest1);
         AdLoader adLoader3 = new AdLoader.Builder(this, getString(R.string.native_ID_2))
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override

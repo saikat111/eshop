@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import com.codingburg.eshop.R;
 import com.codingburg.eshop.authentication.PleaseLogin;
 import com.codingburg.eshop.cart.Cart;
@@ -46,7 +48,7 @@ public class ShowProducts extends AppCompatActivity {
     private String userId;
     private CollectionReference showCatagoryProducts;
     private Toolbar toolbar;
-
+    private AdView mAdView, mAdView1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,12 @@ public class ShowProducts extends AppCompatActivity {
             }
         });
         AudienceNetworkAds.initialize(this);
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView1 = findViewById(R.id.adView1);
+        AdRequest adRequest1 = new AdRequest.Builder().build();
+        mAdView1.loadAd(adRequest1);
         category = getIntent().getExtras().getString("category");
         mAuth = FirebaseAuth.getInstance();
         try {
@@ -158,8 +166,10 @@ public class ShowProducts extends AppCompatActivity {
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent intent = new Intent(getApplicationContext(), Seach.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(), Seach.class);
+//                startActivity(intent);
+                Toast.makeText(getApplicationContext(),"Search option will be available soon", Toast.LENGTH_SHORT).show();
+
                 return false;
             }
         });
