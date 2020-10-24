@@ -61,14 +61,13 @@ public class Profile extends AppCompatActivity {
     private String userId;
     private TextView number, name;
     private DocumentReference currentUserDb;
-    private Button logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseDatabase.getInstance().goOnline();
         setContentView(R.layout.activity_profile);
         number = findViewById(R.id.number);
-        logout = findViewById(R.id.logout);
         name = findViewById(R.id.name);
         mAuth = FirebaseAuth.getInstance();
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -94,16 +93,7 @@ public class Profile extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth.signOut();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
 
-            }
-        });
         //buttom navigation
         SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
@@ -221,7 +211,6 @@ public class Profile extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.top_bar, menu);
@@ -230,8 +219,9 @@ public class Profile extends AppCompatActivity {
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent intent = new Intent(getApplicationContext(), Seach.class);
-                startActivity(intent);
+                Toast.makeText(getApplicationContext(),"Search option will be available soon", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(getApplicationContext(), Seach.class);
+//                startActivity(intent);
                 return false;
             }
         });

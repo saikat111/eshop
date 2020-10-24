@@ -125,6 +125,7 @@ public class Cart extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Minimum order amount is 10 tk", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    intent.putExtra("tk", total.getText().toString());
                     startActivity(intent);
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -46,6 +46,8 @@ public class Pyment extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private com.google.android.gms.ads.InterstitialAd mInterstitialAd;
     private AlertDialog.Builder builder;
+    private int num;
+    private int numFinal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -233,7 +235,12 @@ public class Pyment extends AppCompatActivity {
                          delete.removeValue();
                          userDb.removeValue();
                          progressDialog.dismiss();
-                        builder.setMessage("আমাদের কাছ থেকে কেনাকাটা করার জন্য ধন্যবাদ")
+                        builder.setMessage(
+                                getString(R.string.sendtext)  + "   "+
+                                sim1.getText().toString()+ "  " +
+                                        "\n"+"   " + rsim1.getText().toString() + "\n" +
+                                        "\n"+
+                                "আমাদের কাছ থেকে কেনাকাটা করার জন্য ধন্যবাদ")
                                 .setCancelable(false)
                                 .setPositiveButton("পরবর্তী পৃষ্ঠা", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
@@ -294,7 +301,9 @@ public class Pyment extends AppCompatActivity {
                             Map<String , Object> map = (Map<String, Object>) snapshot.getValue();
                             if(map.get("totalammout") != null){
                                 String tk = map.get("totalammout").toString();
-                                total.setText(tk);
+                                num = Integer.parseInt(tk);
+                                numFinal = num + 25;
+                                total.setText(String.valueOf(numFinal));
                             }
                         }
                     }

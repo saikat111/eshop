@@ -88,17 +88,7 @@
             android:layout_gravity="center"
             >
         </TextView>
-        <TextView
-            android:layout_marginTop="2dp"
-            android:text="@string/sendtext"
-            android:textSize="15dp"
-            android:fontFamily="@font/andika"
-            android:textColor="#000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            >
-        </TextView>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,8 +98,10 @@
 
         </TextView>
         <TextView
+            android:textStyle="bold"
+            android:gravity="center"
             android:layout_marginTop="2dp"
-            android:text="@string/details"
+            android:text="@string/tk"
             android:textSize="15dp"
             android:fontFamily="@font/andika"
             android:textColor="#000"
@@ -141,7 +133,7 @@
         <EditText
             android:id="@+id/number"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:hint="নাম্বার">
 
@@ -152,12 +144,14 @@
             android:textSize="15dp"
             android:fontFamily="@font/andika"
             android:textColor="#000"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             >
         </TextView>
         <EditText
             android:id="@+id/address"
+            android:hint="ঠিকানা"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -176,6 +170,7 @@
         </TextView>
         <EditText
             android:id="@+id/contact"
+            android:hint="নাম্বার"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

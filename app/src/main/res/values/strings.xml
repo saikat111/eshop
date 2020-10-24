@@ -19,13 +19,13 @@
 
     <!--main-->
     <!--        admob-->
-            <string name="googleadsapplicationid">ca-app-pub-9062631069075279~4813600600</string>
-            <string name="banner_ID_1">ca-app-pub-9062631069075279/9299640527</string>
-            <string name="banner_ID_2">ca-app-pub-9062631069075279/8916497144</string>
-            <string name="native_ID_1">ca-app-pub-9062631069075279/8724925459</string>
-            <string name="native_ID_2">ca-app-pub-9062631069075279/5907190421</string>
-            <string name="videoads1">ca-app-pub-9062631069075279/2719550613</string>
-            <string name="instatianlads1">ca-app-pub-9062631069075279/1278229012</string>
+            <string name="googleadsapplicationid">ca-app-pub-4823537818890363~4641906297</string>
+            <string name="banner_ID_1">ca-app-pub-4823537818890363/6857006093</string>
+            <string name="banner_ID_2">ca-app-pub-4823537818890363/6857006093</string>
+            <string name="native_ID_1">ca-app-pub-4823537818890363/4996790209</string>
+            <string name="native_ID_2">ca-app-pub-4823537818890363/4996790209</string>
+            <string name="videoads1">ca-app-pub-4823537818890363/6665434407</string>
+            <string name="instatianlads1">ca-app-pub-4823537818890363/4230842758</string>
 
     <!--    &lt;!&ndash;    main fb&ndash;&gt;-->
 
@@ -69,6 +69,7 @@
     <string name="alert">আপনি আরও পণ্য যুক্ত করতে চান? বা আপনি এখন এই পণ্য কিনতে চান?</string>
     <string name="addmore">আমি আরও পণ্য যুক্ত করতে চাই</string>
     <string name="butnow">আমি এখন এটি কিনতে চাই</string>
+    <string name="tk">অর্ডার সাব্মিট করার ১৫ মিনিটস এর ভিতর এই নম্বরটিতে আপনার অর্থ প্রেরণ করুন</string>
 
 
 </resources>
